@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourApp | WebApp Dashboard</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/toggle-switch.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body class="grid">
+    <header class="app-header">
+      <h1 class="app-header__name"><span class="bold">Your</span>App</h1>
+
+      <div class="app-header__icon-container">
+        <img class="app-header__icon" src="icons/icon-bell.svg" alt="Notification Bell Icon">
+      </div>
+
+      <img class="profile-photo" src="images/profile-photo.png" alt="User Profile Image">
+      <span class="app-header__user">Jamie Reardon</span>
+    </header>
+
+    <nav class="app-nav">
+
+      <a class="app-nav__link">
+        <img class="app-nav__icon" src="icons/icon-dashboard.svg" alt="Navigation Dashboard Icon">
+      </a>
+      <a class="app-nav__link">
+        <img class="app-nav__icon" src="icons/icon-members.svg" alt="Navigation Members Icon">
+      </a>
+      <a class="app-nav__link">
+        <img class="app-nav__icon" src="icons/icon-visits.svg" alt="Navigation Visits Icon">
+      </a>
+      <a class="app-nav__link">
+        <img class="app-nav__icon" src="icons/icon-settings.svg" alt="Navigation Settings Icon">
+      </a>
+
+    </nav>
+
+    <main>
+
+      <section class="header">
+        <h2 class="header__headline">Dashboard</h2>
+        <div class="header__search-container">
+          <input class="header__search" type="search" placeholder="Search..." />
+        </div>
+      </section>
+
+      <div class="alert" id="alertMessage"></div>
+
+      <section class="traffic">
+
+        <div class="traffic__header">
+          <h3 class="sub-headline">Traffic</h3>
+          <ul class="traffic__nav">
+            <li class="traffic__link">Hourly</li>
+            <li class="traffic__link">Daily</li>
+            <li class="traffic__link traffic__link--active">Weekly</li>
+            <li class="traffic__link">Monthly</li>
+          </ul>
+        </div>
+        </div class="traffic__widget">
+          <canvas id="trafficChart"></canvas>
+        </div>
+      </section>
+
+      <section class="daily-traffic">
+        <h3 class="sub-headline">Daily Traffic</h3>
+
+        <div class="daily-traffic__widget">
+          <canvas id="dailyTrafficChart"></canvas>
+        </div>
+      </section>
+
+      <section class="mobile-users">
+        <h3 class="sub-headline">Mobile Users</h3>
+
+        <div class="widget-container-half">
+          <canvas id="devicesChart"></canvas>
+        </div>
+      </section>
+
+      <section class="social">
+        <h3 class="sub-headline">Social Stats</h3>
+
+        <div class="social__container">
+          <div class="social__image">
+            <!-- Add Inline SVG -->
+          </div>
+          <div class="social__container">
+            <p class="social__media">Twitter</p>
+            <p class="social__count">10,345</p>
+          </div>
+        </div>
+
+        <div class="social__container">
+          <div class="social__image">
+            <!-- Add Inline SVG -->
+          </div>
+          <div class="social__container">
+            <p class="social__media">Facebook</p>
+            <p class="social__count">8,739</p>
+          </div>
+        </div>
+
+        <div class="social__container">
+          <div class="social__image">
+            <!-- Add Inline SVG -->
+          </div>
+          <div class="social__container">
+            <p class="social__media">Google+</p>
+            <p class="social__count">2,530</p>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="new-members">
+        <h3 class="sub-headline">New Members</h3>
+
+        <div class="new-members__container">
+          <img class="profile-photo" src="images/member-1.jpg" alt="Member Profile Image">
+          <div class="new-members__container">
+            <p class="new-members__name">Victoria Chambers</p>
+            <a class="new-members__email" href="#">victoria.chambers80@example.com</a>
+            <p class="new-members__join-date">10/15/15</p>
+          </div>
+        </div>
+
+        <div class="new-members__container">
+          <img class="profile-photo" src="images/member-2.jpg" alt="Member Profile Image">
+          <div class="new-members__container">
+            <p class="new-members__name">Dale Byrd</p>
+            <a class="new-members__email" href="#">dale.byrd52@example.com</a>
+            <p class="new-members__join-date">10/15/15</p>
+          </div>
+        </div>
+
+        <div class="new-members__container">
+          <img class="profile-photo" src="images/member-3.jpg" alt="Member Profile Image">
+          <div class="new-members__container">
+            <p class="new-members__name">Dawn Wood</p>
+            <a class="new-members__email" href="#">dawn.wood16@example.com</a>
+            <p class="new-members__join-date">10/15/15</p>
+          </div>
+        </div>
+
+        <div class="new-members__container">
+          <img class="profile-photo" src="images/member-4.jpg" alt="Member Profile Image">
+          <div class="new-members__container">
+            <p class="new-members__name">Dan Oliver</p>
+            <a class="new-members__email" href="#">dan.oliver82@example.com</a>
+            <p class="new-members__join-date">10/15/15</p>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="recent-activity">
+        <h3 class="sub-headline">Recent Activity</h3>
+
+        <div class="recent-activity__container">
+          <img class="profile-photo" src="images/member-1.jpg" alt="Member Profile Image">
+          <div class="recent-activity__container">
+            <p class="recent-activity__comment">Victoria Chambers commented on YourApp's SEO Tips</p>
+            <p class="recent-activity__date">4 hours ago</p>
+            <p class="recent-activity__toggle">></p>
+          </div>
+        </div>
+
+        <div class="recent-activity__container">
+          <img class="profile-photo" src="images/member-2.jpg" alt="Member Profile Image">
+          <div class="recent-activity__container">
+            <p class="recent-activity__comment">Dale byrd liked the post Facebook's Changes for 2016</p>
+            <p class="recent-activity__date">5 hours ago</p>
+            <p class="recent-activity__toggle">></p>
+          </div>
+        </div>
+
+        <div class="recent-activity__container">
+          <img class="profile-photo" src="images/member-3.jpg" alt="Member Profile Image">
+          <div class="recent-activity__container">
+            <p class="recent-activity__comment">Dawn Wood commented on Facebook's Changes for 2016</p>
+            <p class="recent-activity__date">5 hours ago</p>
+            <p class="recent-activity__toggle">></p>
+          </div>
+        </div>
+
+        <div class="recent-activity__container">
+          <img class="profile-photo" src="images/member-4.jpg" alt="Member Profile Image">
+          <div class="recent-activity__container">
+            <p class="recent-activity__comment">Dan Oliver posted YourApp's SEO Tips</p>
+            <p class="recent-activity__date">1 day ago</p>
+            <p class="recent-activity__toggle">></p>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="message">
+        <h3 class="sub-headline">Message User</h3>
+
+        <form class="message__form">
+          <input class="message__field" id="userField" type="text" placeholder="Search for User">
+          <textarea class="message__area" id="messageField" placeholder="Message for User"></textarea>
+          <button class="btn btn--positive" id="send">Send</button>
+        </form>
+      </section>
+
+      <section class="settings">
+        <h3 class="sub-headline">Settings</h3>
+
+        <label class="switch-light switch-candy" onclick="">
+          <input type="checkbox">
+
+          <strong>
+            Send Email Notifications
+          </strong>
+
+          <span>
+            <span>Off</span>
+            <span>On</span>
+            <a></a>
+          </span>
+        </label>
+
+        <label class="switch-light switch-ios" onclick="">
+          <input type="checkbox">
+
+          <strong>
+            Set Profile to Public
+          </strong>
+
+          <span>
+            <span>Off</span>
+            <span>On</span>
+            <a></a>
+          </span>
+        </label>
+
+        <select class="settings__field" id="time-zone">
+          <option disabled selected>Select Timezone</option>
+          <option>Eastern</option>
+          <option>Central</option>
+          <option>Pacific</option>
+        </select>
+        <div class="settings__container">
+          <button class="btn btn--positive" id="save">Save</button>
+          <button class="btn btn-neutral" id="cancel">Cancel</button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+  </body>
+</html>
