@@ -1,0 +1,30 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "app-header"
+    "app-nav"
+    "main";
+}
+
+.app-header {
+  grid-area: app-header;
+}
+
+.app-nav {
+  grid-area: app-nav;
+}
+
+main {
+  grid-area: main;
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: 90px 2fr;
+    grid-template-areas:
+    "app-header app-header"
+    "app-nav main"
+    "app-nav main";
+  }
+}

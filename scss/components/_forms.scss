@@ -1,0 +1,14 @@
+// Search input
+.header__search {
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border: 1px solid lighten($grey, 30%);;
+  border-radius: $border-sm;
+  color: $grey;
+  padding: 10px;
+}
+
+::placeholder {
+  color: lighten($grey, 30%);
+}

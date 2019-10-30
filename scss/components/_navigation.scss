@@ -1,0 +1,17 @@
+.app-nav {
+  background-color: $color-secondary;
+  padding: 35px 0;
+  &__link {
+    display: block;
+    text-align: center;
+    margin-bottom: 50px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+  &__icon {
+    width: 35px;
+    height: 35px;
+    opacity: .5;
+  }
+}
