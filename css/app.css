@@ -435,6 +435,7 @@ main {
   }
 }
 #trafficChart {
+  max-width: 100%;
   width: 1052px;
   height: 276px;
   background: orange;
@@ -444,6 +445,7 @@ main {
 
 #dailyTrafficChart,
 #devicesChart {
+  max-width: 100%;
   width: 483px;
   height: 265px;
   background: orange;
@@ -458,10 +460,6 @@ main {
   margin-right: 10px;
 }
 
-.header {
-  display: flex;
-  align-items: center;
-}
 .header__headline {
   flex: 0 152px;
   text-align: center;
@@ -504,12 +502,18 @@ main {
   padding-bottom: 30px;
 }
 
+.social {
+  padding: 12px 0;
+}
 .social__container {
   background-color: #FBFBFB;
   border: 1px solid #dadada;
   border-radius: 5px;
   margin-bottom: 30px;
   display: flex;
+  align-items: center;
+  padding: 1.5em;
+  margin: 18px 0 0;
 }
 
 .bold {

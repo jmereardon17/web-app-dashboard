@@ -1,4 +1,5 @@
 #trafficChart {
+  max-width: 100%;
   width: 1052px;
   height: 276px;
   background: orange;
@@ -8,6 +9,7 @@
 
 #dailyTrafficChart,
 #devicesChart {
+  max-width: 100%;
   width: 483px;
   height: 265px;
   background: orange;
