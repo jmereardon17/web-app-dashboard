@@ -5,6 +5,10 @@
     display: block;
     text-align: center;
     margin-bottom: 50px;
+    &:nth-child(3) {
+      position: relative;
+      left: 3px;
+    }
     &:last-child {
       margin-bottom: 0;
     }
