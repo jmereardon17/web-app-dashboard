@@ -372,7 +372,8 @@ img {
   color: #fff;
   display: flex;
   align-items: center;
-  padding: 15px 25px;
+  padding: 0 1.5em;
+  height: 70px;
 }
 .app-header__name {
   font-size: 1.5em;
@@ -381,13 +382,11 @@ img {
 }
 .app-header__icon-container {
   border-right: 1.5px solid #6366BF;
-  padding: 2px 18px 2px 0;
+  padding: 10px 24px 10px 0;
   margin-right: 15px;
+  display: flex;
 }
-.app-header__icon {
-  width: 25px;
-  height: 40px;
-}
+
 .app-nav {
   background-color: #4D4C72;
   padding: 35px 0;
@@ -453,13 +452,49 @@ main {
   margin: auto;
 }
 
+.app-header__icon {
+  width: 21px;
+}
+
+.header__search-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 25px;
+  right: 82px;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .header__search-icon {
+    right: 40px;
+  }
+}
+
+#Layer_1 {
+  border: 10px solid #7477BF;
+  border-radius: 100px;
+  background: #7477BF;
+  width: 70px;
+  height: 70px;
+}
+#Layer_1 path {
+  fill: #fff;
+}
+
 .profile-photo {
   border-radius: 100px;
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   margin-right: 10px;
 }
 
+@media (min-width: 768px) {
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+}
 .header__headline {
   flex: 0 152px;
   text-align: center;
@@ -467,9 +502,16 @@ main {
 .header__search-container {
   background-color: #FBFBFB;
   flex: 1 75%;
-  border-left: 1px solid #dadada;
+  border-top: 1px solid #dadada;
   border-bottom: 1px solid #dadada;
   padding: 14px 1.5em 14px 0;
+  position: relative;
+}
+@media (min-width: 786px) {
+  .header__search-container {
+    border-top: none;
+    border-left: 1px solid #dadada;
+  }
 }
 
 .container {
@@ -488,18 +530,31 @@ main {
 }
 
 .daily-traffic {
-  border-right: 1px solid #dadada;
-  margin-right: -5px;
+  border-top: 1px solid #dadada;
+}
+@media (min-width: 768px) {
+  .daily-traffic {
+    border-top: none;
+    border-right: 1px solid #dadada;
+    margin-right: -5px;
+  }
 }
 
 .daily-traffic,
 .mobile-users {
-  display: inline-block;
-  vertical-align: top;
-  width: 50%;
-  border-top: 1px solid #dadada;
-  border-bottom: 1px solid #dadada;
   padding-bottom: 30px;
+  border-bottom: 1px solid #dadada;
+}
+@media (min-width: 768px) {
+  .daily-traffic,
+.mobile-users {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 30px;
+  }
 }
 
 .social {
@@ -515,9 +570,30 @@ main {
   padding: 1.5em;
   margin: 18px 0 0;
 }
+@media (min-width: 768px) {
+  .social__container {
+    margin: 0;
+    flex: 0 329px;
+  }
+}
+
+@media (min-width: 768px) {
+  .flex {
+    padding: 0 5px;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
 
 .bold {
   font-weight: 700;
+}
+
+.app-header__user {
+  font-size: 14px;
 }
 
 .header__headline {
@@ -531,15 +607,38 @@ main {
   border-radius: 5px;
   padding: 12px 18px;
   margin: 25px 0;
+  position: relative;
 }
 .alert span {
   font-weight: 700;
   font-size: 14px;
 }
 .alert p {
-  display: inline-block;
   font-size: 13px;
-  margin-left: 5px;
+  margin-top: 5px;
+}
+@media (min-width: 768px) {
+  .alert p {
+    display: inline-block;
+    margin: 0 0 0 5px;
+  }
+}
+.alert::after {
+  content: "";
+  display: block;
+  background: url("../../icons/icon-close.svg") no-repeat center/cover;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+@media (min-width: 768px) {
+  .alert::after {
+    top: 16px;
+    right: 14px;
+  }
 }
 
 .sub-headline {
@@ -555,6 +654,7 @@ main {
   display: inline-block;
   margin-left: 20px;
   color: #939393;
+  cursor: pointer;
 }
 .traffic__link--active {
   color: #fff;
@@ -580,10 +680,15 @@ main {
   border: 1px solid #dadada;
   border-radius: 5px;
   color: #818181;
-  padding: 12px 16px;
-  margin-left: auto;
+  padding: 12px 18px;
+  margin: auto;
   width: 380px;
   display: block;
+}
+@media (min-width: 768px) {
+  .header__search {
+    margin: 0 0 0 auto;
+  }
 }
 
 ::placeholder {

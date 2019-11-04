@@ -1,0 +1,26 @@
+.app-header__icon {
+  width: 21px;
+}
+
+.header__search-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 25px;
+  right: 82px;
+  cursor: pointer;
+  @include mq(768px) {
+    right: 40px;
+  }
+}
+
+#Layer_1 {
+  border: 10px solid $color-primary;
+  border-radius: $border-round;
+  background: $color-primary;
+  width: 70px;
+  height: 70px;
+  path {
+    fill: $white;
+  }
+}

@@ -3,7 +3,8 @@
   color: $white;
   display: flex;
   align-items: center;
-  padding: 15px 25px;
+  padding: 0 1.5em;
+  height: 70px;
   &__name {
     font-size: 1.5em;
     font-weight: 300;
@@ -11,14 +12,8 @@
   }
   &__icon-container {
     border-right: 1.5px solid #6366BF;
-    padding: 2px 18px 2px 0;
+    padding: 10px 24px 10px 0;
     margin-right: 15px;
-  }
-  &__icon {
-    width: 25px;
-    height: 40px;
-  }
-  &__user {
-    
+    display: flex;
   }
 }

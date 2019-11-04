@@ -2,6 +2,10 @@
   font-weight: 700;
 }
 
+.app-header__user {
+  font-size: 14px;
+}
+
 .header__headline {
   font-size: 1.25em;
   font-weight: 600;
@@ -13,14 +17,33 @@
   border-radius: $border-sm;
   padding: 12px 18px;
   margin: 25px 0;
+  position: relative;
   span {
     font-weight: 700;
     font-size: 14px;
   }
   p {
-    display: inline-block;
     font-size: 13px;
-    margin-left: 5px;
+    margin-top: 5px;
+    @include mq(768px) {
+      display: inline-block;
+      margin: 0 0 0 5px;
+    }
+  }
+  &::after {
+    content: '';
+    display: block;
+    background: url('../../icons/icon-close.svg') no-repeat center / cover;
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    @include mq(768px) {
+      top: 16px;
+      right: 14px;
+    }
   }
 }
 
@@ -37,6 +60,7 @@
   display: inline-block;
   margin-left: 20px;
   color: $color-link;
+  cursor: pointer;
   &--active {
     color: $white;
     background-color: $color-link-selected;

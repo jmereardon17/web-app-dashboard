@@ -6,10 +6,13 @@
   border: 1px solid $color-border;
   border-radius: $border-sm;
   color: $grey;
-  padding: 12px 16px;
-  margin-left: auto;
+  padding: 12px 18px;
+  margin: auto;
   width: 380px;
   display: block;
+  @include mq(768px) {
+    margin: 0 0 0 auto;
+  }
 }
 
 ::placeholder {

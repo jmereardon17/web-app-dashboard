@@ -1,0 +1,18 @@
+@mixin flex(
+  $disp: flex,
+  $dir: row,
+  $wrap: null,
+  $align: center
+) {
+  display: $disp;
+  flex-direction: $dir;
+  flex-wrap: $wrap;
+  align-items: $align;
+  @content;
+}
+
+@mixin mq($break) {
+  @media (min-width: $break) {
+    @content;
+  }
+}

@@ -1,6 +1,7 @@
 .header {
-  // display: flex;
-  // align-items: center;
+  @include mq(768px) {
+    @include flex();
+  }
   &__headline {
     flex: 0 152px;
     text-align: center;
@@ -8,9 +9,14 @@
   &__search-container {
     background-color: $silver;
     flex: 1 75%;
-    border-left: 1px solid $color-border;
+    border-top: 1px solid $color-border;
     border-bottom: 1px solid $color-border;
     padding: 14px 1.5em 14px 0;
+    position: relative;
+    @include mq(786px) {
+      border-top: none;
+      border-left: 1px solid $color-border;
+    }
   }
 }
 
@@ -30,18 +36,26 @@
 }
 
 .daily-traffic {
-  border-right: 1px solid $color-border;
-  margin-right: -5px;
+  border-top: 1px solid $color-border;
+  @include mq(768px) {
+    border-top: none;
+    border-right: 1px solid $color-border;
+    margin-right: -5px;
+  }
 }
 
 .daily-traffic,
 .mobile-users {
-  display: inline-block;
-  vertical-align: top;
-  width: 50%;
-  border-top: 1px solid $color-border;
-  border-bottom: 1px solid $color-border;
   padding-bottom: 30px;
+  border-bottom: 1px solid $color-border;
+  @include mq(768px) {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    border-top: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+    padding-bottom: 30px;
+  }
 }
 
 .social {
@@ -55,5 +69,19 @@
     align-items: center;
     padding: 1.5em;
     margin: 18px 0 0;
+    @include mq(768px) {
+      margin: 0;
+      flex: 0 329px;
+    }
+  }
+}
+
+.flex {
+  @include mq(768px) {
+    padding: 0 5px;
+    margin-top: 20px;
+    @include flex() {
+      justify-content: space-between;
+    }
   }
 }
