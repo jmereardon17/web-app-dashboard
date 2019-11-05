@@ -1,4 +1,5 @@
 .btn {
+  cursor: pointer;
   outline: 0;
   border: none;
   font-size: 14px;
@@ -16,4 +17,8 @@
   &--neutral {
     background: $color-button-neutral;
   }
+}
+
+.btn + .btn {
+  margin: 17px 0;
 }

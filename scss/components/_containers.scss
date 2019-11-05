@@ -90,6 +90,10 @@
       justify-content: space-between;
     }
   }
+  &-row {
+    @include flex();
+    margin: 12px 0;
+  }
 }
 
 .new-members {
@@ -136,6 +140,7 @@
 
 .message {
   padding: 12px 0 30px;
+  margin-bottom: 10px;
   border-bottom: 1px solid $color-border;
 }
 

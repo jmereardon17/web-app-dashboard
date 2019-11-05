@@ -268,33 +268,21 @@
         <div class="container">
           <h3 class="sub-headline">Settings</h3>
 
-          <label class="switch-light switch-ios" onclick="">
-            <input type="checkbox">
+          <div class="flex-row">
+            <span class="toggle-label">Send Email Notifications</span>
+            <label class="toggle">
+              <input class="toggle-checkbox" type="checkbox">
+              <div class="toggle-switch"></div>
+            </label>
+          </div>
 
-            <strong>
-              Send Email Notifications
-            </strong>
-
-            <span>
-              <span>Off</span>
-              <span>On</span>
-              <a></a>
-            </span>
-          </label>
-
-          <label class="switch-light switch-ios" onclick="">
-            <input type="checkbox">
-
-            <strong>
-              Set Profile to Public
-            </strong>
-
-            <span>
-              <span>Off</span>
-              <span>On</span>
-              <a></a>
-            </span>
-          </label>
+          <div class="flex-row">
+            <span class="toggle-label">Set Profile to Public</span>
+            <label class="toggle">
+              <input class="toggle-checkbox" type="checkbox">
+              <div class="toggle-switch"></div>
+            </label>
+          </div>
 
           <select class="settings__field" id="time-zone">
             <option disabled selected>Select Timezone</option>
