@@ -8,10 +8,12 @@ $color-primary       : #7477BF;
 $color-secondary     : #4D4C72;
 $color-tertiary      : #7377BF;
 
-$color-text          : #727171;
-$color-link          : #939393;
-$color-link-selected : #81C98F;
-$color-border        : lighten($grey, 35%);
+$color-text           : #727171;
+$color-link           : #939393;
+$color-link-selected  : #81C98F;
+$color-border         : lighten($grey, 35%);
+$color-button-primary : $color-primary;
+$color-button-neutral : #B2B2B2;
 
 $border-sm              : 5px;
 $border-round           : 100px;

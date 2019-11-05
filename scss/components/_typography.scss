@@ -74,9 +74,39 @@
     color: $color-tertiary;
     font-weight: 700;
     font-size: 1.2em;
+    text-align: right;
+    @include mq(768px) {
+      text-align: left;
+    }
   }
   &__count {
     font-size: 2.8em;
     font-weight: 300;
+  }
+}
+
+.activity {
+  &__name {
+    font-size: 14px;
+    font-weight: 600;
+  }
+  &__email {
+    color: $color-primary;
+    font-size: 13px;
+  }
+  &__join-date {
+    font-size: 13px;
+  }
+  &__comment {
+    font-size: 13.5px;
+  }
+  &__post {
+    font-family: 'Muli', sans-serif;
+    font-weight: 600;
+  }
+  &__date {
+    font-family: 'Muli', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
   }
 }

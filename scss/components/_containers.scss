@@ -59,19 +59,25 @@
 }
 
 .social {
-  padding: 12px 0;
+  padding: 12px 0 0;
+  margin-bottom: 50px;
   &__container {
     background-color: $silver;
     border: 1px solid $color-border;
     border-radius: $border-sm;
     margin-bottom: 30px;
-    display: flex;
-    align-items: center;
+    @include flex();
     padding: 1.5em;
     margin: 18px 0 0;
     @include mq(768px) {
       margin: 0;
       flex: 0 329px;
+    }
+  }
+  &__image {
+    margin-right: auto;
+    @include mq(768px) {
+      margin-right: 20px;
     }
   }
 }
@@ -84,4 +90,55 @@
       justify-content: space-between;
     }
   }
+}
+
+.new-members {
+  @include mq(768px) {
+    border-right: 1px solid $color-border;
+    margin-right: -5px;
+  }
+}
+
+.new-members,
+.recent-activity {
+  padding-bottom: 20px;
+  border-bottom: 1px solid $color-border;
+  @include mq(768px) {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    border-top: 1px solid $color-border;
+    border-bottom: 1px solid $color-border;
+    padding-bottom: 30px;
+  }
+}
+
+.activity {
+  border-top: 1px solid $color-border;
+  padding-top: 1em;
+  @include mq(768px) {
+    border-top: none;
+    border-right: 1px solid $color-border;
+    margin-right: -5px;
+  }
+  &__container {
+    padding: 20px 0 16px;
+    border-bottom: 1px solid $color-border;
+    @include flex();
+    &:last-child {
+      border: none;
+    }
+    .inner-container {
+      margin-right: auto;
+    }
+  }
+}
+
+.message {
+  padding: 12px 0 30px;
+  border-bottom: 1px solid $color-border;
+}
+
+.settings {
+  padding: 12px 0 0;
 }

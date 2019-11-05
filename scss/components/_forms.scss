@@ -15,6 +15,92 @@
   }
 }
 
+// Form field placeholder texts
 ::placeholder {
   color: darken($color-border, 10%);
+}
+
+// Messaging Form
+.message {
+  &__form {
+    margin-top: 20px;
+  }
+  &__field {
+    font-size: 14px;
+    outline: 0;
+    border: none;
+    border: 1px solid $color-border;
+    border-radius: $border-sm;
+    color: $grey;
+    background: $silver;
+    padding: 12px 18px;
+    display: block;
+    width: 100%;
+    margin-bottom: 17px;
+  }
+  &__area {
+    font-size: 14px;
+    outline: 0;
+    border: none;
+    border: 1px solid $color-border;
+    border-radius: $border-sm;
+    color: $grey;
+    background: $silver;
+    padding: 12px 18px;
+    width: 100%;
+    display: block;
+    margin-bottom: 17px;
+  }
+}
+
+// Setting switches
+.switch-light {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+}
+
+.switch-ios.switch-light strong {
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.switch-ios.switch-light > span {
+  display: inline-block;
+  width: 90px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid #CFCFD0;
+  height: 32px;
+  background: $color-primary;
+}
+
+.switch-ios.switch-light span span {
+  color: $white;
+  top: 1px;
+}
+
+.switch-ios.switch-light a {
+  width: 1.6em;
+  height: 1.6em;
+  border: 2px solid #CFCFD0;
+  top: 3px;
+  left: 4px;
+}
+
+// Timezone Select
+.settings__field {
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border: 1px solid $color-border;
+  border-radius: $border-sm;
+  color: $grey;
+  background: $silver;
+  padding: 12px 18px;
+  width: 100%;
+  display: block;
 }

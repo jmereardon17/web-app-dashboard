@@ -367,6 +367,10 @@ img {
   max-width: 100%;
 }
 
+:focus {
+  outline: 0;
+}
+
 .app-header {
   background-color: #7477BF;
   color: #fff;
@@ -481,11 +485,21 @@ main {
   fill: #fff;
 }
 
+.activity__toggle {
+  cursor: pointer;
+  width: 15px;
+}
+
 .profile-photo {
   border-radius: 100px;
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   margin-right: 10px;
+}
+
+.feed {
+  width: 38px;
+  height: 38px;
 }
 
 @media (min-width: 768px) {
@@ -558,7 +572,8 @@ main {
 }
 
 .social {
-  padding: 12px 0;
+  padding: 12px 0 0;
+  margin-bottom: 50px;
 }
 .social__container {
   background-color: #FBFBFB;
@@ -566,6 +581,7 @@ main {
   border-radius: 5px;
   margin-bottom: 30px;
   display: flex;
+  flex-direction: row;
   align-items: center;
   padding: 1.5em;
   margin: 18px 0 0;
@@ -574,6 +590,14 @@ main {
   .social__container {
     margin: 0;
     flex: 0 329px;
+  }
+}
+.social__image {
+  margin-right: auto;
+}
+@media (min-width: 768px) {
+  .social__image {
+    margin-right: 20px;
   }
 }
 
@@ -586,6 +610,64 @@ main {
     align-items: center;
     justify-content: space-between;
   }
+}
+
+@media (min-width: 768px) {
+  .new-members {
+    border-right: 1px solid #dadada;
+    margin-right: -5px;
+  }
+}
+
+.new-members,
+.recent-activity {
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dadada;
+}
+@media (min-width: 768px) {
+  .new-members,
+.recent-activity {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+    border-top: 1px solid #dadada;
+    border-bottom: 1px solid #dadada;
+    padding-bottom: 30px;
+  }
+}
+
+.activity {
+  border-top: 1px solid #dadada;
+  padding-top: 1em;
+}
+@media (min-width: 768px) {
+  .activity {
+    border-top: none;
+    border-right: 1px solid #dadada;
+    margin-right: -5px;
+  }
+}
+.activity__container {
+  padding: 20px 0 16px;
+  border-bottom: 1px solid #dadada;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.activity__container:last-child {
+  border: none;
+}
+.activity__container .inner-container {
+  margin-right: auto;
+}
+
+.message {
+  padding: 12px 0 30px;
+  border-bottom: 1px solid #dadada;
+}
+
+.settings {
+  padding: 12px 0 0;
 }
 
 .bold {
@@ -667,10 +749,60 @@ main {
   color: #7377BF;
   font-weight: 700;
   font-size: 1.2em;
+  text-align: right;
+}
+@media (min-width: 768px) {
+  .social__media {
+    text-align: left;
+  }
 }
 .social__count {
   font-size: 2.8em;
   font-weight: 300;
+}
+
+.activity__name {
+  font-size: 14px;
+  font-weight: 600;
+}
+.activity__email {
+  color: #7477BF;
+  font-size: 13px;
+}
+.activity__join-date {
+  font-size: 13px;
+}
+.activity__comment {
+  font-size: 13.5px;
+}
+.activity__post {
+  font-family: "Muli", sans-serif;
+  font-weight: 600;
+}
+.activity__date {
+  font-family: "Muli", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.btn {
+  outline: 0;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: 5px;
+  color: #fff;
+  padding: 16px 0;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  width: 100%;
+}
+.btn--positive {
+  background: #7477BF;
+}
+.btn--neutral {
+  background: #B2B2B2;
 }
 
 .header__search {
@@ -693,6 +825,86 @@ main {
 
 ::placeholder {
   color: #c1c1c1;
+}
+
+.message__form {
+  margin-top: 20px;
+}
+.message__field {
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  color: #818181;
+  background: #FBFBFB;
+  padding: 12px 18px;
+  display: block;
+  width: 100%;
+  margin-bottom: 17px;
+}
+.message__area {
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  color: #818181;
+  background: #FBFBFB;
+  padding: 12px 18px;
+  width: 100%;
+  display: block;
+  margin-bottom: 17px;
+}
+
+.switch-light {
+  margin: 12px 0;
+  display: flex;
+  align-items: center;
+}
+
+.switch-ios.switch-light strong {
+  font-size: 14px;
+  font-weight: 600;
+  margin-right: auto;
+}
+
+.switch-ios.switch-light > span {
+  display: inline-block;
+  width: 90px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid #CFCFD0;
+  height: 32px;
+  background: #7477BF;
+}
+
+.switch-ios.switch-light span span {
+  color: #fff;
+  top: 1px;
+}
+
+.switch-ios.switch-light a {
+  width: 1.6em;
+  height: 1.6em;
+  border: 2px solid #CFCFD0;
+  top: 3px;
+  left: 4px;
+}
+
+.settings__field {
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  color: #818181;
+  background: #FBFBFB;
+  padding: 12px 18px;
+  width: 100%;
+  display: block;
 }
 
 /*# sourceMappingURL=app.css.map */
