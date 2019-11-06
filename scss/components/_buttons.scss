@@ -1,36 +1,29 @@
 .btn {
-  cursor: pointer;
-  outline: 0;
-  border: none;
-  font-size: 14px;
-  font-weight: 700;
-  border-radius: $border-sm;
-  color: $white;
-  padding: 16px 0;
-  text-transform: uppercase;
-  text-align: center;
-  display: block;
-  width: 100%;
-  &--positive {
-    background: $color-button-primary;
+  &-positive {
+    @extend %btn;
   }
-  &--neutral {
+  &-neutral {
+    @extend %btn;
     background: $color-button-neutral;
   }
 }
 
-.btn + .btn {
+.btn-neutral {
   margin: 17px 0;
 }
 
-.settings .btn {
-  @include mq(1024px) {
+.settings .btn-positive {
+  @include mq('tablet-wide') {
+    margin-right: 20px;
+  }
+}
+
+.settings .btn-positive,
+.settings .btn-neutral {
+  @include mq('tablet-wide') {
     margin-top: 5px;
     display: inline-block;
     width: 40%;
     max-width: 232px;
-  }
-  &:first-child {
-    margin-right: 20px;
   }
 }

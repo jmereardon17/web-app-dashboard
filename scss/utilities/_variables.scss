@@ -11,12 +11,23 @@ $color-tertiary      : #7377BF;
 $color-text           : #727171;
 $color-link           : #939393;
 $color-link-selected  : #81C98F;
+
 $color-border         : lighten($grey, 35%);
+
 $color-button-primary : $color-primary;
 $color-button-neutral : #B2B2B2;
 
 $border-sm              : 5px;
 $border-round           : 100px;
+
+$breakpoints: (
+  'phone'         : 480px,
+  'tablet-small'  : 680px,
+  'tablet'        : 768px,
+  'tablet-medium' : 992px,
+  'tablet-wide'   : 1024px,
+  'desktop'       : 1150px
+);
 
 
 

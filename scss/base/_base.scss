@@ -6,7 +6,12 @@ body {
   font-size: 16px;
   color: $color-text;
   -webkit-font-smoothing: antialiased;
-  background-color: white;
+  background-color: $white;
+}
+main {
+  @include mq('tablet-wide') {
+    padding-bottom: 30px;
+  }
 }
 ul {
   list-style: none;

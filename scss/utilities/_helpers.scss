@@ -1,0 +1,15 @@
+%btn {
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  font-size: 14px;
+  font-weight: 700;
+  border-radius: $border-sm;
+  color: $white;
+  padding: 16px 0;
+  text-transform: uppercase;
+  text-align: center;
+  display: block;
+  width: 100%;
+  background: $color-button-primary;
+}

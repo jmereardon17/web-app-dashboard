@@ -2,21 +2,6 @@
   width: 21px;
 }
 
-.header__search-icon {
-  content: '';
-  display: block;
-  background: url('../../icons/icon-search.svg') no-repeat center / cover;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 25px;
-  right: 82px;
-  cursor: pointer;
-  @include mq(768px) {
-    right: 40px;
-  }
-}
-
 .alert::after {
   content: '';
   display: block;
@@ -27,7 +12,7 @@
   top: 8px;
   right: 8px;
   cursor: pointer;
-  @include mq(1150px) {
+  @include mq('desktop') {
     top: 16px;
     right: 14px;
   }

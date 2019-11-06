@@ -11,8 +11,45 @@
   @content;
 }
 
-@mixin mq($break) {
-  @media (min-width: $break) {
-    @content;
+@mixin mq($width, $type: min) {
+  @if map_has_key($breakpoints, $width) {
+    $width: map_get($breakpoints, $width);
+    @if $type == max {
+      $width: $width - 1px;
+    }
+    @media (#{$type}-width: $width) {
+      @content;
+    }
+  }
+}
+
+// @mixin border(
+//   $dir: null, 
+//   $width: 1px, 
+//   $style: solid, 
+//   $color: $color-border
+// ) {
+//   @if $dir == null {
+//     border: $width $style $color;
+//   } @else {
+//     border-#{$dir}: $width $style $color;
+//   }
+// }
+
+// @mixin border($width: 1px, $style: solid, $color: $color-border, $dir...) {
+//   @if length($dir) == 1 {
+//     border-#{nth($dir, 1)}: $width $style $color;
+//   } @else if length($dir) == 2 {
+//     border-#{nth($dir, 1)}: $width $style $color;
+//     border-#{nth($dir, 2)}: $width $style $color;
+//   }
+// }
+
+@mixin border($style, $dir...) {
+  @if length($dir) == 1 {
+    border-#{nth($dir, 1)}: $style;
+  } @else if length($dir) == 2 {
+    border-#{nth($dir, 1)}: $style;
+    border-#{nth($dir, 2)}: $style;
   }
 }

@@ -1,5 +1,5 @@
 .header {
-  @include mq(680px) {
+  @include mq('tablet-small') {
     @include flex();
   }
   &__headline {
@@ -9,14 +9,13 @@
   &__search-container {
     background-color: $silver;
     flex: 1 75%;
-    border-top: 1px solid $color-border;
-    border-bottom: 1px solid $color-border;
     padding: 14px 0;
     position: relative;
-    @include mq(680px) {
+    @include border(1px solid $color-border, 'top', 'bottom');
+    @include mq('tablet-small') {
       padding-right: 1.5em;
       border-top: none;
-      border-left: 1px solid $color-border;
+      @include border(1px solid $color-border, 'left');
     }
   }
 }
@@ -28,11 +27,11 @@
 .traffic {
   margin-bottom: 30px;
   &__header {
-    @include mq(480px) {
+    @include mq('phone') {
       @include flex();
     }
     .sub-headline {
-      @include mq(480px) {
+      @include mq('phone') {
         margin-right: auto;
       }
     }
@@ -41,7 +40,7 @@
 
 .daily-traffic {
   border-top: 1px solid $color-border;
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     border-top: none;
     border-right: 1px solid $color-border;
     margin-right: -5px;
@@ -52,7 +51,7 @@
 .mobile-users {
   padding-bottom: 30px;
   border-bottom: 1px solid $color-border;
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     display: inline-block;
     vertical-align: top;
     width: 50%;
@@ -74,24 +73,24 @@
     padding: 1.5em;
     margin: 18px 0 0;
     flex: 0 100%;
-    @include mq(992px) {
+    @include mq('tablet-medium') {
       flex-basis: calc(33.3333% - 20px);
     }
-    @include mq(1150px) {
+    @include mq('desktop') {
       margin: 0;
       flex-basis: 329px;
     }
   }
   &__image {
     margin-right: auto;
-    @include mq(1024px) {
+    @include mq('tablet-wide') {
       margin-right: 20px;
     }
   }
 }
 
 .flex {
-  @include mq(992px) {
+  @include mq('tablet-medium') {
     padding: 0 5px;
     margin-top: 20px;
     @include flex($wrap: wrap) {
@@ -106,7 +105,7 @@
 }
 
 .new-members {
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     border-right: 1px solid $color-border;
     margin-right: -5px;
   }
@@ -116,7 +115,7 @@
 .recent-activity {
   padding-bottom: 20px;
   border-bottom: 1px solid $color-border;
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     display: inline-block;
     vertical-align: top;
     width: 50%;
@@ -129,7 +128,7 @@
 .activity {
   border-top: 1px solid $color-border;
   padding-top: 1em;
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     border-top: none;
     border-right: 1px solid $color-border;
     margin-right: -5px;
@@ -138,7 +137,7 @@
     padding: 20px 0 16px;
     border-bottom: 1px solid $color-border;
     @include flex($wrap: wrap);
-    @include mq(1024px) {
+    @include mq('tablet-wide') {
       padding-top: 5px;
     }
     &:last-child {
@@ -148,11 +147,11 @@
       flex-wrap: nowrap;
     }
     .inner-container {
-      @include mq(480px) {
+      @include mq('phone') {
         flex: 0 75%;
         margin-right: auto;
       }
-      @include mq(768px) {
+      @include mq('tablet') {
         flex-basis: auto;
       }
     }
@@ -163,8 +162,9 @@
   padding: 12px 0 30px;
   margin-bottom: 10px;
   border-bottom: 1px solid $color-border;
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     margin-right: -5px;
+    border-right: 1px solid $color-border;
     border-bottom: none;
     .btn {
       width: 100%;
@@ -178,9 +178,14 @@
 
 .message,
 .settings {
-  @include mq(1024px) {
+  @include mq('tablet-wide') {
     display: inline-block;
     vertical-align: top;
     width: 50%;
+    padding-bottom: 40px;
   }
+}
+
+.wrapper {
+  padding: 0 5px;
 }

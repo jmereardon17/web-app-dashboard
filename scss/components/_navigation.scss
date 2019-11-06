@@ -2,6 +2,7 @@
   background-color: $color-secondary;
   padding: 35px 0;
   &__link {
+    cursor: pointer;
     display: block;
     text-align: center;
     margin-bottom: 50px;

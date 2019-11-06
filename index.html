@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YourApp | WebApp Dashboard</title>
+    <title>SHUBApp | WebApp Dashboard</title>
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Muli:400,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/toggle-switch.css">
@@ -12,13 +12,13 @@
   </head>
   <body class="grid">
     <header class="app-header">
-      <h1 class="app-header__name"><span class="bold">Your</span>App</h1>
+      <h1 class="app-header__name"><span class="bold">SHUB</span>App</h1>
 
       <div class="app-header__icon-container">
         <img class="app-header__icon" src="icons/icon-bell.svg" alt="Notification Bell Icon">
       </div>
 
-      <img class="profile-photo" src="images/profile-photo.png" alt="User Profile Image">
+      <img class="profile-photo" src="images/profile-photo.jpg" alt="User Profile Image">
       <span class="app-header__user">Jamie Reardon</span>
     </header>
 
@@ -45,7 +45,6 @@
         <h2 class="header__headline">Dashboard</h2>
         <div class="header__search-container">
           <input class="header__search" type="search" placeholder="Search" />
-          <img class="header__search-icon" src="icons/icon-search.svg" alt="Search Icon">
         </div>
       </section>
 
@@ -216,7 +215,7 @@
           <div class="activity__container activity__container--nowrap">
             <img class="profile-photo feed" src="images/member-1.jpg" alt="Member Profile Image">
             <div class="inner-container">
-              <p class="activity__comment">Victoria Chambers commented on <span class="activity__post">YourApp's SEO Tips</span></p>
+              <p class="activity__comment">Victoria Chambers commented on <span class="activity__post">SHUBApp's SEO Tips</span></p>
               <p class="activity__date">4 hours ago</p>
             </div>
             <img class="activity__toggle" src="icons/icon-angle-right.svg" alt="Angle Right Icon">
@@ -243,7 +242,7 @@
           <div class="activity__container activity__container--nowrap">
             <img class="profile-photo feed" src="images/member-4.jpg" alt="Member Profile Image">
             <div class="inner-container">
-              <p class="activity__comment">Dan Oliver posted <span class="activity__post">YourApp's SEO Tips</span></p>
+              <p class="activity__comment">Dan Oliver posted <span class="activity__post">SHUBApp's SEO Tips</span></p>
               <p class="activity__date">1 day ago</p>
             </div>
             <img class="activity__toggle" src="icons/icon-angle-right.svg" alt="Angle Right Icon">
@@ -259,7 +258,7 @@
           <form class="message__form">
             <input class="message__field" id="userField" type="text" placeholder="Search for User">
             <textarea class="message__area" id="messageField" rows="6" placeholder="Message for User"></textarea>
-            <button class="btn btn--positive" id="send">Send</button>
+            <button class="btn-positive" id="send">Send</button>
           </form>
         </div>
       </section>
@@ -268,31 +267,33 @@
         <div class="container">
           <h3 class="sub-headline">Settings</h3>
 
-          <div class="flex-row">
-            <span class="toggle-label">Send Email Notifications</span>
-            <label class="toggle">
-              <input class="toggle-checkbox" type="checkbox">
-              <div class="toggle-switch"></div>
-            </label>
-          </div>
+          <div class="wrapper">
+            <div class="flex-row">
+              <span class="toggle-label">Send Email Notifications</span>
+              <label class="toggle">
+                <input class="toggle-checkbox" type="checkbox">
+                <div class="toggle-switch"></div>
+              </label>
+            </div>
 
-          <div class="flex-row">
-            <span class="toggle-label">Set Profile to Public</span>
-            <label class="toggle">
-              <input class="toggle-checkbox" type="checkbox">
-              <div class="toggle-switch"></div>
-            </label>
-          </div>
+            <div class="flex-row">
+              <span class="toggle-label">Set Profile to Public</span>
+              <label class="toggle">
+                <input class="toggle-checkbox" type="checkbox">
+                <div class="toggle-switch"></div>
+              </label>
+            </div>
 
-          <select class="settings__field" id="time-zone">
-            <option disabled selected>Select Timezone</option>
-            <option>Eastern</option>
-            <option>Central</option>
-            <option>Pacific</option>
-          </select>
-          <div class="settings__container">
-            <button class="btn btn--positive" id="save">Save</button>
-            <button class="btn btn--neutral" id="cancel">Cancel</button>
+            <select class="settings__field" id="time-zone">
+              <option disabled selected>Select Timezone</option>
+              <option>Eastern</option>
+              <option>Central</option>
+              <option>Pacific</option>
+            </select>
+
+            <button class="btn-positive" id="save">Save</button>
+            <button class="btn-neutral" id="cancel">Cancel</button>
+
           </div>
 
         </div>
