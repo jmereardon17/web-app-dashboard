@@ -3,6 +3,9 @@
 }
 
 .header__search-icon {
+  content: '';
+  display: block;
+  background: url('../../icons/icon-search.svg') no-repeat center / cover;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -11,6 +14,22 @@
   cursor: pointer;
   @include mq(768px) {
     right: 40px;
+  }
+}
+
+.alert::after {
+  content: '';
+  display: block;
+  background: url('../../icons/icon-close.svg') no-repeat center / cover;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+  @include mq(1150px) {
+    top: 16px;
+    right: 14px;
   }
 }
 

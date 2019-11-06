@@ -372,23 +372,43 @@ img {
 }
 
 .app-header {
+  text-align: center;
   background-color: #7477BF;
   color: #fff;
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
-  padding: 0 1.5em;
-  height: 70px;
+  justify-content: center;
+  padding: 1em 1.5em;
+}
+@media (min-width: 680px) {
+  .app-header {
+    flex-wrap: nowrap;
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 70px;
+  }
 }
 .app-header__name {
+  flex: 0 100%;
   font-size: 1.5em;
   font-weight: 300;
-  margin: 0 auto 0 0;
+  margin-top: 0;
+}
+@media (min-width: 680px) {
+  .app-header__name {
+    flex-basis: auto;
+    margin: 0 auto 0 0;
+  }
 }
 .app-header__icon-container {
   border-right: 1.5px solid #6366BF;
   padding: 10px 24px 10px 0;
   margin-right: 15px;
   display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .app-nav {
@@ -443,17 +463,22 @@ main {
   height: 276px;
   background: orange;
   display: block;
-  margin: 10px auto 0;
+  margin-top: 10px;
+}
+@media (min-width: 768px) {
+  #trafficChart {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 #dailyTrafficChart,
 #devicesChart {
   max-width: 100%;
-  width: 483px;
+  width: 100%;
   height: 265px;
   background: orange;
   display: block;
-  margin: auto;
 }
 
 .app-header__icon {
@@ -461,6 +486,9 @@ main {
 }
 
 .header__search-icon {
+  content: "";
+  display: block;
+  background: url("../../icons/icon-search.svg") no-repeat center/cover;
   width: 20px;
   height: 20px;
   position: absolute;
@@ -471,6 +499,24 @@ main {
 @media (min-width: 768px) {
   .header__search-icon {
     right: 40px;
+  }
+}
+
+.alert::after {
+  content: "";
+  display: block;
+  background: url("../../icons/icon-close.svg") no-repeat center/cover;
+  width: 10px;
+  height: 10px;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  cursor: pointer;
+}
+@media (min-width: 1150px) {
+  .alert::after {
+    top: 16px;
+    right: 14px;
   }
 }
 
@@ -502,7 +548,7 @@ main {
   height: 38px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 680px) {
   .header {
     display: flex;
     flex-direction: row;
@@ -518,11 +564,12 @@ main {
   flex: 1 75%;
   border-top: 1px solid #dadada;
   border-bottom: 1px solid #dadada;
-  padding: 14px 1.5em 14px 0;
+  padding: 14px 0;
   position: relative;
 }
-@media (min-width: 786px) {
+@media (min-width: 680px) {
   .header__search-container {
+    padding-right: 1.5em;
     border-top: none;
     border-left: 1px solid #dadada;
   }
@@ -535,18 +582,23 @@ main {
 .traffic {
   margin-bottom: 30px;
 }
-.traffic__header {
-  display: flex;
-  align-items: center;
+@media (min-width: 480px) {
+  .traffic__header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
-.traffic__header .sub-headline {
-  margin-right: auto;
+@media (min-width: 480px) {
+  .traffic__header .sub-headline {
+    margin-right: auto;
+  }
 }
 
 .daily-traffic {
   border-top: 1px solid #dadada;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .daily-traffic {
     border-top: none;
     border-right: 1px solid #dadada;
@@ -559,7 +611,7 @@ main {
   padding-bottom: 30px;
   border-bottom: 1px solid #dadada;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .daily-traffic,
 .mobile-users {
     display: inline-block;
@@ -585,40 +637,48 @@ main {
   align-items: center;
   padding: 1.5em;
   margin: 18px 0 0;
+  flex: 0 100%;
 }
-@media (min-width: 768px) {
+@media (min-width: 992px) {
+  .social__container {
+    flex-basis: calc(33.3333% - 20px);
+  }
+}
+@media (min-width: 1150px) {
   .social__container {
     margin: 0;
-    flex: 0 329px;
+    flex-basis: 329px;
   }
 }
 .social__image {
   margin-right: auto;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .social__image {
     margin-right: 20px;
   }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .flex {
     padding: 0 5px;
     margin-top: 20px;
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
   }
 }
+
 .flex-row {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin: 12px 0;
+  margin: 25px 0 30px;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .new-members {
     border-right: 1px solid #dadada;
     margin-right: -5px;
@@ -630,7 +690,7 @@ main {
   padding-bottom: 20px;
   border-bottom: 1px solid #dadada;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .new-members,
 .recent-activity {
     display: inline-block;
@@ -646,7 +706,7 @@ main {
   border-top: 1px solid #dadada;
   padding-top: 1em;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .activity {
     border-top: none;
     border-right: 1px solid #dadada;
@@ -658,13 +718,30 @@ main {
   border-bottom: 1px solid #dadada;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   align-items: center;
+}
+@media (min-width: 1024px) {
+  .activity__container {
+    padding-top: 5px;
+  }
 }
 .activity__container:last-child {
   border: none;
 }
-.activity__container .inner-container {
-  margin-right: auto;
+.activity__container--nowrap {
+  flex-wrap: nowrap;
+}
+@media (min-width: 480px) {
+  .activity__container .inner-container {
+    flex: 0 75%;
+    margin-right: auto;
+  }
+}
+@media (min-width: 768px) {
+  .activity__container .inner-container {
+    flex-basis: auto;
+  }
 }
 
 .message {
@@ -672,9 +749,27 @@ main {
   margin-bottom: 10px;
   border-bottom: 1px solid #dadada;
 }
+@media (min-width: 1024px) {
+  .message {
+    margin-right: -5px;
+    border-bottom: none;
+  }
+  .message .btn {
+    width: 100%;
+  }
+}
 
 .settings {
   padding: 12px 0 0;
+}
+
+@media (min-width: 1024px) {
+  .message,
+.settings {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+  }
 }
 
 .bold {
@@ -706,27 +801,10 @@ main {
   font-size: 13px;
   margin-top: 5px;
 }
-@media (min-width: 768px) {
+@media (min-width: 1150px) {
   .alert p {
     display: inline-block;
     margin: 0 0 0 5px;
-  }
-}
-.alert::after {
-  content: "";
-  display: block;
-  background: url("../../icons/icon-close.svg") no-repeat center/cover;
-  width: 10px;
-  height: 10px;
-  position: absolute;
-  top: 8px;
-  right: 8px;
-  cursor: pointer;
-}
-@media (min-width: 768px) {
-  .alert::after {
-    top: 16px;
-    right: 14px;
   }
 }
 
@@ -741,9 +819,15 @@ main {
   font-weight: 700;
   font-size: 13px;
   display: inline-block;
-  margin-left: 20px;
+  margin-right: 15px;
   color: #939393;
   cursor: pointer;
+}
+@media (min-width: 480px) {
+  .traffic__link {
+    margin-right: 0;
+    margin-left: 20px;
+  }
 }
 .traffic__link--active {
   color: #fff;
@@ -755,17 +839,24 @@ main {
 .social__media {
   color: #7377BF;
   font-weight: 700;
-  font-size: 1.2em;
+  font-size: 1em;
   text-align: right;
 }
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
   .social__media {
+    font-size: 1.2em;
     text-align: left;
   }
 }
 .social__count {
-  font-size: 2.8em;
+  font-size: 2em;
   font-weight: 300;
+  text-align: right;
+}
+@media (min-width: 1024px) {
+  .social__count {
+    font-size: 2.8em;
+  }
 }
 
 .activity__name {
@@ -778,9 +869,37 @@ main {
 }
 .activity__join-date {
   font-size: 13px;
+  margin-top: 5px;
+  text-align: right;
+  flex: 0 100%;
+}
+@media (min-width: 480px) {
+  .activity__join-date {
+    margin-top: 0;
+    flex-basis: auto;
+  }
 }
 .activity__comment {
   font-size: 13.5px;
+  text-overflow: ellipsis;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@media (min-width: 992px) {
+  .activity__comment {
+    width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .activity__comment {
+    width: 90%;
+  }
+}
+@media (min-width: 1150px) {
+  .activity__comment {
+    width: 100%;
+  }
 }
 .activity__post {
   font-family: "Muli", sans-serif;
@@ -817,6 +936,18 @@ main {
   margin: 17px 0;
 }
 
+@media (min-width: 1024px) {
+  .settings .btn {
+    margin-top: 5px;
+    display: inline-block;
+    width: 40%;
+    max-width: 232px;
+  }
+}
+.settings .btn:first-child {
+  margin-right: 20px;
+}
+
 .header__search {
   font-size: 14px;
   outline: 0;
@@ -826,10 +957,12 @@ main {
   color: #818181;
   padding: 12px 18px;
   margin: auto;
-  width: 380px;
+  width: 80%;
+  max-width: 380px;
   display: block;
+  position: relative;
 }
-@media (min-width: 768px) {
+@media (min-width: 680px) {
   .header__search {
     margin: 0 0 0 auto;
   }
@@ -938,7 +1071,7 @@ main {
 }
 
 .settings__field {
-  margin: 30px 0 17px;
+  margin: 35px 0 17px;
   height: 42px;
   font-size: 14px;
   outline: 0;

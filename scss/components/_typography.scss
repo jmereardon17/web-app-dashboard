@@ -25,24 +25,9 @@
   p {
     font-size: 13px;
     margin-top: 5px;
-    @include mq(768px) {
+    @include mq(1150px) {
       display: inline-block;
       margin: 0 0 0 5px;
-    }
-  }
-  &::after {
-    content: '';
-    display: block;
-    background: url('../../icons/icon-close.svg') no-repeat center / cover;
-    width: 10px;
-    height: 10px;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    cursor: pointer;
-    @include mq(768px) {
-      top: 16px;
-      right: 14px;
     }
   }
 }
@@ -58,7 +43,11 @@
   font-weight: 700;
   font-size: 13px;
   display: inline-block;
-  margin-left: 20px;
+  margin-right: 15px;
+  @include mq(480px) {
+    margin-right: 0;
+    margin-left: 20px;
+  }
   color: $color-link;
   cursor: pointer;
   &--active {
@@ -73,15 +62,20 @@
   &__media {
     color: $color-tertiary;
     font-weight: 700;
-    font-size: 1.2em;
+    font-size: 1em;
     text-align: right;
-    @include mq(768px) {
+    @include mq(1024px) {
+      font-size: 1.2em;
       text-align: left;
     }
   }
   &__count {
-    font-size: 2.8em;
+    font-size: 2em;
     font-weight: 300;
+    text-align: right;
+    @include mq(1024px) {
+      font-size: 2.8em;
+    }
   }
 }
 
@@ -96,9 +90,29 @@
   }
   &__join-date {
     font-size: 13px;
+    margin-top: 5px;
+    text-align: right;
+    flex: 0 100%;
+    @include mq(480px) {
+      margin-top: 0;
+      flex-basis: auto;
+    }
   }
   &__comment {
     font-size: 13.5px;
+    text-overflow: ellipsis;
+    width: 90%;
+    white-space: nowrap;
+    overflow: hidden;
+    @include mq(992px) {
+      width: 100%
+    }
+    @include mq(1024px) {
+      width: 90%;
+    }
+    @include mq(1150px) {
+      width: 100%;
+    }
   }
   &__post {
     font-family: 'Muli', sans-serif;

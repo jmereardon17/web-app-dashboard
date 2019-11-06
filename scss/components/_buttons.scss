@@ -22,3 +22,15 @@
 .btn + .btn {
   margin: 17px 0;
 }
+
+.settings .btn {
+  @include mq(1024px) {
+    margin-top: 5px;
+    display: inline-block;
+    width: 40%;
+    max-width: 232px;
+  }
+  &:first-child {
+    margin-right: 20px;
+  }
+}

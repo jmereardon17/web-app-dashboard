@@ -1,5 +1,5 @@
 .header {
-  @include mq(768px) {
+  @include mq(680px) {
     @include flex();
   }
   &__headline {
@@ -11,9 +11,10 @@
     flex: 1 75%;
     border-top: 1px solid $color-border;
     border-bottom: 1px solid $color-border;
-    padding: 14px 1.5em 14px 0;
+    padding: 14px 0;
     position: relative;
-    @include mq(786px) {
+    @include mq(680px) {
+      padding-right: 1.5em;
       border-top: none;
       border-left: 1px solid $color-border;
     }
@@ -27,17 +28,20 @@
 .traffic {
   margin-bottom: 30px;
   &__header {
-    display: flex;
-    align-items: center;
+    @include mq(480px) {
+      @include flex();
+    }
     .sub-headline {
-      margin-right: auto;
+      @include mq(480px) {
+        margin-right: auto;
+      }
     }
   }
 }
 
 .daily-traffic {
   border-top: 1px solid $color-border;
-  @include mq(768px) {
+  @include mq(1024px) {
     border-top: none;
     border-right: 1px solid $color-border;
     margin-right: -5px;
@@ -48,7 +52,7 @@
 .mobile-users {
   padding-bottom: 30px;
   border-bottom: 1px solid $color-border;
-  @include mq(768px) {
+  @include mq(1024px) {
     display: inline-block;
     vertical-align: top;
     width: 50%;
@@ -69,35 +73,40 @@
     @include flex();
     padding: 1.5em;
     margin: 18px 0 0;
-    @include mq(768px) {
+    flex: 0 100%;
+    @include mq(992px) {
+      flex-basis: calc(33.3333% - 20px);
+    }
+    @include mq(1150px) {
       margin: 0;
-      flex: 0 329px;
+      flex-basis: 329px;
     }
   }
   &__image {
     margin-right: auto;
-    @include mq(768px) {
+    @include mq(1024px) {
       margin-right: 20px;
     }
   }
 }
 
 .flex {
-  @include mq(768px) {
+  @include mq(992px) {
     padding: 0 5px;
     margin-top: 20px;
-    @include flex() {
+    @include flex($wrap: wrap) {
       justify-content: space-between;
     }
   }
-  &-row {
-    @include flex();
-    margin: 12px 0;
-  }
+}
+
+.flex-row {
+  @include flex();
+  margin: 25px 0 30px;
 }
 
 .new-members {
-  @include mq(768px) {
+  @include mq(1024px) {
     border-right: 1px solid $color-border;
     margin-right: -5px;
   }
@@ -107,7 +116,7 @@
 .recent-activity {
   padding-bottom: 20px;
   border-bottom: 1px solid $color-border;
-  @include mq(768px) {
+  @include mq(1024px) {
     display: inline-block;
     vertical-align: top;
     width: 50%;
@@ -120,7 +129,7 @@
 .activity {
   border-top: 1px solid $color-border;
   padding-top: 1em;
-  @include mq(768px) {
+  @include mq(1024px) {
     border-top: none;
     border-right: 1px solid $color-border;
     margin-right: -5px;
@@ -128,12 +137,24 @@
   &__container {
     padding: 20px 0 16px;
     border-bottom: 1px solid $color-border;
-    @include flex();
+    @include flex($wrap: wrap);
+    @include mq(1024px) {
+      padding-top: 5px;
+    }
     &:last-child {
       border: none;
     }
+    &--nowrap {
+      flex-wrap: nowrap;
+    }
     .inner-container {
-      margin-right: auto;
+      @include mq(480px) {
+        flex: 0 75%;
+        margin-right: auto;
+      }
+      @include mq(768px) {
+        flex-basis: auto;
+      }
     }
   }
 }
@@ -142,8 +163,24 @@
   padding: 12px 0 30px;
   margin-bottom: 10px;
   border-bottom: 1px solid $color-border;
+  @include mq(1024px) {
+    margin-right: -5px;
+    border-bottom: none;
+    .btn {
+      width: 100%;
+    }
+  }
 }
 
 .settings {
   padding: 12px 0 0;
+}
+
+.message,
+.settings {
+  @include mq(1024px) {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+  }
 }
