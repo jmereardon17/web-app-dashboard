@@ -2,6 +2,12 @@
   width: 21px;
 }
 
+.app-nav__icon {
+  width: 35px;
+  height: 35px;
+  opacity: .5;
+}
+
 .alert::after {
   content: '';
   display: block;

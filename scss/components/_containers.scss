@@ -11,11 +11,11 @@
     flex: 1 75%;
     padding: 14px 0;
     position: relative;
-    @include border(1px solid $color-border, 'top', 'bottom');
+    @include border('top', 'bottom');
     @include mq('tablet-small') {
       padding-right: 1.5em;
       border-top: none;
-      @include border(1px solid $color-border, 'left');
+      @include border('left');
     }
   }
 }
@@ -39,10 +39,10 @@
 }
 
 .daily-traffic {
-  border-top: 1px solid $color-border;
+  @include border('top');
   @include mq('tablet-wide') {
     border-top: none;
-    border-right: 1px solid $color-border;
+    @include border('right');
     margin-right: -5px;
   }
 }
@@ -50,13 +50,12 @@
 .daily-traffic,
 .mobile-users {
   padding-bottom: 30px;
-  border-bottom: 1px solid $color-border;
+  @include border('bottom');
   @include mq('tablet-wide') {
     display: inline-block;
     vertical-align: top;
     width: 50%;
-    border-top: 1px solid $color-border;
-    border-bottom: 1px solid $color-border;
+    @include border('top');
     padding-bottom: 30px;
   }
 }
@@ -66,7 +65,7 @@
   margin-bottom: 50px;
   &__container {
     background-color: $silver;
-    border: 1px solid $color-border;
+    @include border();
     border-radius: $border-sm;
     margin-bottom: 30px;
     @include flex();
@@ -106,7 +105,7 @@
 
 .new-members {
   @include mq('tablet-wide') {
-    border-right: 1px solid $color-border;
+    @include border('right');
     margin-right: -5px;
   }
 }
@@ -114,28 +113,27 @@
 .new-members,
 .recent-activity {
   padding-bottom: 20px;
-  border-bottom: 1px solid $color-border;
+  @include border('bottom');
   @include mq('tablet-wide') {
     display: inline-block;
     vertical-align: top;
     width: 50%;
-    border-top: 1px solid $color-border;
-    border-bottom: 1px solid $color-border;
+    @include border('top');
     padding-bottom: 30px;
   }
 }
 
 .activity {
-  border-top: 1px solid $color-border;
+  @include border('top');
   padding-top: 1em;
   @include mq('tablet-wide') {
     border-top: none;
-    border-right: 1px solid $color-border;
+    @include border('right');
     margin-right: -5px;
   }
   &__container {
     padding: 20px 0 16px;
-    border-bottom: 1px solid $color-border;
+    @include border('bottom');
     @include flex($wrap: wrap);
     @include mq('tablet-wide') {
       padding-top: 5px;
@@ -146,14 +144,14 @@
     &--nowrap {
       flex-wrap: nowrap;
     }
-    .inner-container {
-      @include mq('phone') {
-        flex: 0 75%;
-        margin-right: auto;
-      }
-      @include mq('tablet') {
-        flex-basis: auto;
-      }
+  }
+  &__content {
+    @include mq('phone') {
+      flex: 0 75%;
+      margin-right: auto;
+    }
+    @include mq('tablet') {
+      flex-basis: auto;
     }
   }
 }
@@ -161,10 +159,10 @@
 .message {
   padding: 12px 0 30px;
   margin-bottom: 10px;
-  border-bottom: 1px solid $color-border;
+  @include border('bottom');
   @include mq('tablet-wide') {
     margin-right: -5px;
-    border-right: 1px solid $color-border;
+    @include border('right');
     border-bottom: none;
     .btn {
       width: 100%;

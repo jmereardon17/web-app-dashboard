@@ -14,6 +14,68 @@
   background: #7477BF;
 }
 
+.settings__field, .message__area, .message__field, .header__search {
+  width: 100%;
+  font-size: 14px;
+  outline: 0;
+  border: none;
+  border: 1px solid #dadada;
+  border-radius: 5px;
+  color: #818181;
+  background: #FBFBFB;
+  padding: 10.5px 18px;
+  display: block;
+}
+
+.toggle-switch {
+  cursor: pointer;
+  display: inline-block;
+  border-radius: 16px;
+  position: relative;
+  display: inline-block;
+  width: 90px;
+  height: 32px;
+  vertical-align: middle;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 700;
+  border: 2px solid #CFCFD0;
+  background: #B2B2B2;
+  transition: background 0.25s;
+}
+.toggle-switch:before, .toggle-switch:after {
+  content: "";
+  color: #fff;
+}
+.toggle-switch:after {
+  content: "off";
+  position: relative;
+  top: 6.2px;
+  left: 50px;
+}
+.toggle-switch:before {
+  display: block;
+  background: #fff;
+  border-radius: 50%;
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  border: 2px solid #CFCFD0;
+  top: 2px;
+  left: 3.5px;
+  transition: left 0.25s;
+}
+.toggle-checkbox:checked + .toggle-switch {
+  background: #7477BF;
+}
+.toggle-checkbox:checked + .toggle-switch:before {
+  left: 57.5px;
+}
+.toggle-checkbox:checked + .toggle-switch:after {
+  content: "on";
+  left: 9.5px;
+}
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
@@ -450,11 +512,6 @@ img {
 .app-nav__link:last-child {
   margin-bottom: 0;
 }
-.app-nav__icon {
-  width: 35px;
-  height: 35px;
-  opacity: 0.5;
-}
 
 .grid {
   display: grid;
@@ -497,15 +554,28 @@ main {
 
 #dailyTrafficChart,
 #devicesChart {
-  max-width: 100%;
   width: 100%;
+  max-width: 483px;
   height: 265px;
   background: orange;
   display: block;
 }
+@media (min-width: 768px) {
+  #dailyTrafficChart,
+#devicesChart {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 
 .app-header__icon {
   width: 21px;
+}
+
+.app-nav__icon {
+  width: 35px;
+  height: 35px;
+  opacity: 0.5;
 }
 
 .alert::after {
@@ -624,7 +694,6 @@ main {
     vertical-align: top;
     width: 50%;
     border-top: 1px solid #dadada;
-    border-bottom: 1px solid #dadada;
     padding-bottom: 30px;
   }
 }
@@ -703,7 +772,6 @@ main {
     vertical-align: top;
     width: 50%;
     border-top: 1px solid #dadada;
-    border-bottom: 1px solid #dadada;
     padding-bottom: 30px;
   }
 }
@@ -739,13 +807,13 @@ main {
   flex-wrap: nowrap;
 }
 @media (min-width: 480px) {
-  .activity__container .inner-container {
+  .activity__content {
     flex: 0 75%;
     margin-right: auto;
   }
 }
 @media (min-width: 768px) {
-  .activity__container .inner-container {
+  .activity__content {
     flex-basis: auto;
   }
 }
@@ -805,16 +873,16 @@ main {
   margin: 25px 0;
   position: relative;
 }
-.alert span {
+.alert__title {
   font-weight: 700;
   font-size: 14px;
 }
-.alert p {
+.alert__message {
   font-size: 13px;
   margin-top: 5px;
 }
 @media (min-width: 1150px) {
-  .alert p {
+  .alert__message {
     display: inline-block;
     margin: 0 0 0 5px;
   }
@@ -871,8 +939,29 @@ main {
   }
 }
 
-.activity__name {
-  font-size: 14px;
+.activity__desc {
+  font-size: 13.5px;
+  text-overflow: ellipsis;
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+}
+@media (min-width: 992px) {
+  .activity__desc {
+    width: 100%;
+  }
+}
+@media (min-width: 1024px) {
+  .activity__desc {
+    width: 90%;
+  }
+}
+@media (min-width: 1150px) {
+  .activity__desc {
+    width: 100%;
+  }
+}
+.activity__desc--name {
   font-weight: 600;
 }
 .activity__email {
@@ -889,28 +978,6 @@ main {
   .activity__join-date {
     margin-top: 0;
     flex-basis: auto;
-  }
-}
-.activity__comment {
-  font-size: 13.5px;
-  text-overflow: ellipsis;
-  width: 90%;
-  white-space: nowrap;
-  overflow: hidden;
-}
-@media (min-width: 992px) {
-  .activity__comment {
-    width: 100%;
-  }
-}
-@media (min-width: 1024px) {
-  .activity__comment {
-    width: 90%;
-  }
-}
-@media (min-width: 1150px) {
-  .activity__comment {
-    width: 100%;
   }
 }
 .activity__post {
@@ -938,8 +1005,12 @@ main {
 
 @media (min-width: 1024px) {
   .settings .btn-positive {
-    margin-right: 20px;
+    margin-right: 25px;
   }
+}
+
+.settings .btn-neutral {
+  margin-bottom: 0;
 }
 
 @media (min-width: 1024px) {
@@ -947,29 +1018,17 @@ main {
 .settings .btn-neutral {
     margin-top: 5px;
     display: inline-block;
-    width: 40%;
-    max-width: 232px;
+    width: calc(50% - 15px);
   }
 }
 
 .header__search {
-  font-size: 14px;
-  outline: 0;
-  border: none;
-  border: 1px solid #dadada;
-  border-radius: 5px;
-  color: #818181;
-  padding: 12px 18px;
   margin: auto;
   width: 80%;
   max-width: 380px;
-  display: block;
   position: relative;
   line-height: 0;
-  background-image: url("../../icons/icon-search.svg");
-  background-repeat: no-repeat;
-  background-size: 18px 18px;
-  background-position: 97% 50%;
+  background: url("../../icons/icon-search.svg") no-repeat 97% 50%/18px 18px;
 }
 @media (min-width: 680px) {
   .header__search {
@@ -986,111 +1045,30 @@ main {
   padding: 0 5px;
 }
 .message__field {
-  font-size: 14px;
-  outline: 0;
-  border: none;
-  border: 1px solid #dadada;
-  border-radius: 5px;
-  color: #818181;
-  background: #FBFBFB;
-  padding: 12px 18px;
-  display: block;
-  width: 100%;
+  line-height: 0;
   margin-bottom: 17px;
 }
 .message__area {
-  font-size: 14px;
-  outline: 0;
-  border: none;
-  border: 1px solid #dadada;
-  border-radius: 5px;
-  color: #818181;
-  background: #FBFBFB;
-  padding: 12px 18px;
-  width: 100%;
-  display: block;
   margin-bottom: 17px;
-}
-
-.toggle {
-  cursor: pointer;
-  display: inline-block;
-}
-
-.toggle-switch {
-  border-radius: 16px;
-  position: relative;
-  display: inline-block;
-  width: 90px;
-  height: 32px;
-  vertical-align: middle;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 700;
-  border: 2px solid #CFCFD0;
-  background: #B2B2B2;
-  transition: background 0.25s;
-}
-.toggle-switch:before, .toggle-switch:after {
-  content: "";
-  color: #fff;
-}
-.toggle-switch:after {
-  content: "off";
-  position: relative;
-  top: 6.2px;
-  left: 50px;
-}
-.toggle-switch:before {
-  display: block;
-  background: #fff;
-  border-radius: 50%;
-  position: absolute;
-  width: 20px;
-  height: 20px;
-  border: 2px solid #CFCFD0;
-  top: 2px;
-  left: 3.5px;
-  transition: left 0.25s;
-}
-.toggle-checkbox:checked + .toggle-switch {
-  background: #7477BF;
-}
-.toggle-checkbox:checked + .toggle-switch:before {
-  left: 57.5px;
-}
-.toggle-checkbox:checked + .toggle-switch:after {
-  content: "on";
-  left: 9.5px;
 }
 
 .toggle-checkbox {
   position: absolute;
   visibility: hidden;
 }
-
 .toggle-label {
   margin-right: auto;
 }
 @media (min-width: 768px) {
   .toggle-label {
     flex: 0 195px;
+    margin-right: 0;
   }
 }
 
 .settings__field {
   margin: 35px 0 17px;
-  height: 42px;
-  font-size: 14px;
-  outline: 0;
-  border: none;
-  border: 1px solid #dadada;
-  border-radius: 5px;
-  color: #818181;
-  background: #FBFBFB;
-  padding: 12px 18px;
-  width: 100%;
-  display: block;
+  height: 45px;
   text-indent: 10px;
 }
 

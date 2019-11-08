@@ -18,11 +18,11 @@
   padding: 12px 18px;
   margin: 25px 0;
   position: relative;
-  span {
+  &__title {
     font-weight: 700;
     font-size: 14px;
   }
-  p {
+  &__message {
     font-size: 13px;
     margin-top: 5px;
     @include mq('desktop') {
@@ -80,25 +80,7 @@
 }
 
 .activity {
-  &__name {
-    font-size: 14px;
-    font-weight: 600;
-  }
-  &__email {
-    color: $color-primary;
-    font-size: 13px;
-  }
-  &__join-date {
-    font-size: 13px;
-    margin-top: 5px;
-    text-align: right;
-    flex: 0 100%;
-    @include mq('phone') {
-      margin-top: 0;
-      flex-basis: auto;
-    }
-  }
-  &__comment {
+  &__desc {
     font-size: 13.5px;
     text-overflow: ellipsis;
     width: 90%;
@@ -112,6 +94,23 @@
     }
     @include mq('desktop') {
       width: 100%;
+    }
+    &--name {
+      font-weight: 600;
+    }
+  }
+  &__email {
+    color: $color-primary;
+    font-size: 13px;
+  }
+  &__join-date {
+    font-size: 13px;
+    margin-top: 5px;
+    text-align: right;
+    flex: 0 100%;
+    @include mq('phone') {
+      margin-top: 0;
+      flex-basis: auto;
     }
   }
   &__post {

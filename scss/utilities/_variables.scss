@@ -1,6 +1,8 @@
 // Colors
 $white               : #fff;
 $black               : #000;
+
+// Defined Colors
 $grey                : #818181;
 $silver              : #FBFBFB;
 
@@ -17,9 +19,11 @@ $color-border         : lighten($grey, 35%);
 $color-button-primary : $color-primary;
 $color-button-neutral : #B2B2B2;
 
+// Border Styles
 $border-sm              : 5px;
 $border-round           : 100px;
 
+// Layout
 $breakpoints: (
   'phone'         : 480px,
   'tablet-small'  : 680px,

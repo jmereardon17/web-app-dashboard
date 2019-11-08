@@ -1,10 +1,10 @@
 .grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas:
+  @include grid() {
+    grid-template-areas:
     "app-header"
     "app-nav"
     "main";
+  }
   @include mq('tablet') {
     grid-template-columns: 90px 2fr;
     grid-template-areas:

@@ -14,8 +14,12 @@
 
 .settings .btn-positive {
   @include mq('tablet-wide') {
-    margin-right: 20px;
+    margin-right: 25px;
   }
+}
+
+.settings .btn-neutral {
+  margin-bottom: 0;
 }
 
 .settings .btn-positive,
@@ -23,7 +27,6 @@
   @include mq('tablet-wide') {
     margin-top: 5px;
     display: inline-block;
-    width: 40%;
-    max-width: 232px;
+    width: calc(50% - 15px);
   }
 }

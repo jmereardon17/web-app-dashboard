@@ -13,10 +13,13 @@
 
 #dailyTrafficChart,
 #devicesChart {
-  max-width: 100%;
   width: 100%;
-  // width: 483px;
+  max-width: 483px;
   height: 265px;
   background: orange;
   display: block;
+  @include mq('tablet') {
+    margin-left: auto;
+    margin-right: auto;
+  }
 }

@@ -1,22 +1,12 @@
 // Search input
 .header__search {
-  font-size: 14px;
-  outline: 0;
-  border: none;
-  border: 1px solid $color-border;
-  border-radius: $border-sm;
-  color: $grey;
-  padding: 12px 18px;
+  @extend %form-field;
   margin: auto;
   width: 80%;
   max-width: 380px;
-  display: block;
   position: relative;
   line-height: 0;
-  background-image: url('../../icons/icon-search.svg');
-  background-repeat: no-repeat;
-  background-size: 18px 18px;
-  background-position: 97% 50%;
+  background: url('../../icons/icon-search.svg') no-repeat 97% 50% / 18px 18px;
   @include mq('tablet-small') {
     margin: 0 0 0 auto;
   }
@@ -34,110 +24,38 @@
     padding: 0 5px;
   }
   &__field {
-    font-size: 14px;
-    outline: 0;
-    border: none;
-    border: 1px solid $color-border;
-    border-radius: $border-sm;
-    color: $grey;
-    background: $silver;
-    padding: 12px 18px;
-    display: block;
-    width: 100%;
+    @extend %form-field;
+    line-height: 0;
     margin-bottom: 17px;
   }
   &__area {
-    font-size: 14px;
-    outline: 0;
-    border: none;
-    border: 1px solid $color-border;
-    border-radius: $border-sm;
-    color: $grey;
-    background: $silver;
-    padding: 12px 18px;
-    width: 100%;
-    display: block;
+    @extend %form-field;
     margin-bottom: 17px;
   }
 }
 
 // Setting switches
 .toggle {
-  cursor: pointer;
-  display: inline-block;
-}
-
-.toggle-switch {
-	border-radius: 16px;
-	position: relative;
-  display: inline-block;
-  width: 90px;
-  height: 32px;
-  vertical-align: middle;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 700;
-  border: 2px solid #CFCFD0;
-  background: $color-button-neutral;
-  transition: background 0.25s;
-	&:before,
-	&:after {
-    content: "";
-    color: $white;
-	}
-	&:after{
-    content: "off";
-    position: relative;
-    top: 6.2px;
-    left: 50px;
-	}
-	&:before {
-		display: block;
-		background: $white;
-		border-radius: 50%;
-		position: absolute;
-    width: 20px;
-    height: 20px;
-    border: 2px solid #CFCFD0;
-    top: 2px;
-    left: 3.5px;
-    transition: left 0.25s; 
-	}
-	.toggle-checkbox:checked + & {
-		background: $color-button-primary;
-		&:before {
-			left: 57.5px;
-		}
-		&:after{
-      content: "on";
-      left: 9.5px;
-		}
-	}
-}
-.toggle-checkbox {
-	position: absolute;
-	visibility: hidden;
-}
-.toggle-label {
-  margin-right: auto;
-  @include mq('tablet') {
-   flex: 0 195px; 
+  &-switch {
+    @extend %toggle;
+  }
+  &-checkbox {
+    position: absolute;
+	  visibility: hidden;
+  }
+  &-label {
+    margin-right: auto;
+    @include mq('tablet') {
+      flex: 0 195px; 
+      margin-right: 0;
+    }
   }
 }
 
 // Timezone Select
 .settings__field {
+  @extend %form-field;
   margin: 35px 0 17px;
-  height: 42px;
-  font-size: 14px;
-  outline: 0;
-  border: none;
-  border: 1px solid $color-border;
-  border-radius: $border-sm;
-  color: $grey;
-  background: $silver;
-  padding: 12px 18px;
-  width: 100%;
-  display: block;
+  height: 45px;
   text-indent: 10px;
 }

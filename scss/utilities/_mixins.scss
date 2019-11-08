@@ -1,3 +1,15 @@
+// Layout Mixins
+@mixin grid(
+  $disp: grid,
+  $cols: 1fr,
+  $rows: null
+) {
+  display: $disp;
+  grid-template-columns: $cols;
+  grid-template-rows: $rows;
+  @content;
+}
+
 @mixin flex(
   $disp: flex,
   $dir: row,
@@ -23,33 +35,13 @@
   }
 }
 
-// @mixin border(
-//   $dir: null, 
-//   $width: 1px, 
-//   $style: solid, 
-//   $color: $color-border
-// ) {
-//   @if $dir == null {
-//     border: $width $style $color;
-//   } @else {
-//     border-#{$dir}: $width $style $color;
-//   }
-// }
-
-// @mixin border($width: 1px, $style: solid, $color: $color-border, $dir...) {
-//   @if length($dir) == 1 {
-//     border-#{nth($dir, 1)}: $width $style $color;
-//   } @else if length($dir) == 2 {
-//     border-#{nth($dir, 1)}: $width $style $color;
-//     border-#{nth($dir, 2)}: $width $style $color;
-//   }
-// }
-
-@mixin border($style, $dir...) {
-  @if length($dir) == 1 {
-    border-#{nth($dir, 1)}: $style;
-  } @else if length($dir) == 2 {
-    border-#{nth($dir, 1)}: $style;
-    border-#{nth($dir, 2)}: $style;
+// Style Mixins
+@mixin border($dir...) {
+  @if length($dir) == 0 {
+    border: 1px solid $color-border;
+  } @else {
+      @for $i from 1 through length($dir) {
+      border-#{nth($dir, $i)}: 1px solid $color-border;
+    }
   }
 }
