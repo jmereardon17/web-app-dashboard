@@ -1,0 +1,3 @@
+@function calc-pc($target) {
+  @return 100% / $target;
+}

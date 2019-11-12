@@ -51,10 +51,8 @@
 .mobile-users {
   padding-bottom: 30px;
   @include border('bottom');
+  @extend %col;
   @include mq('tablet-wide') {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
     @include border('top');
     padding-bottom: 30px;
   }
@@ -114,10 +112,8 @@
 .recent-activity {
   padding-bottom: 20px;
   @include border('bottom');
+  @extend %col;
   @include mq('tablet-wide') {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
     @include border('top');
     padding-bottom: 30px;
   }
@@ -176,10 +172,8 @@
 
 .message,
 .settings {
+  @extend %col;
   @include mq('tablet-wide') {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
     padding-bottom: 40px;
   }
 }

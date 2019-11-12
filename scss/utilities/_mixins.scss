@@ -23,6 +23,13 @@
   @content;
 }
 
+@mixin col($items) {
+  display: inline-block;
+  vertical-align: top;
+  width: calc-pc($items);
+  @content;
+}
+
 @mixin mq($width, $type: min) {
   @if map_has_key($breakpoints, $width) {
     $width: map_get($breakpoints, $width);
@@ -44,4 +51,15 @@
       border-#{nth($dir, $i)}: 1px solid $color-border;
     }
   }
+}
+
+@mixin font(
+  $family: null,
+  $size: 13px,
+  $weight: null
+) {
+  font-family: $family;
+  font-size: $size;
+  font-weight: $weight;
+  @content;
 }

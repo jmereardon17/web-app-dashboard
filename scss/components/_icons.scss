@@ -1,11 +1,28 @@
 .app-header__icon {
+  cursor: pointer;
   width: 21px;
+  position: relative;
+  &::after {
+    content: '\A';
+    display: inline-block;
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    border-radius: $border-round;
+    background: $color-notification;
+  }
 }
 
-.app-nav__icon {
-  width: 35px;
-  height: 35px;
-  opacity: .5;
+.app-nav {
+  &__icon {
+    width: 35px;
+    height: 35px;
+    opacity: .5;
+  }
+  &__link--selected &__icon {
+    opacity: 1;
+  }
 }
 
 .alert::after {

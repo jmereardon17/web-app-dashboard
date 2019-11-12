@@ -3,16 +3,23 @@
   cursor: pointer;
   outline: 0;
   border: none;
-  font-size: 14px;
-  font-weight: 700;
+  @include font($size: 14px, $weight: $font-weight-bold) {
+    text-transform: uppercase;
+    text-align: center;
+  }
   border-radius: $border-sm;
   color: $white;
   padding: 16px 0;
-  text-transform: uppercase;
-  text-align: center;
   display: block;
   width: 100%;
   background: $color-button-primary;
+}
+
+// Layout Placeholder
+%col {
+  @include mq('tablet-wide') {
+    @include col(2);
+  }
 }
 
 // Form Placeholder
@@ -39,9 +46,9 @@
   width: 90px;
   height: 32px;
   vertical-align: middle;
-  text-transform: uppercase;
-  font-size: 14px;
-  font-weight: 700;
+  @include font($size: 14px, $weight: $font-weight-bold) {
+    text-transform: uppercase;
+  }
   border: 2px solid #CFCFD0;
   background: $color-button-neutral;
   transition: background 0.25s;

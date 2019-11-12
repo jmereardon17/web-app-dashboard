@@ -10,16 +10,27 @@ $color-primary       : #7477BF;
 $color-secondary     : #4D4C72;
 $color-tertiary      : #7377BF;
 
-$color-text           : #727171;
-$color-link           : #939393;
-$color-link-selected  : #81C98F;
+$color-text              : #727171;
+$color-link              : #939393;
+$color-link-selected     : #81C98F;
+$color-nav-link-selected : #85DB80;
+$color-notification      : #85DB80;
 
 $color-border         : lighten($grey, 35%);
 
 $color-button-primary : $color-primary;
 $color-button-neutral : #B2B2B2;
 
-// Border Styles
+// Font 
+$font-primary            : 'Open Sans', sans-serif;
+$font-secondary          : 'Muli', sans-serif;
+$font-size               : 16px;
+$font-weight-light       : 300;
+$font-weight-regular     : 400;
+$font-weight-semi-bold   : 600;
+$font-weight-bold        : 700;
+
+// Borders
 $border-sm              : 5px;
 $border-round           : 100px;
 

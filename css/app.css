@@ -4,14 +4,25 @@
   border: none;
   font-size: 14px;
   font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
   border-radius: 5px;
   color: #fff;
   padding: 16px 0;
-  text-transform: uppercase;
-  text-align: center;
   display: block;
   width: 100%;
   background: #7477BF;
+}
+
+@media (min-width: 1024px) {
+  .message,
+.settings, .new-members,
+.recent-activity, .daily-traffic,
+.mobile-users {
+    display: inline-block;
+    vertical-align: top;
+    width: 50%;
+  }
 }
 
 .settings__field, .message__area, .message__field, .header__search {
@@ -36,9 +47,9 @@
   width: 90px;
   height: 32px;
   vertical-align: middle;
-  text-transform: uppercase;
   font-size: 14px;
   font-weight: 700;
+  text-transform: uppercase;
   border: 2px solid #CFCFD0;
   background: #B2B2B2;
   transition: background 0.25s;
@@ -504,13 +515,31 @@ img {
   display: block;
   text-align: center;
   margin-bottom: 50px;
+  position: relative;
 }
 .app-nav__link:nth-child(3) {
   position: relative;
   left: 3px;
 }
+.app-nav__link:nth-child(3)::before {
+  left: -16px;
+}
 .app-nav__link:last-child {
   margin-bottom: 0;
+}
+.app-nav__link::before {
+  content: "";
+  width: 10px;
+  height: 60px;
+  position: absolute;
+  display: block;
+  border: 3px solid transparent;
+  top: -16px;
+  left: -13px;
+}
+.app-nav__link--selected::before {
+  border-radius: 100px;
+  border-right-color: #85DB80;
 }
 
 .grid {
@@ -569,13 +598,28 @@ main {
 }
 
 .app-header__icon {
+  cursor: pointer;
   width: 21px;
+  position: relative;
+}
+.app-header__icon::after {
+  content: "\a";
+  display: inline-block;
+  position: absolute;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  background: #85DB80;
 }
 
 .app-nav__icon {
   width: 35px;
   height: 35px;
   opacity: 0.5;
+}
+.app-nav__link--selected .app-nav__icon {
+  opacity: 1;
 }
 
 .alert::after {
@@ -690,9 +734,6 @@ main {
 @media (min-width: 1024px) {
   .daily-traffic,
 .mobile-users {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
     border-top: 1px solid #dadada;
     padding-bottom: 30px;
   }
@@ -768,9 +809,6 @@ main {
 @media (min-width: 1024px) {
   .new-members,
 .recent-activity {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
     border-top: 1px solid #dadada;
     padding-bottom: 30px;
   }
@@ -841,9 +879,6 @@ main {
 @media (min-width: 1024px) {
   .message,
 .settings {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
     padding-bottom: 40px;
   }
 }
@@ -874,8 +909,8 @@ main {
   position: relative;
 }
 .alert__title {
-  font-weight: 700;
   font-size: 14px;
+  font-weight: 700;
 }
 .alert__message {
   font-size: 13px;
@@ -896,8 +931,8 @@ main {
 }
 
 .traffic__link {
-  font-weight: 700;
   font-size: 13px;
+  font-weight: 700;
   display: inline-block;
   margin-right: 15px;
   color: #939393;
@@ -913,13 +948,13 @@ main {
   color: #fff;
   background-color: #81C98F;
   border-radius: 100px;
-  padding: 5px 10px;
+  padding: 6px 12px;
 }
 
 .social__media {
   color: #7377BF;
-  font-weight: 700;
   font-size: 1em;
+  font-weight: 700;
   text-align: right;
 }
 @media (min-width: 1024px) {
@@ -940,7 +975,7 @@ main {
 }
 
 .activity__desc {
-  font-size: 13.5px;
+  font-size: 13.5;
   text-overflow: ellipsis;
   width: 90%;
   white-space: nowrap;
@@ -962,6 +997,7 @@ main {
   }
 }
 .activity__desc--name {
+  font-size: 13px;
   font-weight: 600;
 }
 .activity__email {
@@ -970,8 +1006,8 @@ main {
 }
 .activity__join-date {
   font-size: 13px;
-  margin-top: 5px;
   text-align: right;
+  margin-top: 5px;
   flex: 0 100%;
 }
 @media (min-width: 480px) {
@@ -982,6 +1018,7 @@ main {
 }
 .activity__post {
   font-family: "Muli", sans-serif;
+  font-size: 13px;
   font-weight: 600;
 }
 .activity__date {
