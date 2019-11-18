@@ -1,7 +1,6 @@
 .app-header {
   text-align: center;
-  background-color: $color-primary;
-  color: $white;
+  @include element($color-primary, $white);
   @include flex($wrap: wrap) {
     justify-content: center;
   }
@@ -27,5 +26,14 @@
     padding: 10px 24px 10px 0;
     margin-right: 15px;
     @include flex();
+    &::after {
+      content: '\A';
+      position: absolute;
+      top: 21px;
+      right: 196px;
+      @include element($disp: none, $width: 7px, $height: 7px, $background: $color-notification) {
+        border-radius: $border-round;
+      }
+    }
   }
 }

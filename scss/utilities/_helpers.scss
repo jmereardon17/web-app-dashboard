@@ -51,7 +51,7 @@
   }
   border: 2px solid #CFCFD0;
   background: $color-button-neutral;
-  transition: background 0.25s;
+  @include transition(background, .4s, ease-out);
   &:before,
 	&:after {
     content: "";
@@ -73,7 +73,7 @@
     border: 2px solid #CFCFD0;
     top: 2px;
     left: 3.5px;
-    transition: left 0.25s; 
+    @include transition(left, 0.25s); 
 	}
 	.toggle-checkbox:checked + & {
 		background: $color-button-primary;

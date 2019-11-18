@@ -11,14 +11,14 @@
 }
 
 .alert {
-  color: $white;
-  background-color: $color-tertiary;
-  border-radius: $border-sm;
-  padding: 12px 18px;
-  margin: 25px 0;
+  @include element($color-tertiary, $white, none) {
+    padding: 12px 18px;
+    border-radius: $border-sm;
+  }
+  margin-top: 25px;
   position: relative;
   &__title {
-    @include font($size: 14px, $weight: $font-weight-bold)
+    @include font($size: 14px, $weight: $font-weight-bold);
   }
   &__message {
     font-size: 13px;
@@ -40,18 +40,18 @@
 .traffic__link {
   @include font($weight: $font-weight-bold);
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 12px;
+  padding: 6px 12px;
   @include mq('phone') {
     margin-right: 0;
-    margin-left: 20px;
+    margin-left: 12px;
   }
   color: $color-link;
   cursor: pointer;
   &--active {
-    color: $white;
-    background-color: $color-link-selected;
-    border-radius: $border-round;
-    padding: 6px 12px;
+    @include element($color-link-selected, $white) {
+      border-radius: $border-round;
+    }
   }
 }
 
@@ -79,11 +79,11 @@
 
 .activity {
   &__desc {
-    @include font($size: 13.5) {
+    @include font($size: 13.5px) {
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
     width: 90%;
-    white-space: nowrap;
     overflow: hidden;
     @include mq('tablet-medium') {
       width: 100%

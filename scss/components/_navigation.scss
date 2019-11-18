@@ -18,18 +18,20 @@
       margin-bottom: 0;
     }
     &::before {
+      transition: opacity .5s;
       content: '';
-      width: 10px;
-      height: 60px;
       position: absolute;
-      display: block;
-      border: 3px solid transparent;
       top: -16px;
       left: -13px;
+      opacity: 0;
+      @include element($disp: block, $width: 10px, $height: 60px) {
+        border: 3px solid transparent;
+      }
     }
     &--selected::before {
       border-radius: $border-round;
       border-right-color: $color-nav-link-selected;
+      opacity: 1;
     }
   }
 }

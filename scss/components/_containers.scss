@@ -25,6 +25,7 @@
 }
 
 .traffic {
+  margin-top: 25px;
   margin-bottom: 30px;
   &__header {
     @include mq('phone') {
@@ -35,6 +36,9 @@
         margin-right: auto;
       }
     }
+  }
+  &__nav {
+    text-align: center;
   }
 }
 

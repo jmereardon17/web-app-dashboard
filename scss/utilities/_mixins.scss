@@ -63,3 +63,27 @@
   font-weight: $weight;
   @content;
 }
+
+@mixin transition(
+  $prop: all,
+  $duration: .5s,
+  $func: null,
+  $delay: null
+) {
+  transition: $prop $duration $func $delay;
+}
+
+@mixin element(
+  $background: null,
+  $color: null,
+  $disp: null,
+  $width: null,
+  $height: null
+) {
+  background: $background;
+  color: $color;
+  display: $disp;
+  width: $width;
+  height: $height;
+  @content;
+}

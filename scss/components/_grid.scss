@@ -1,12 +1,14 @@
 .grid {
   @include grid() {
+    grid-template-columns: 100%;
+    grid-template-rows: auto;
     grid-template-areas:
     "app-header"
     "app-nav"
     "main";
   }
   @include mq('tablet') {
-    grid-template-columns: 90px 2fr;
+    grid-template-columns: 90px 1fr;
     grid-template-areas:
     "app-header app-header"
     "app-nav main"

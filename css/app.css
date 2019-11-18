@@ -52,7 +52,7 @@
   text-transform: uppercase;
   border: 2px solid #CFCFD0;
   background: #B2B2B2;
-  transition: background 0.25s;
+  transition: background 0.4s ease-out;
 }
 .toggle-switch:before, .toggle-switch:after {
   content: "";
@@ -468,7 +468,7 @@ img {
 
 .app-header {
   text-align: center;
-  background-color: #7477BF;
+  background: #7477BF;
   color: #fff;
   display: flex;
   flex-direction: row;
@@ -505,6 +505,17 @@ img {
   flex-direction: row;
   align-items: center;
 }
+.app-header__icon-container::after {
+  content: "\a";
+  position: absolute;
+  top: 21px;
+  right: 196px;
+  background: #85DB80;
+  display: none;
+  width: 7px;
+  height: 7px;
+  border-radius: 100px;
+}
 
 .app-nav {
   background-color: #4D4C72;
@@ -528,28 +539,33 @@ img {
   margin-bottom: 0;
 }
 .app-nav__link::before {
+  transition: opacity 0.5s;
   content: "";
-  width: 10px;
-  height: 60px;
   position: absolute;
-  display: block;
-  border: 3px solid transparent;
   top: -16px;
   left: -13px;
+  opacity: 0;
+  display: block;
+  width: 10px;
+  height: 60px;
+  border: 3px solid transparent;
 }
 .app-nav__link--selected::before {
   border-radius: 100px;
   border-right-color: #85DB80;
+  opacity: 1;
 }
 
 .grid {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-columns: 100%;
+  grid-template-rows: auto;
   grid-template-areas: "app-header" "app-nav" "main";
 }
 @media (min-width: 768px) {
   .grid {
-    grid-template-columns: 90px 2fr;
+    grid-template-columns: 90px 1fr;
     grid-template-areas: "app-header app-header" "app-nav main" "app-nav main";
   }
 }
@@ -567,11 +583,8 @@ main {
 }
 
 #trafficChart {
-  max-width: 100%;
-  width: 1052px;
-  height: 276px;
-  background: orange;
   display: block;
+  max-width: 100%;
   margin-top: 10px;
 }
 @media (min-width: 768px) {
@@ -583,11 +596,8 @@ main {
 
 #dailyTrafficChart,
 #devicesChart {
-  width: 100%;
-  max-width: 483px;
-  height: 265px;
-  background: orange;
   display: block;
+  max-width: 100%;
 }
 @media (min-width: 768px) {
   #dailyTrafficChart,
@@ -601,31 +611,25 @@ main {
   cursor: pointer;
   width: 21px;
   position: relative;
+  transition: transform 0.5s;
 }
-.app-header__icon::after {
-  content: "\a";
-  display: inline-block;
-  position: absolute;
-  right: 0;
-  width: 10px;
-  height: 10px;
-  border-radius: 100px;
-  background: #85DB80;
+.app-header__icon:hover {
+  transform: rotate(30deg);
 }
 
 .app-nav__icon {
   width: 35px;
   height: 35px;
   opacity: 0.5;
+  transition: opacity 0.3s;
 }
-.app-nav__link--selected .app-nav__icon {
+.app-nav__icon:hover, .app-nav__link--selected .app-nav__icon {
   opacity: 1;
 }
 
-.alert::after {
-  content: "";
-  display: block;
+.alert__icon {
   background: url("../../icons/icon-close.svg") no-repeat center/cover;
+  display: block;
   width: 10px;
   height: 10px;
   position: absolute;
@@ -634,7 +638,7 @@ main {
   cursor: pointer;
 }
 @media (min-width: 1150px) {
-  .alert::after {
+  .alert__icon {
     top: 16px;
     right: 14px;
   }
@@ -700,6 +704,7 @@ main {
 }
 
 .traffic {
+  margin-top: 25px;
   margin-bottom: 30px;
 }
 @media (min-width: 480px) {
@@ -713,6 +718,9 @@ main {
   .traffic__header .sub-headline {
     margin-right: auto;
   }
+}
+.traffic__nav {
+  text-align: center;
 }
 
 .daily-traffic {
@@ -901,11 +909,12 @@ main {
 }
 
 .alert {
+  background: #7377BF;
   color: #fff;
-  background-color: #7377BF;
-  border-radius: 5px;
+  display: none;
   padding: 12px 18px;
-  margin: 25px 0;
+  border-radius: 5px;
+  margin-top: 25px;
   position: relative;
 }
 .alert__title {
@@ -934,21 +943,21 @@ main {
   font-size: 13px;
   font-weight: 700;
   display: inline-block;
-  margin-right: 15px;
+  margin-right: 12px;
+  padding: 6px 12px;
   color: #939393;
   cursor: pointer;
 }
 @media (min-width: 480px) {
   .traffic__link {
     margin-right: 0;
-    margin-left: 20px;
+    margin-left: 12px;
   }
 }
 .traffic__link--active {
+  background: #81C98F;
   color: #fff;
-  background-color: #81C98F;
   border-radius: 100px;
-  padding: 6px 12px;
 }
 
 .social__media {
@@ -975,10 +984,10 @@ main {
 }
 
 .activity__desc {
-  font-size: 13.5;
+  font-size: 13.5px;
   text-overflow: ellipsis;
-  width: 90%;
   white-space: nowrap;
+  width: 90%;
   overflow: hidden;
 }
 @media (min-width: 992px) {
@@ -1061,11 +1070,11 @@ main {
 
 .header__search {
   margin: auto;
-  width: 80%;
-  max-width: 380px;
   position: relative;
   line-height: 0;
   background: url("../../icons/icon-search.svg") no-repeat 97% 50%/18px 18px;
+  width: 80%;
+  max-width: 380px;
 }
 @media (min-width: 680px) {
   .header__search {

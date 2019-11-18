@@ -2,11 +2,11 @@
 .header__search {
   @extend %form-field;
   margin: auto;
-  width: 80%;
-  max-width: 380px;
   position: relative;
   line-height: 0;
-  background: url('../../icons/icon-search.svg') no-repeat 97% 50% / 18px 18px;
+  @include element($background: url('../../icons/icon-search.svg') no-repeat 97% 50% / 18px 18px, $width: 80%) {
+    max-width: 380px;
+  }
   @include mq('tablet-small') {
     margin: 0 0 0 auto;
   }
