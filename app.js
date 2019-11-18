@@ -7,6 +7,7 @@ const alertMessage = document.getElementById('alertMessage');
 const trafficNav = document.querySelector('.traffic__nav');
 const trafficLinks = trafficNav.querySelectorAll('.traffic__link');
 const trafficCanvas = document.getElementById('trafficChart');
+const trafficProgress = document.getElementById('animationProgress');
 const dailyTrafficCanvas = document.getElementById('dailyTrafficChart');
 const devicesTrafficCanvas = document.getElementById('devicesChart');
 
@@ -35,7 +36,12 @@ const trafficOptions = {
   responsive: true,
   aspectRatio: 4.5,
   animation: {
-    duration: 0
+    onProgress: function(animation) {
+      trafficProgress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
+    },
+    onComplete: function(animation) {
+      $(trafficProgress).fadeOut(1500);
+    }
   },
   scales: {
     yAxes: [
@@ -44,7 +50,7 @@ const trafficOptions = {
           maxTicksLimit: 5,
           fontFamily: 'Open Sans, sans-serif',
           fontColor: '#939393',
-          padding: 15
+          padding: 14
         },
         gridLines: {
           offsetGridLines: true,
@@ -54,6 +60,11 @@ const trafficOptions = {
     ],
     xAxes: [
       {
+        ticks: {
+          fontFamily: 'Open Sans, sans-serif',
+          fontColor: '#939393',
+          padding: 18
+        },
         gridLines: {
           offsetGridLines: true,
           drawTicks: false
@@ -81,7 +92,7 @@ let dailyTrafficData = {
       label: "# of Hits",
       data: [75, 100, 175, 125, 225, 200, 100],
       backgroundColor: "#7377BF",
-      borderWidth: 1
+      barThickness: 2
     }
   ]
 };
@@ -91,7 +102,26 @@ const dailyTrafficOptions = {
     yAxes: [
       {
         ticks: {
-          beginAtZero: true
+          maxTicksLimit: 5,
+          fontFamily: 'Open Sans, sans-serif',
+          fontColor: '#939393',
+          padding: 14
+        },
+        gridLines: {
+          offsetGridLines: true,
+          drawTicks: false
+        }
+      }
+    ],
+    xAxes: [
+      {
+        ticks: {
+          fontFamily: 'Open Sans, sans-serif',
+          fontColor: '#939393',
+          padding: 18
+        },
+        gridLines: {
+          drawTicks: false
         }
       }
     ]
