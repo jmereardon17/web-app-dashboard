@@ -208,7 +208,7 @@ const showAlert = (type, message) => {
   }
   if (type === 'fail') {
     alertMessage.style.backgroundColor = 'tomato';
-    insertAlertHTML(message);
+    addAlertHTML(message);
     document.body.scrollTop = document.documentElement.scrollTop = 0;
     $('#alertMessage').delay(300).slideDown(700);
   }
