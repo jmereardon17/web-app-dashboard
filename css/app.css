@@ -592,6 +592,7 @@ main {
 #devicesChart {
   display: block;
   max-width: 100%;
+  margin-top: 20px;
 }
 
 .app-header__icon {
@@ -1076,6 +1077,7 @@ main {
 .message__form {
   margin-top: 20px;
   padding: 0 5px;
+  position: relative;
 }
 .message__field {
   line-height: 0;
@@ -1083,6 +1085,15 @@ main {
 }
 .message__area {
   margin-bottom: 17px;
+}
+.message__match {
+  position: absolute;
+  top: 42px;
+  background: #000;
+  color: #fff;
+  font-size: 14px;
+  padding: 10px 20px;
+  width: 100%;
 }
 
 .toggle-checkbox {

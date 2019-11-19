@@ -22,6 +22,7 @@
   &__form {
     margin-top: 20px;
     padding: 0 5px;
+    position: relative;
   }
   &__field {
     @extend %form-field;
@@ -31,6 +32,15 @@
   &__area {
     @extend %form-field;
     margin-bottom: 17px;
+  }
+  &__match {
+    position: absolute;
+    top: 42px;
+    background: $black;
+    color: $white;
+    font-size: 14px;
+    padding: 10px 20px;
+    width: 100%;
   }
 }
 

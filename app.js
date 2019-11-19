@@ -10,6 +10,10 @@ const trafficCanvas = document.getElementById('trafficChart');
 const trafficProgress = document.getElementById('animationProgress');
 const dailyTrafficCanvas = document.getElementById('dailyTrafficChart');
 const devicesTrafficCanvas = document.getElementById('devicesChart');
+const messageForm = document.querySelector('.message__form');
+const userField = document.getElementById('userField');
+const messageField = document.getElementById('messageField');
+const sendButton = document.querySelector('.btn-positive');
 
 let trafficData = {
   labels: [
@@ -91,8 +95,7 @@ let dailyTrafficData = {
     {
       label: "# of Hits",
       data: [75, 100, 175, 125, 225, 200, 100],
-      backgroundColor: "#7377BF",
-      barThickness: 2
+      backgroundColor: "#7377BF"
     }
   ]
 };
@@ -115,6 +118,7 @@ const dailyTrafficOptions = {
     ],
     xAxes: [
       {
+        barThickness: 30,
         ticks: {
           fontFamily: 'Open Sans, sans-serif',
           fontColor: '#939393',
@@ -128,6 +132,14 @@ const dailyTrafficOptions = {
   },
   legend: {
     display: false
+  },
+  layout: {
+    padding: {
+      left: 5,
+      right: 0,
+      top: 0,
+      bottom: 0
+    }
   }
 };
 
@@ -148,22 +160,70 @@ let devicesTrafficData = {
 };
 
 const devicesTrafficOptions = {
+  responsive: true,
   legend: {
     position: 'right',
     align: 'center',
     labels: {
       boxWidth: 28,
-      fontFamily: "'Open Sans', sans-serif",
+      fontFamily: 'Open Sans, sans-serif',
       fontSize: 14,
       padding: 18
+    }
+  },
+  layout: {
+    padding: {
+      left: 0,
+      right: 20,
+      top: 0,
+      bottom: 0
     }
   }
 };
 
-alertMessage.innerHTML = 
+let users = [
+  'Jamie Reardon',
+  'Victoria Chambers',
+  'Dale Byrd',
+  'Dawn Wood',
+  'Dan Oliver'
+];
+
+const addAlertHTML = message => {
+  alertMessage.innerHTML = 
   `<span class="alert__title">Alert</span>
-   <p class="alert__message">You have <strong>6</strong> overdue tasks to complete.</p>
+   <p class="alert__message">${message}</p>
    <span class="alert__icon"></span>`;
+}
+
+const showAlert = (type, message) => {
+  if (type === 'login') {
+   addAlertHTML(message);
+  }
+  if (type === 'sent') {
+    alertMessage.style.backgroundColor = '#81C98F';
+    addAlertHTML(message);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    $('#alertMessage').delay(300).slideDown(700);
+  }
+  if (type === 'fail') {
+    alertMessage.style.backgroundColor = 'tomato';
+    insertAlertHTML(message);
+    document.body.scrollTop = document.documentElement.scrollTop = 0;
+    $('#alertMessage').delay(300).slideDown(700);
+  }
+}
+
+const checkUser = search => {
+  if (users.indexOf(search) > -1) {
+    const div = document.createElement('div');
+    div.className = 'message__match';
+    div.textContent = search;
+    messageForm.insertBefore(div, messageField);
+  }
+}
+
+showAlert('login', 'You have <strong>6</strong> overdue tasks to complete.');
 
 let trafficChart = new Chart(trafficCanvas, {
   type: "line",
@@ -213,5 +273,34 @@ trafficNav.addEventListener('click', (e) => {
     let link = e.target;
     toggleClass(link, trafficLinks, 'traffic__link--active');
   }
+});
+
+messageForm.addEventListener('click', (e) => {
+  e.preventDefault();
+  if (e.target === sendButton) {
+    let user = userField.value;
+    let message = messageField.value;
+    if (user === '' && message === '') {
+      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please fill in both form fields.');
+      user = '';
+      message = '';
+    } else if (user === '') {
+      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please enter a member name.');
+    } else if (message === '') {
+      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please enter a message.');
+    } else if (message.length < 6 ) {
+      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please enter a message that is longer than 5 characters.');
+      message = '';
+    } else {
+      showAlert('sent', 'Message sent <strong>successfully</strong>.');
+      user = '';
+      message = '';
+    }
+  }
+});
+
+userField.addEventListener('keyup', (e) => {
+  let userSearch = userField.value;
+  checkUser(userSearch);
 });
 
