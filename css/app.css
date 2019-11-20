@@ -507,14 +507,15 @@ img {
 }
 
 .notifications {
-  background: #7377BF;
+  background: #FBFBFB;
+  color: #727171;
   display: none;
+  width: 350px;
   font-size: 13px;
-  border: 1px solid #fff;
+  border: 1px solid #dadada;
   border-radius: 5px;
-  padding: 10px;
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 136px;
   z-index: 1;
 }
@@ -522,13 +523,15 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-bottom: 5px;
+  padding: 5px 10px 5px 6px;
+  border-bottom: 1px solid #dadada;
+  height: 42px;
+}
+.notifications .notification:nth-child(odd) {
+  background: #eaeaea;
 }
 .notifications .notification strong {
   margin-right: 5px;
-}
-.notifications a {
-  color: #fff;
 }
 
 .app-nav {

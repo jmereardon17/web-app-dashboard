@@ -39,24 +39,25 @@
 }
 
 .notifications {
-  @include element($disp: none, $background: $color-tertiary) {
+  @include element($disp: none, $width: 350px, $background: $silver, $color: $color-text) {
     font-size: 13px;
-    border: 1px solid $white;
+    @include border();
     border-radius: $border-sm;
-    padding: 10px;
   }
   position: absolute;
-  top: 50px;
+  top: 55px;
   right: 136px;
   z-index: 1;
   .notification {
     @include flex();
-    margin-bottom: 5px;
+    padding: 5px 10px 5px 6px;
+    @include border('bottom');
+    height: 42px;
+    &:nth-child(odd) {
+      background: lighten($color-border, 6%);
+    }
     strong {
       margin-right: 5px;
     }
-  }
-  a {
-    color: $white;
   }
 }
