@@ -505,16 +505,30 @@ img {
   flex-direction: row;
   align-items: center;
 }
-.app-header__icon-container::after {
-  content: "\a";
-  position: absolute;
-  top: 21px;
-  right: 196px;
-  background: #85DB80;
+
+.notifications {
+  background: #7377BF;
   display: none;
-  width: 7px;
-  height: 7px;
-  border-radius: 100px;
+  font-size: 13px;
+  border: 1px solid #fff;
+  border-radius: 5px;
+  padding: 10px;
+  position: absolute;
+  top: 50px;
+  right: 136px;
+  z-index: 1;
+}
+.notifications .notification {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 5px;
+}
+.notifications .notification strong {
+  margin-right: 5px;
+}
+.notifications a {
+  color: #fff;
 }
 
 .app-nav {
@@ -605,6 +619,16 @@ main {
   transform: rotate(30deg);
 }
 
+.notification-light {
+  position: absolute;
+  top: 21px;
+  right: 196px;
+  background: #85DB80;
+  width: 7px;
+  height: 7px;
+  border-radius: 100px;
+}
+
 .app-nav__icon {
   width: 35px;
   height: 35px;
@@ -613,6 +637,15 @@ main {
 }
 .app-nav__icon:hover, .app-nav__link--selected .app-nav__icon {
   opacity: 1;
+}
+
+.close-icon {
+  background: url("../../icons/icon-close.svg") no-repeat center/cover;
+  display: block;
+  width: 10px;
+  height: 10px;
+  cursor: pointer;
+  margin-left: auto;
 }
 
 .alert__icon {

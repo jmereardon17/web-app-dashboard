@@ -26,14 +26,37 @@
     padding: 10px 24px 10px 0;
     margin-right: 15px;
     @include flex();
-    &::after {
-      content: '\A';
-      position: absolute;
-      top: 21px;
-      right: 196px;
-      @include element($disp: none, $width: 7px, $height: 7px, $background: $color-notification) {
-        border-radius: $border-round;
-      }
+    // &::after {
+    //   content: '\A';
+    //   position: absolute;
+    //   top: 21px;
+    //   right: 196px;
+    //   @include element($disp: block, $width: 7px, $height: 7px, $background: $color-notification) {
+    //     border-radius: $border-round;
+    //   }
+    // }
+  }
+}
+
+.notifications {
+  @include element($disp: none, $background: $color-tertiary) {
+    font-size: 13px;
+    border: 1px solid $white;
+    border-radius: $border-sm;
+    padding: 10px;
+  }
+  position: absolute;
+  top: 50px;
+  right: 136px;
+  z-index: 1;
+  .notification {
+    @include flex();
+    margin-bottom: 5px;
+    strong {
+      margin-right: 5px;
     }
+  }
+  a {
+    color: $white;
   }
 }

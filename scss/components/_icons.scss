@@ -8,6 +8,15 @@
   }
 }
 
+.notification-light {
+  position: absolute;
+  top: 21px;
+  right: 196px;
+  @include element($width: 7px, $height: 7px, $background: $color-notification) {
+    border-radius: $border-round;
+  }
+}
+
 .app-nav {
   &__icon {
     width: 35px;
@@ -19,6 +28,16 @@
   &__link--selected &__icon {
     opacity: 1;
   }
+}
+
+.close-icon {
+  @include element(
+    $background: url('../../icons/icon-close.svg') no-repeat center / cover, 
+    $disp: block, 
+    $width: 10px, 
+    $height: 10px);
+  cursor: pointer;
+  margin-left: auto;
 }
 
 .alert__icon {

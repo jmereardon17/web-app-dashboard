@@ -1,5 +1,7 @@
 const notificationIconDiv = document.querySelector('.app-header__icon-container');
 const notificationIcon = document.querySelector('.app-header__icon');
+const notificationLight = document.querySelector('.notification-light');
+const notificationsList = document.querySelector('.notifications');
 const nav = document.querySelector('.app-nav');
 const navLinks = nav.querySelectorAll('.app-nav__link');
 const searchBox = document.querySelector('.header__search');
@@ -14,6 +16,21 @@ const messageForm = document.querySelector('.message__form');
 const userField = document.getElementById('userField');
 const messageField = document.getElementById('messageField');
 const sendButton = document.querySelector('.btn-positive');
+
+let notifications = [
+  {
+    from: 'Dan Oliver',
+    notification: 'liked your post'
+  },
+  {
+    from: 'Victoria Chambers',
+    notification: 'shared your post'
+  },
+  {
+    from: 'Dale Byrd',
+    notification: 'upvoted your post'
+  }
+];
 
 let trafficData = {
   labels: [
@@ -182,11 +199,26 @@ const devicesTrafficOptions = {
 };
 
 let users = [
-  'Jamie Reardon',
-  'Victoria Chambers',
-  'Dale Byrd',
-  'Dawn Wood',
-  'Dan Oliver'
+  {
+    name: 'Jamie Reardon',
+    photo: 'images/profile-photo.jpg'
+  },
+  {
+    name: 'Victoria Chambers',
+    photo: 'images/member-1.jpg'
+  },
+  {
+    name: 'Dale Byrd',
+    photo: 'images/member-2.jpg'
+  },
+  {
+    name: 'Dawn Wood',
+    photo: 'images/member-3.jpg'
+  },
+  {
+    name: 'Dan Oliver',
+    photo: 'images/member-4.jpg'
+  }
 ];
 
 const addAlertHTML = message => {
@@ -214,16 +246,41 @@ const showAlert = (type, message) => {
   }
 }
 
+// const checkUser = search => {
+//   if (users.indexOf(search) > -1) {
+//     const div = document.createElement('div');
+//     div.className = 'message__match';
+//     div.textContent = search;
+//     messageForm.insertBefore(div, messageField);
+
+//     const divTexts = messageForm.querySelectorAll('div');
+
+//     divTexts.forEach(divText => {
+//       if (divText.textContent !== search) {
+//         divText.parentNode.removeChild(divText);
+//       }
+//     });
+//   }
+// }
+
 const checkUser = search => {
-  if (users.indexOf(search) > -1) {
-    const div = document.createElement('div');
-    div.className = 'message__match';
-    div.textContent = search;
-    messageForm.insertBefore(div, messageField);
+  let matched = [];
+  for (let i = 0; i < users.length; i += 1) {
+    let user = users[i].name;
+    if (user.indexOf(search) > -1) {
+      matched.push(user);
+    }
   }
+  let sorted = Array.from(new Set(matched));
+  sorted.forEach(user => {
+    const div = document.createElement('div');
+    div.textContent = user;
+    div.className = 'message__match';
+    messageForm.appendChild(div);
+  });
 }
 
-showAlert('login', 'You have <strong>6</strong> overdue tasks to complete.');
+showAlert('login', 'Chart data is from Saturday due to a system update that ran overnight.');
 
 let trafficChart = new Chart(trafficCanvas, {
   type: "line",
@@ -252,14 +309,41 @@ const toggleClass = (element, parent, name) => {
   element.classList.add(name);
 }
 
-nav.addEventListener('click', (e) => {
+const addNotifications = () => {
+  for (let i = 0; i < notifications.length; i += 1) {
+    let from = notifications[i].from;
+    let notification = notifications[i].notification;
+    for (let j = 0; j < users.length; j += 1) {
+      if (users[i].name === from) {
+        let userPhoto = users[i].photo;
+        const li = document.createElement('li');
+        li.innerHTML = `<img class="profile-photo feed" src="${userPhoto}"> <strong>${from}</strong> ${notification} <span class="close-icon"></span>`;
+        li.className = 'notification';
+        notificationsList.appendChild(li);
+      }
+    }
+  }
+}
+
+notificationIcon.addEventListener('click', () => {
+  if (notificationsList.style.display === 'block') {
+    notificationsList.style.display = 'none';
+    notificationLight.style.display = 'block';
+  } else {
+    notificationsList.style.display = 'block';
+    notificationLight.style.display = 'none';
+    addNotifications();
+  }
+});
+
+nav.addEventListener('click', e => {
   if (e.target.tagName === 'IMG') {
     let iconLink = e.target.parentNode;
     toggleClass(iconLink, navLinks, 'app-nav__link--selected');
   }
 });
 
-searchBox.addEventListener('keypress', (e) => {
+searchBox.addEventListener('keypress', e => {
   let text = searchBox.value;
   let key = e.which || e.keyCode;
   if (key === 13) {
@@ -268,14 +352,14 @@ searchBox.addEventListener('keypress', (e) => {
   }
 });
 
-trafficNav.addEventListener('click', (e) => {
+trafficNav.addEventListener('click', e => {
   if (e.target.tagName === 'LI') {
     let link = e.target;
     toggleClass(link, trafficLinks, 'traffic__link--active');
   }
 });
 
-messageForm.addEventListener('click', (e) => {
+messageForm.addEventListener('click', e => {
   e.preventDefault();
   if (e.target === sendButton) {
     let user = userField.value;
@@ -299,8 +383,10 @@ messageForm.addEventListener('click', (e) => {
   }
 });
 
-userField.addEventListener('keyup', (e) => {
+userField.addEventListener('keyup', e => {
   let userSearch = userField.value;
-  checkUser(userSearch);
+  if (userSearch !== '') {
+    checkUser(userSearch);
+  }
 });
 
