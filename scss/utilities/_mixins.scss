@@ -64,15 +64,6 @@
   @content;
 }
 
-@mixin transition(
-  $prop: all,
-  $duration: .5s,
-  $func: null,
-  $delay: null
-) {
-  transition: $prop $duration $func $delay;
-}
-
 @mixin element(
   $background: null,
   $color: null,

@@ -36,6 +36,12 @@
   display: block;
 }
 
+%select-field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url('../../icons/icon-angle-down.svg') no-repeat right $silver;
+}
+
 // Toggle Buttons Placeholder
 %toggle {
   cursor: pointer;
@@ -51,7 +57,7 @@
   }
   border: 2px solid #CFCFD0;
   background: $color-button-neutral;
-  @include transition(background, .4s, ease-out);
+  transition: background .4s ease-out;
   &:before,
 	&:after {
     content: "";
@@ -73,7 +79,7 @@
     border: 2px solid #CFCFD0;
     top: 2px;
     left: 3.5px;
-    @include transition(left, 0.25s); 
+    transition: left 0.25s; 
 	}
 	.toggle-checkbox:checked + & {
 		background: $color-button-primary;

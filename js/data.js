@@ -1,3 +1,8 @@
+/* 
+  Chart and page data for app
+*/
+
+// Charts
 let trafficData = {
   labels: [
     '16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', 
@@ -7,6 +12,7 @@ let trafficData = {
     {
       data: [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250],
       backgroundColor: 'rgba(116, 119, 191, .3)',
+      hoverBackgroundColor: '#81C98F',
       borderColor: '#BCBFEB',
       borderWidth: 2,
       lineTension: 0,
@@ -78,7 +84,8 @@ let dailyTrafficData = {
     {
       label: "# of Hits",
       data: [75, 100, 175, 125, 225, 200, 100],
-      backgroundColor: "#7377BF"
+      backgroundColor: "#7377BF",
+      hoverBackgroundColor: "#81C98F"
     }
   ]
 };
@@ -137,6 +144,11 @@ let devicesTrafficData = {
         '#81C98F',
         '#73B1BF',
         '#7377BF'
+      ],
+      hoverBackgroundColor: [
+        '#9ad3a5',
+        '#8ec0cb',
+        '#8e92cb'
       ]
     }
   ]
@@ -163,3 +175,42 @@ const devicesTrafficOptions = {
     }
   }
 };
+
+// Page Data
+let notifications = [
+  {
+    from: 'Dan Oliver',
+    notification: 'liked your post.'
+  },
+  {
+    from: 'Victoria Chambers',
+    notification: 'shared your post.'
+  },
+  {
+    from: 'Dale Byrd',
+    notification: 'upvoted your post.'
+  }
+];
+
+let users = [
+  {
+    name: 'Jamie Reardon',
+    photo: 'images/profile-photo.jpg'
+  },
+  {
+    name: 'Victoria Chambers',
+    photo: 'images/member-1.jpg'
+  },
+  {
+    name: 'Dale Byrd',
+    photo: 'images/member-2.jpg'
+  },
+  {
+    name: 'Dawn Wood',
+    photo: 'images/member-3.jpg'
+  },
+  {
+    name: 'Dan Oliver',
+    photo: 'images/member-4.jpg'
+  }
+];

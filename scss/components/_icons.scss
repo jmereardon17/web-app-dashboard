@@ -3,8 +3,31 @@
   width: 21px;
   position: relative;
   transition: transform .5s;
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  animation-delay: 2s;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
   &:hover {
     transform: rotate(30deg);
+  }
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  
+  20%, 80% {
+    transform: translate3d(3px, 0, 0);
+  }
+
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
   }
 }
 
@@ -12,7 +35,7 @@
   position: absolute;
   top: 21px;
   right: 196px;
-  @include element($width: 7px, $height: 7px, $background: $color-notification) {
+  @include element($width: 7px, $height: 7px, $background: $color-notification, $color: $color-notification) {
     border-radius: $border-round;
   }
 }
@@ -22,7 +45,7 @@
     width: 35px;
     height: 35px;
     opacity: .5;
-    @include transition(opacity, .3s);
+    transition: opacity .3s;
   }
   &__icon:hover,
   &__link--selected &__icon {
@@ -38,6 +61,10 @@
     $height: 10px);
   cursor: pointer;
   margin-left: auto;
+}
+
+.purple {
+  background-image: url('../../icons/icon-close-purple.svg');
 }
 
 .alert__icon {

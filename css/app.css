@@ -38,6 +38,12 @@
   display: block;
 }
 
+.settings__field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: url("../../icons/icon-angle-down.svg") no-repeat right #FBFBFB;
+}
+
 .toggle-switch {
   cursor: pointer;
   display: inline-block;
@@ -530,8 +536,14 @@ img {
 .notifications .notification:nth-child(odd) {
   background: #eaeaea;
 }
-.notifications .notification strong {
-  margin-right: 5px;
+.notifications .notification span {
+  margin-left: 5px;
+}
+.notifications .notification img + span {
+  margin-left: 0;
+}
+.notifications .notification img + span + span {
+  margin-left: auto;
 }
 
 .app-nav {
@@ -617,16 +629,36 @@ main {
   width: 21px;
   position: relative;
   transition: transform 0.5s;
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+  animation-delay: 2s;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 .app-header__icon:hover {
   transform: rotate(30deg);
 }
 
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(3px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
 .notification-light {
   position: absolute;
   top: 21px;
   right: 196px;
   background: #85DB80;
+  color: #85DB80;
   width: 7px;
   height: 7px;
   border-radius: 100px;
@@ -649,6 +681,10 @@ main {
   height: 10px;
   cursor: pointer;
   margin-left: auto;
+}
+
+.purple {
+  background-image: url("../../icons/icon-close-purple.svg");
 }
 
 .alert__icon {
@@ -1149,7 +1185,6 @@ main {
 .settings__field {
   margin: 35px 0 17px;
   height: 45px;
-  text-indent: 10px;
 }
 
 /*# sourceMappingURL=app.css.map */

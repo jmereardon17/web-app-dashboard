@@ -17,88 +17,13 @@ const userField = document.getElementById('userField');
 const messageField = document.getElementById('messageField');
 const sendButton = document.querySelector('.btn-positive');
 
-let notifications = [
-  {
-    from: 'Dan Oliver',
-    notification: 'liked your post.'
-  },
-  {
-    from: 'Victoria Chambers',
-    notification: 'shared your post.'
-  },
-  {
-    from: 'Dale Byrd',
-    notification: 'upvoted your post.'
-  }
-];
+// Add default notifications to DOM
+addNotifications();
 
-let users = [
-  {
-    name: 'Jamie Reardon',
-    photo: 'images/profile-photo.jpg'
-  },
-  {
-    name: 'Victoria Chambers',
-    photo: 'images/member-1.jpg'
-  },
-  {
-    name: 'Dale Byrd',
-    photo: 'images/member-2.jpg'
-  },
-  {
-    name: 'Dawn Wood',
-    photo: 'images/member-3.jpg'
-  },
-  {
-    name: 'Dan Oliver',
-    photo: 'images/member-4.jpg'
-  }
-];
-
-const addAlertHTML = message => {
-  alertMessage.innerHTML = 
-  `<span class="alert__title">Alert</span>
-   <p class="alert__message">${message}</p>
-   <span class="alert__icon"></span>`;
-}
-
-const showAlert = (type, message) => {
-  if (type === 'login') {
-   addAlertHTML(message);
-  }
-  if (type === 'sent') {
-    alertMessage.style.backgroundColor = '#81C98F';
-    addAlertHTML(message);
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-    $('#alertMessage').delay(300).slideDown(700);
-  }
-  if (type === 'fail') {
-    alertMessage.style.backgroundColor = 'tomato';
-    addAlertHTML(message);
-    document.body.scrollTop = document.documentElement.scrollTop = 0;
-    $('#alertMessage').delay(300).slideDown(700);
-  }
-}
-
-const checkUser = search => {
-  let matched = [];
-  for (let i = 0; i < users.length; i += 1) {
-    let user = users[i].name;
-    if (user.indexOf(search) > -1) {
-      matched.push(user);
-    }
-  }
-  let sorted = Array.from(new Set(matched));
-  sorted.forEach(user => {
-    const div = document.createElement('div');
-    div.textContent = user;
-    div.className = 'message__match';
-    messageForm.appendChild(div);
-  });
-}
-
+// display default login alert box
 showAlert('login', 'Chart data is from Saturday due to a system update that ran overnight.');
 
+// Generate charts for display
 let trafficChart = new Chart(trafficCanvas, {
   type: "line",
   data: trafficData,
@@ -117,35 +42,20 @@ let devicesTrafficChart = new Chart(devicesTrafficCanvas, {
   options: devicesTrafficOptions
 });
 
-const toggleClass = (element, parent, name) => {
-  for (let i = 0; i < parent.length; i += 1) {
-    if (parent[i].classList.contains(name)) {
-      parent[i].classList.remove(name);
-    }
-  }
-  element.classList.add(name);
-}
-
-const addNotifications = () => {
-  for (let i = 0; i < notifications.length; i += 1) {
-    let from = notifications[i].from;
-    let notification = notifications[i].notification;
-    for (let j = 0; j < users.length; j += 1) {
-      if (users[j].name === from) {
-        let userPhoto = users[j].photo;
-        const li = document.createElement('li');
-        li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <strong class="activity__desc--name">${from}</strong> ${notification} <span class="close-icon"></span>`;
-        li.className = 'notification';
-        notificationsList.appendChild(li);
+// Event Listeners
+notificationsList.addEventListener('click', e => {
+  if (e.target.className === 'close-icon purple') {
+    let notification = e.target.parentNode;
+    // let content += e.target.previousElementSibling.childNodes[1];
+    let content = e.target.previousElementSibling.firstChild.nextSibling.textContent;
+    // let content = e.target.previousElementSibling.firstChild.nextSibling;
+    notificationsList.removeChild(notification);
+    for (let i = 0; i < notifications.length; i += 1) {
+      let comparison = ' ' + notifications[i].notification;
+      if (comparison === content) {
+        notifications.splice(i, 1);
       }
     }
-  }
-}
-
-notificationsList.addEventListener('click', e => {
-  if (e.target.className === 'close-icon') {
-    let notification = e.target.parentNode;
-    notificationsList.removeChild(notification);
   }
   if (notificationsList.childElementCount === 0) {
     notificationsList.style.display = 'none';
@@ -158,7 +68,12 @@ notificationIcon.addEventListener('click', () => {
   } else {
     notificationsList.style.display = 'block';
     notificationLight.style.display = 'none';
-    addNotifications();
+    if (notificationsList.childElementCount === 0) {
+      const li = document.createElement('li');
+      li.innerHTML = '<span>No new notifications.</span>';
+      li.className = 'notification';
+      notificationsList.appendChild(li);
+    }
   }
 });
 
@@ -166,15 +81,6 @@ nav.addEventListener('click', e => {
   if (e.target.tagName === 'IMG') {
     let iconLink = e.target.parentNode;
     toggleClass(iconLink, navLinks, 'app-nav__link--selected');
-  }
-});
-
-searchBox.addEventListener('keypress', e => {
-  let text = searchBox.value;
-  let key = e.which || e.keyCode;
-  if (key === 13) {
-    console.log(text);
-    searchBox.value = '';
   }
 });
 
@@ -203,6 +109,17 @@ messageForm.addEventListener('click', e => {
       message = '';
     } else {
       showAlert('sent', 'Message sent <strong>successfully</strong>.');
+      if (user === 'Jamie Reardon') {
+        notifications.push({from: 'Jamie Reardon', notification: 'sent you a message.'});
+        const li = document.createElement('li');
+        let userPhoto = users[0].photo;
+        let from = notifications[3].from;
+        let notification = notifications[3].notification;
+        li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
+        li.className = 'notification';
+        notificationsList.appendChild(li);
+        notificationLight.style.display = 'block';
+      }
       user = '';
       message = '';
     }

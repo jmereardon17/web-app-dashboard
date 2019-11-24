@@ -65,7 +65,7 @@
 // Timezone Select
 .settings__field {
   @extend %form-field;
+  @extend %select-field;
   margin: 35px 0 17px;
   height: 45px;
-  text-indent: 10px;
 }

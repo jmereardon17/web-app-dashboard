@@ -26,15 +26,6 @@
     padding: 10px 24px 10px 0;
     margin-right: 15px;
     @include flex();
-    // &::after {
-    //   content: '\A';
-    //   position: absolute;
-    //   top: 21px;
-    //   right: 196px;
-    //   @include element($disp: block, $width: 7px, $height: 7px, $background: $color-notification) {
-    //     border-radius: $border-round;
-    //   }
-    // }
   }
 }
 
@@ -56,8 +47,14 @@
     &:nth-child(odd) {
       background: lighten($color-border, 6%);
     }
-    strong {
-      margin-right: 5px;
+    span {
+      margin-left: 5px;
+    }
+    img + span {
+      margin-left: 0;
+    }
+    img + span + span {
+      margin-left: auto;
     }
   }
 }
