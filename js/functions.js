@@ -41,7 +41,7 @@ const showAlert = (type, message) => {
 const checkUser = search => {
   let matched = [];
   for (let i = 0; i < users.length; i += 1) {
-    let user = users[i].name;
+    let user = users[i].name.toLowerCase();
     if (user.indexOf(search) > -1) {
       matched.push(user);
     }
@@ -52,6 +52,12 @@ const checkUser = search => {
     div.textContent = user;
     div.className = "message__match";
     messageForm.appendChild(div);
+  });
+  const matchDivs = document.querySelectorAll('.message__match');
+  matchDivs.forEach(match => {
+    if (!match.textContent.startsWith(search)) {
+      messageForm.removeChild(match);
+    }
   });
 };
 

@@ -73,6 +73,15 @@ notificationIcon.addEventListener('click', () => {
       li.innerHTML = '<span>No new notifications.</span>';
       li.className = 'notification';
       notificationsList.appendChild(li);
+    } else {
+      if (notificationsList.childElementCount > 1) {
+        let notifications = document.querySelectorAll('.notification');
+        for (let i = 0; i < notifications.length; i += 1) {
+         if (notifications[i].innerHTML === '<span>No new notifications.</span>') {
+            notificationsList.removeChild(notifications[i]);
+          }
+        }
+      }
     }
   }
 });
@@ -88,6 +97,44 @@ trafficNav.addEventListener('click', e => {
   if (e.target.tagName === 'LI') {
     let link = e.target;
     toggleClass(link, trafficLinks, 'traffic__link--active');
+    if (link.textContent === 'Hourly') {
+      trafficData.labels = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+      trafficData.datasets[0].data = [867, 200, 768, 100, 232, 231, 112, 122, 200];
+      trafficChart = new Chart(trafficCanvas, {
+        type: "line",
+        data: trafficData,
+        options: trafficOptions
+      });
+    }
+    if (link.textContent === 'Daily') {
+      trafficData.labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+      trafficData.datasets[0].data = [300, 670, 550, 820, 700, 520, 580];
+      trafficChart = new Chart(trafficCanvas, {
+        type: "line",
+        data: trafficData,
+        options: trafficOptions
+      });
+    }
+    if (link.textContent === 'Weekly') {
+      trafficData.labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', 
+    '11-17', '18-24', '25-31'];
+      trafficData.datasets[0].data = [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250];
+      trafficChart = new Chart(trafficCanvas, {
+        type: "line",
+        data: trafficData,
+        options: trafficOptions
+      });
+    }
+    if (link.textContent === 'Monthly') {
+      trafficData.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 
+    'Aug', 'Oct', 'Nov', 'Dec'];
+      trafficData.datasets[0].data = [950, 2012, 542, 768, 1024, 1200, 480, 1020, 1025, 1230, 2400, 2120];
+      trafficChart = new Chart(trafficCanvas, {
+        type: "line",
+        data: trafficData,
+        options: trafficOptions
+      });
+    }
   }
 });
 
@@ -110,11 +157,12 @@ messageForm.addEventListener('click', e => {
     } else {
       showAlert('sent', 'Message sent <strong>successfully</strong>.');
       if (user === 'Jamie Reardon') {
+        let notificationsArrayLength = notifications.length;
         notifications.push({from: 'Jamie Reardon', notification: 'sent you a message.'});
         const li = document.createElement('li');
         let userPhoto = users[0].photo;
-        let from = notifications[3].from;
-        let notification = notifications[3].notification;
+        let from = notifications[notificationsArrayLength].from;
+        let notification = notifications[notificationsArrayLength].notification;
         li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
         li.className = 'notification';
         notificationsList.appendChild(li);
@@ -127,7 +175,7 @@ messageForm.addEventListener('click', e => {
 });
 
 userField.addEventListener('keyup', e => {
-  let userSearch = userField.value;
+  let userSearch = userField.value.toLowerCase();
   if (userSearch !== '') {
     checkUser(userSearch);
   }
