@@ -255,8 +255,10 @@
         <div class="container">
           <h3 class="sub-headline">Message User</h3>
 
-          <form class="message__form">
-            <input class="message__field" id="userField" type="text" placeholder="Search for User">
+          <form class="message__form" autocomplete="off">
+            <div class="autocomplete">
+              <input class="message__field" id="userField" type="text" placeholder="Search for User">
+            </div>
             <textarea class="message__area" id="messageField" rows="6" placeholder="Message for User"></textarea>
             <button class="btn-positive" id="send">Send</button>
           </form>

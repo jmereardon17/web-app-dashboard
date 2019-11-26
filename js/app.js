@@ -177,12 +177,14 @@ messageForm.addEventListener('click', e => {
   }
 });
 
-userField.addEventListener('keyup', e => {
-  let userSearch = userField.value.toLowerCase();
-  if (userSearch !== '') {
-    checkUser(userSearch);
-  }
-});
+// userField.addEventListener('keyup', e => {
+//   let userSearch = userField.value.toLowerCase();
+//   if (userSearch !== '') {
+//     checkUser(userSearch);
+//   }
+// });
+
+autocomplete(userField, users);
 
 // To move and refactor
 
