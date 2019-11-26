@@ -16,6 +16,9 @@ const messageForm = document.querySelector('.message__form');
 const userField = document.getElementById('userField');
 const messageField = document.getElementById('messageField');
 const sendButton = document.querySelector('.btn-positive');
+const emailSettingsCheckBox = document.getElementById('emailSetting');
+const profileSettingsCheckBox = document.getElementById('profileSetting');
+const timeZoneSelect = document.getElementById('time-zone');
 
 // Add default notifications to DOM
 addNotifications();
@@ -178,6 +181,53 @@ userField.addEventListener('keyup', e => {
   let userSearch = userField.value.toLowerCase();
   if (userSearch !== '') {
     checkUser(userSearch);
+  }
+});
+
+// To move and refactor
+
+let emailPref = localStorage.getItem('Email Notifications');
+
+emailSettingsCheckBox.addEventListener('change', (e) => {
+  if (emailSettingsCheckBox.checked) {
+    localStorage.setItem('Email Notifications', 'true');
+  } else {
+    localStorage.setItem('Email Notifications', 'false');
+  }
+});
+
+if (emailPref === 'true') {
+  emailSettingsCheckBox.checked = true;
+}
+if (emailPref === 'false') {
+  emailSettingsCheckBox.checked = false;
+}
+
+let profilePref = localStorage.getItem('Profile Public');
+
+profileSettingsCheckBox.addEventListener('change', () => {
+  if (profileSettingsCheckBox.checked) {
+    localStorage.setItem('Profile Public', 'true');
+  } else {
+    localStorage.setItem('Profile Public', 'false');
+  }
+});
+
+if (profilePref === 'true') {
+  profileSettingsCheckBox.checked = true;
+}
+if (profilePref === 'false') {
+  profileSettingsCheckBox.checked = false;
+}
+
+timeZoneSelect.addEventListener('change', (e) => {
+  let selectedTimeZone = e.target.options[e.target.selectedIndex];
+  if (selectedTimeZone.textContent === 'Eastern') {
+    selectedTimeZone.selected = true;
+  } else if (selectedTimeZone.textContent === 'Central') {
+    console.log('central');
+  } else if (selectedTimeZone.textContent === 'Pacific') {
+    console.log('pacific');
   }
 });
 
