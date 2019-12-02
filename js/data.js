@@ -214,3 +214,15 @@ let users = [
     photo: 'images/member-4.jpg'
   }
 ];
+
+// Plugins
+ion.sound({
+    sounds: [
+        {name: "bell_ring"},
+        {name: 'level_up'},
+        {name: 'door_bell'}
+    ],
+    volume: 0.2,
+    path: "js/plugins/ion-sound/sounds/",
+    preload: true
+});

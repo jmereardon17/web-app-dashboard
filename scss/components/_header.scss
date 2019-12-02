@@ -26,19 +26,30 @@
     padding: 10px 24px 10px 0;
     margin-right: 15px;
     @include flex();
+    position: relative;
   }
 }
 
 .notifications {
-  @include element($disp: none, $width: 350px, $background: $silver, $color: $color-text) {
+  @include element($disp: none, $width: 315px, $background: $silver, $color: $color-text) {
     font-size: 13px;
     @include border();
     border-radius: $border-sm;
   }
   position: absolute;
   top: 55px;
-  right: 136px;
+  right: -210px;
   z-index: 1;
+  @include mq('phone') {
+    width: 350px;
+    // right: 136px;
+  }
+  @include mq('tablet-small') {
+    right: -120px;
+  }
+  @include mq('tablet') {
+    // right: 0;
+  }
   .notification {
     @include flex();
     padding: 5px 10px 5px 6px;
@@ -52,6 +63,14 @@
     }
     img + span {
       margin-left: 0;
+      text-align: left;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 80%;
+      @include mq('phone') {
+        width: 100%;
+      }
     }
     img + span + span {
       margin-left: auto;

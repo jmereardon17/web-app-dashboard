@@ -40,7 +40,7 @@
 .traffic__link {
   @include font($weight: $font-weight-bold);
   display: inline-block;
-  margin-right: 12px;
+  margin-right: 3px;
   padding: 6px 12px;
   @include mq('phone') {
     margin-right: 0;
@@ -79,12 +79,13 @@
 
 .activity {
   &__desc {
-    @include font($size: 13.5px) {
+    font-size: 13.5px;
+    overflow: hidden;
+    @include mq('tablet-small') {
       text-overflow: ellipsis;
       white-space: nowrap;
+      width: 90%;
     }
-    width: 90%;
-    overflow: hidden;
     @include mq('tablet-medium') {
       width: 100%
     }
@@ -118,6 +119,19 @@
   }
   &__date {
     @include font($family: $font-secondary, $weight: $font-weight-semi-bold);
+  }
+}
+
+.autocomplete-items {
+  font-size: 14px;
+  div:hover {
+    color: $white;
+    strong {
+      color: $white;
+    }
+  }
+  strong {
+    color: $color-primary;
   }
 }
 

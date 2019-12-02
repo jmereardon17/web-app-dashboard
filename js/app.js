@@ -16,15 +16,27 @@ const messageForm = document.querySelector('.message__form');
 const userField = document.getElementById('userField');
 const messageField = document.getElementById('messageField');
 const sendButton = document.querySelector('.btn-positive');
+const settingsWrapper = document.querySelector('.settings .wrapper');
 const emailSettingsCheckBox = document.getElementById('emailSetting');
 const profileSettingsCheckBox = document.getElementById('profileSetting');
 const timeZoneSelect = document.getElementById('time-zone');
+const saveSettingsBtn = document.getElementById('save');
+const cancelSettingsBtn = document.getElementById('cancel');
 
 // Add default notifications to DOM
 addNotifications();
+animateLight();
+
+// Play notification sound and animation on page load
+window.addEventListener('load', function(){
+  this.setTimeout(function(){
+    notificationIcon.classList.add('shake');
+    ion.sound.play('level_up');
+  },2000);
+});
 
 // display default login alert box
-showAlert('login', 'Chart data is from Saturday due to a system update that ran overnight.');
+showAlert('Alert', 'Chart data is from Saturday due to a system update that ran overnight.');
 
 // Generate charts for display
 let trafficChart = new Chart(trafficCanvas, {
@@ -66,6 +78,7 @@ notificationsList.addEventListener('click', e => {
 });
 
 notificationIcon.addEventListener('click', () => {
+  notificationIcon.classList.remove('shake');
   if (notificationsList.style.display === 'block') {
     notificationsList.style.display = 'none';
   } else {
@@ -92,7 +105,17 @@ notificationIcon.addEventListener('click', () => {
 nav.addEventListener('click', e => {
   if (e.target.tagName === 'IMG') {
     let iconLink = e.target.parentNode;
+    let selected = e.target;
     toggleClass(iconLink, navLinks, 'app-nav__link--selected');
+    if (selected.alt === 'Navigation Dashboard Icon') {
+      console.log('dashboard');
+    } else if (selected.alt === 'Navigation Members Icon') {
+      console.log('members');
+    } else if (selected.alt === 'Navigation Visits Icon') {
+      console.log('visits');
+    } else if (selected.alt === 'Navigation Settings Icon') {
+      console.log('settings');
+    }
   }
 });
 
@@ -144,32 +167,44 @@ trafficNav.addEventListener('click', e => {
 messageForm.addEventListener('click', e => {
   e.preventDefault();
   if (e.target === sendButton) {
-    let user = userField.value;
+    let user = userField.value.toLowerCase();
     let message = messageField.value;
     if (user === '' && message === '') {
-      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please fill in both form fields.');
-      user = '';
-      message = '';
+      showAlert('error', 'Message unsuccessfully sent, please fill in both form fields.');
     } else if (user === '') {
-      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please enter a member name.');
+      showAlert('error', 'Message unsuccessfully sent, please enter a member name.');
     } else if (message === '') {
-      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please enter a message.');
+      showAlert('error', 'Message unsuccessfully sent, please enter a message.');
     } else if (message.length < 6 ) {
-      showAlert('fail', 'Message <strong>Unsuccessfully</strong> sent, please enter a message that is longer than 5 characters.');
+      showAlert('error', 'Message unsuccessfully sent, please enter a message that is longer than 5 characters.');
       message = '';
     } else {
-      showAlert('sent', 'Message sent <strong>successfully</strong>.');
-      if (user === 'Jamie Reardon') {
-        let notificationsArrayLength = notifications.length;
-        notifications.push({from: 'Jamie Reardon', notification: 'sent you a message.'});
-        const li = document.createElement('li');
-        let userPhoto = users[0].photo;
-        let from = notifications[notificationsArrayLength].from;
-        let notification = notifications[notificationsArrayLength].notification;
-        li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
-        li.className = 'notification';
-        notificationsList.appendChild(li);
-        notificationLight.style.display = 'block';
+      let userNames = [];
+      for (let i = 0; i < users.length; i += 1) {
+        let userName = users[i].name.toLowerCase();
+        userNames.push(userName);
+      }
+      if (userNames.indexOf(user) < 0) {
+        showAlert('error', 'Message unsuccessfully sent, there is no such member that matches your user search.');
+      } else {
+          showAlert('success', 'Message sent successfully.');
+        if (user === 'Jamie Reardon'.toLowerCase()) {
+          let notificationsArrayLength = notifications.length;
+          notifications.push({from: 'Jamie Reardon', notification: 'sent you a message.'});
+          const li = document.createElement('li');
+          let userPhoto = users[0].photo;
+          let from = notifications[notificationsArrayLength].from;
+          let notification = notifications[notificationsArrayLength].notification;
+          li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
+          li.className = 'notification';
+          notificationsList.appendChild(li);
+          notificationLight.style.display = 'block';
+          animateLight();
+          window.setTimeout(function(){
+            notificationIcon.classList.add('shake');
+            ion.sound.play('level_up');
+          },2000);
+        }
       }
       user = '';
       message = '';
@@ -177,26 +212,11 @@ messageForm.addEventListener('click', e => {
   }
 });
 
-// userField.addEventListener('keyup', e => {
-//   let userSearch = userField.value.toLowerCase();
-//   if (userSearch !== '') {
-//     checkUser(userSearch);
-//   }
-// });
-
 autocomplete(userField, users);
 
 // To move and refactor
 
 let emailPref = localStorage.getItem('Email Notifications');
-
-emailSettingsCheckBox.addEventListener('change', (e) => {
-  if (emailSettingsCheckBox.checked) {
-    localStorage.setItem('Email Notifications', 'true');
-  } else {
-    localStorage.setItem('Email Notifications', 'false');
-  }
-});
 
 if (emailPref === 'true') {
   emailSettingsCheckBox.checked = true;
@@ -206,14 +226,6 @@ if (emailPref === 'false') {
 }
 
 let profilePref = localStorage.getItem('Profile Public');
-
-profileSettingsCheckBox.addEventListener('change', () => {
-  if (profileSettingsCheckBox.checked) {
-    localStorage.setItem('Profile Public', 'true');
-  } else {
-    localStorage.setItem('Profile Public', 'false');
-  }
-});
 
 if (profilePref === 'true') {
   profileSettingsCheckBox.checked = true;
@@ -232,4 +244,55 @@ timeZoneSelect.addEventListener('change', (e) => {
     console.log('pacific');
   }
 });
+
+saveSettingsBtn.addEventListener('click', () => {
+  if (emailSettingsCheckBox.checked) {
+    localStorage.setItem('Email Notifications', 'true');
+  } else {
+    localStorage.setItem('Email Notifications', 'false');
+  }
+  if (profileSettingsCheckBox.checked) {
+    localStorage.setItem('Profile Public', 'true');
+  } else {
+    localStorage.setItem('Profile Public', 'false');
+  }
+  showAlert('success', 'Settings saved successfully.')
+});
+
+cancelSettingsBtn.addEventListener("click", () => {
+
+  if (emailSettingsCheckBox.checked) {
+    emailSettingsCheckBox.checked = false;
+  }
+  if (profileSettingsCheckBox.checked) {
+    profileSettingsCheckBox.checked = false;
+  }
+});
+
+// settingsWrapper.addEventListener('click', (e) => {
+//   let newEmailSetting;
+//   let newProfileSetting;
+//   if (e.target.className === 'toggle-checkbox') {
+//     let checkbox = e.target;
+//     if (checkbox === emailSettingsCheckBox) {
+//       if (checkbox.checked) {
+//         newEmailSetting = true;
+//       } else {
+//         newEmailSetting = false;
+//       }
+//       // newEmailSetting = emailSettingsCheckBox.checked;
+//     } else if (checkbox === profileSettingsCheckBox) {
+//       newProfileSetting = profileSettingsCheckBox.checked;
+//       console.log(newProfileSetting);
+//     }
+//   }
+//   if (e.target === cancelSettingsBtn) {
+//     let oldEmailSetting = emailSettingsCheckBox.checked;
+//     if (newEmailSetting !== oldEmailSetting) {
+//       console.log('no it\'s not');
+//     } else {
+//       console.log('yes it is');
+//     }
+//   }
+// });
 

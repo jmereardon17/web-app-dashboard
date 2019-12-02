@@ -510,20 +510,31 @@ img {
   display: flex;
   flex-direction: row;
   align-items: center;
+  position: relative;
 }
 
 .notifications {
   background: #FBFBFB;
   color: #727171;
   display: none;
-  width: 350px;
+  width: 315px;
   font-size: 13px;
   border: 1px solid #dadada;
   border-radius: 5px;
   position: absolute;
   top: 55px;
-  right: 136px;
+  right: -210px;
   z-index: 1;
+}
+@media (min-width: 480px) {
+  .notifications {
+    width: 350px;
+  }
+}
+@media (min-width: 680px) {
+  .notifications {
+    right: -120px;
+  }
 }
 .notifications .notification {
   display: flex;
@@ -541,6 +552,16 @@ img {
 }
 .notifications .notification img + span {
   margin-left: 0;
+  text-align: left;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 80%;
+}
+@media (min-width: 480px) {
+  .notifications .notification img + span {
+    width: 100%;
+  }
 }
 .notifications .notification img + span + span {
   margin-left: auto;
@@ -549,40 +570,69 @@ img {
 .app-nav {
   background-color: #4D4C72;
   padding: 35px 0;
+  text-align: center;
 }
 .app-nav__link {
   cursor: pointer;
-  display: block;
+  display: inline-block;
   text-align: center;
-  margin-bottom: 50px;
+  margin-right: 40px;
   position: relative;
+}
+@media (min-width: 768px) {
+  .app-nav__link {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 50px;
+  }
 }
 .app-nav__link:nth-child(3) {
   position: relative;
   left: 3px;
 }
 .app-nav__link:nth-child(3)::before {
-  left: -16px;
+  left: -10px;
+}
+@media (min-width: 768px) {
+  .app-nav__link:nth-child(3)::before {
+    left: -16px;
+  }
 }
 .app-nav__link:last-child {
-  margin-bottom: 0;
+  margin-right: 0;
+}
+@media (min-width: 768px) {
+  .app-nav__link:last-child {
+    margin-bottom: 0;
+  }
 }
 .app-nav__link::before {
   transition: opacity 0.5s;
   content: "";
   position: absolute;
   top: -16px;
-  left: -13px;
+  left: -5px;
   opacity: 0;
   display: block;
-  width: 10px;
+  width: 40px;
   height: 60px;
   border: 3px solid transparent;
 }
+@media (min-width: 768px) {
+  .app-nav__link::before {
+    left: -13px;
+    width: 10px;
+  }
+}
 .app-nav__link--selected::before {
-  border-radius: 100px;
-  border-right-color: #85DB80;
+  border-bottom-color: #85DB80;
   opacity: 1;
+}
+@media (min-width: 768px) {
+  .app-nav__link--selected::before {
+    border-radius: 100px;
+    border-right-color: #85DB80;
+  }
 }
 
 .grid {
@@ -614,7 +664,12 @@ main {
 #trafficChart {
   display: block;
   max-width: 100%;
-  margin-top: 10px;
+  margin-top: 24px;
+}
+@media (min-width: 480px) {
+  #trafficChart {
+    margin-top: 10px;
+  }
 }
 
 #dailyTrafficChart,
@@ -627,10 +682,7 @@ main {
 .app-header__icon {
   cursor: pointer;
   width: 21px;
-  position: relative;
   transition: transform 0.5s;
-  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
-  animation-delay: 2s;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -639,24 +691,10 @@ main {
   transform: rotate(30deg);
 }
 
-@keyframes shake {
-  10%, 90% {
-    transform: translate3d(-1px, 0, 0);
-  }
-  20%, 80% {
-    transform: translate3d(3px, 0, 0);
-  }
-  30%, 50%, 70% {
-    transform: translate3d(-4px, 0, 0);
-  }
-  40%, 60% {
-    transform: translate3d(4px, 0, 0);
-  }
-}
 .notification-light {
   position: absolute;
-  top: 21px;
-  right: 196px;
+  top: 7px;
+  right: 20px;
   background: #85DB80;
   color: #85DB80;
   width: 7px;
@@ -720,6 +758,24 @@ main {
   width: 15px;
 }
 
+.shake {
+  animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: translate3d(-1px, 0, 0);
+  }
+  20%, 80% {
+    transform: translate3d(3px, 0, 0);
+  }
+  30%, 50%, 70% {
+    transform: translate3d(-4px, 0, 0);
+  }
+  40%, 60% {
+    transform: translate3d(4px, 0, 0);
+  }
+}
 .profile-photo {
   border-radius: 100px;
   width: 30px;
@@ -760,7 +816,13 @@ main {
 }
 
 .container {
-  padding: 0 1.5em;
+  padding: 0 0.6em;
+}
+@media (min-width: 680px) {
+  .container {
+    padding-left: 1.5em;
+    padding-right: 1.5em;
+  }
 }
 
 .traffic {
@@ -1003,7 +1065,7 @@ main {
   font-size: 13px;
   font-weight: 700;
   display: inline-block;
-  margin-right: 12px;
+  margin-right: 3px;
   padding: 6px 12px;
   color: #939393;
   cursor: pointer;
@@ -1045,10 +1107,14 @@ main {
 
 .activity__desc {
   font-size: 13.5px;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 90%;
   overflow: hidden;
+}
+@media (min-width: 680px) {
+  .activity__desc {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 90%;
+  }
 }
 @media (min-width: 992px) {
   .activity__desc {
@@ -1094,6 +1160,19 @@ main {
   font-family: "Muli", sans-serif;
   font-size: 13px;
   font-weight: 600;
+}
+
+.autocomplete-items {
+  font-size: 14px;
+}
+.autocomplete-items div:hover {
+  color: #fff;
+}
+.autocomplete-items div:hover strong {
+  color: #fff;
+}
+.autocomplete-items strong {
+  color: #7477BF;
 }
 
 .toggle-label {
@@ -1186,13 +1265,16 @@ main {
   right: 0;
 }
 .autocomplete-items div {
-  padding: 10px;
+  padding: 10px 18px;
   cursor: pointer;
   background-color: #fff;
   border-bottom: 1px solid #d4d4d4;
 }
+.autocomplete-items div:nth-child(odd) {
+  background: #eaeaea;
+}
 .autocomplete-items div:hover {
-  background-color: #e9e9e9;
+  background-color: #7477BF;
 }
 
 .toggle-checkbox {

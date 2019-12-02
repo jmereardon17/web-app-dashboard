@@ -1,36 +1,55 @@
 .app-nav {
   background-color: $color-secondary;
   padding: 35px 0;
+  text-align: center;
   &__link {
     cursor: pointer;
-    display: block;
+    display: inline-block;
     text-align: center;
-    margin-bottom: 50px;
+    margin-right: 40px;
     position: relative;
+    @include mq('tablet') {
+      display: block;
+      margin-right: 0;
+      margin-bottom: 50px;
+    }
     &:nth-child(3) {
       position: relative;
       left: 3px;
       &::before {
-        left: -16px;
+        left: -10px;
+        @include mq('tablet') {
+          left: -16px;
+        }
       }
     }
     &:last-child {
-      margin-bottom: 0;
+      margin-right: 0;
+      @include mq('tablet') {
+        margin-bottom: 0;
+      }
     }
     &::before {
       transition: opacity .5s;
       content: '';
       position: absolute;
       top: -16px;
-      left: -13px;
+      left: -5px;
       opacity: 0;
-      @include element($disp: block, $width: 10px, $height: 60px) {
+      @include element($disp: block, $width: 40px, $height: 60px) {
         border: 3px solid transparent;
+      }
+      @include mq('tablet') {
+        left: -13px;
+        width: 10px;
       }
     }
     &--selected::before {
-      border-radius: $border-round;
-      border-right-color: $color-nav-link-selected;
+      border-bottom-color: $color-nav-link-selected;
+      @include mq('tablet') {
+        border-radius: $border-round;
+        border-right-color: $color-nav-link-selected;
+      }
       opacity: 1;
     }
   }
