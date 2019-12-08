@@ -70,6 +70,7 @@
   padding: 12px 0 0;
   margin-bottom: 50px;
   &__container {
+    cursor: pointer;
     background-color: $silver;
     @include border();
     border-radius: $border-sm;
@@ -78,12 +79,27 @@
     padding: 1.5em;
     margin: 18px 0 0;
     flex: 0 100%;
+    transition: background .4s;
     @include mq('tablet-medium') {
       flex-basis: calc(33.3333% - 20px);
     }
     @include mq('desktop') {
       margin: 0;
       flex-basis: 329px;
+    }
+    &:hover {
+      background: $color-primary;
+      color: $white;
+      .social__media {
+        color: $white;
+      }
+      #Layer_1 {
+        border-color: $white;
+        background: $white;
+        path {
+          fill: $color-primary;
+        }
+      }
     }
   }
   &__image {

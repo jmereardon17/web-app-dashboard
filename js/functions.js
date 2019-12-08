@@ -180,15 +180,22 @@ const toggleClass = (element, parent, name) => {
   element.classList.add(name);
 };
 
+// function animateLight() {
+//   if (notificationLight.style.display === 'block') {
+//     $(notificationLight).fadeOut(1000,function(){ 
+//     $(this).fadeIn(1000,function(){ 
+//       animateLight() });
+//     });
+//   }
+//   if (notificationLight.style.display === 'none') {
+//     $(notificationLight).hide();
+//   }
+// }
 function animateLight() {
-  if (notificationLight.style.display === 'block') {
-    $(notificationLight).fadeOut(1000,function(){ 
-    $(this).fadeIn(1000,function(){ 
-      animateLight() });
-    });
-  } else {
-    $(notificationLight).hide();
-  }
+  $(notificationLight).fadeOut(1000,function(){ 
+  $(this).fadeIn(1000,function(){ 
+    animateLight() });
+  });
 }
 
 const addNotifications = () => {

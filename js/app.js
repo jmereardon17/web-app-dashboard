@@ -4,6 +4,7 @@ const notificationLight = document.querySelector('.notification-light');
 const notificationsList = document.querySelector('.notifications');
 const nav = document.querySelector('.app-nav');
 const navLinks = nav.querySelectorAll('.app-nav__link');
+const main = document.querySelector('main');
 const searchBox = document.querySelector('.header__search');
 const alertMessage = document.getElementById('alertMessage');
 const trafficNav = document.querySelector('.traffic__nav');
@@ -25,13 +26,14 @@ const cancelSettingsBtn = document.getElementById('cancel');
 
 // Add default notifications to DOM
 addNotifications();
-animateLight();
+notificationLight.style.visibility = 'hidden';
 
-// Play notification sound and animation on page load
+// Play notification icon animation on page load
 window.addEventListener('load', function(){
   this.setTimeout(function(){
+    notificationLight.style.visibility = 'visible';
     notificationIcon.classList.add('shake');
-    ion.sound.play('level_up');
+    animateLight();
   },2000);
 });
 
@@ -78,12 +80,12 @@ notificationsList.addEventListener('click', e => {
 });
 
 notificationIcon.addEventListener('click', () => {
+  notificationLight.style.visibility = 'hidden';
   notificationIcon.classList.remove('shake');
   if (notificationsList.style.display === 'block') {
     notificationsList.style.display = 'none';
   } else {
     notificationsList.style.display = 'block';
-    notificationLight.style.display = 'none';
     if (notificationsList.childElementCount === 0) {
       const li = document.createElement('li');
       li.innerHTML = '<span>No new notifications.</span>';
@@ -107,15 +109,6 @@ nav.addEventListener('click', e => {
     let iconLink = e.target.parentNode;
     let selected = e.target;
     toggleClass(iconLink, navLinks, 'app-nav__link--selected');
-    if (selected.alt === 'Navigation Dashboard Icon') {
-      console.log('dashboard');
-    } else if (selected.alt === 'Navigation Members Icon') {
-      console.log('members');
-    } else if (selected.alt === 'Navigation Visits Icon') {
-      console.log('visits');
-    } else if (selected.alt === 'Navigation Settings Icon') {
-      console.log('settings');
-    }
   }
 });
 
@@ -198,7 +191,7 @@ messageForm.addEventListener('click', e => {
           li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
           li.className = 'notification';
           notificationsList.appendChild(li);
-          notificationLight.style.display = 'block';
+          notificationLight.style.visibility = 'visible';
           animateLight();
           window.setTimeout(function(){
             notificationIcon.classList.add('shake');
@@ -234,18 +227,31 @@ if (profilePref === 'false') {
   profileSettingsCheckBox.checked = false;
 }
 
-timeZoneSelect.addEventListener('change', (e) => {
-  let selectedTimeZone = e.target.options[e.target.selectedIndex];
-  if (selectedTimeZone.textContent === 'Eastern') {
-    selectedTimeZone.selected = true;
-  } else if (selectedTimeZone.textContent === 'Central') {
-    console.log('central');
-  } else if (selectedTimeZone.textContent === 'Pacific') {
-    console.log('pacific');
-  }
-});
+let timeZonePref = localStorage.getItem('Timezone');
+
+if (timeZonePref === 'Eastern') {
+  timeZoneSelect.selectedIndex = '1';
+}
+if (timeZonePref === 'Central') {
+  timeZoneSelect.selectedIndex = '2';
+}
+if (timeZonePref === 'Pacific') {
+  timeZoneSelect.selectedIndex = '3';
+}
+
+// timeZoneSelect.addEventListener('change', (e) => {
+//   let selectedTimeZone = e.target.options[e.target.selectedIndex];
+//   if (selectedTimeZone.textContent === 'Eastern') {
+//     timeZonePref = 'Eastern';
+//   } else if (selectedTimeZone.textContent === 'Central') {
+//     timeZonePref = localStorage.setItem('Timezone', 'Eastern');
+//   } else if (selectedTimeZone.textContent === 'Pacific') {
+//     timeZonePref = localStorage.setItem('Timezone', 'Eastern');
+//   }
+// });
 
 saveSettingsBtn.addEventListener('click', () => {
+  let selectedTimeZone = timeZoneSelect[timeZoneSelect.selectedIndex];
   if (emailSettingsCheckBox.checked) {
     localStorage.setItem('Email Notifications', 'true');
   } else {
@@ -255,6 +261,13 @@ saveSettingsBtn.addEventListener('click', () => {
     localStorage.setItem('Profile Public', 'true');
   } else {
     localStorage.setItem('Profile Public', 'false');
+  }
+  if (selectedTimeZone.textContent === 'Eastern') {
+    timeZonePref = localStorage.setItem('Timezone', 'Eastern');
+  } else if (selectedTimeZone.textContent === 'Central') {
+    timeZonePref = localStorage.setItem('Timezone', 'Central');
+  } else if (selectedTimeZone.textContent === 'Pacific') {
+    timeZonePref = localStorage.setItem('Timezone', 'Pacific');
   }
   showAlert('success', 'Settings saved successfully.')
 });

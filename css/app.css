@@ -874,6 +874,7 @@ main {
   margin-bottom: 50px;
 }
 .social__container {
+  cursor: pointer;
   background-color: #FBFBFB;
   border: 1px solid #dadada;
   border-radius: 5px;
@@ -884,6 +885,7 @@ main {
   padding: 1.5em;
   margin: 18px 0 0;
   flex: 0 100%;
+  transition: background 0.4s;
 }
 @media (min-width: 992px) {
   .social__container {
@@ -895,6 +897,20 @@ main {
     margin: 0;
     flex-basis: 329px;
   }
+}
+.social__container:hover {
+  background: #7477BF;
+  color: #fff;
+}
+.social__container:hover .social__media {
+  color: #fff;
+}
+.social__container:hover #Layer_1 {
+  border-color: #fff;
+  background: #fff;
+}
+.social__container:hover #Layer_1 path {
+  fill: #7477BF;
 }
 .social__image {
   margin-right: auto;
