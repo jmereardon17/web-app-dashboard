@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/app.css">
   </head>
   <body class="grid">
-    <header class="app-header">
+    <header class="app-header" id="dashboard">
       <h1 class="app-header__name"><span class="bold">SHUB</span>App</h1>
 
       <div class="app-header__icon-container">
@@ -25,19 +25,20 @@
     </header>
 
     <nav class="app-nav">
-
-      <a class="app-nav__link app-nav__link--selected">
-        <img class="app-nav__icon" src="icons/icon-dashboard.svg" alt="Navigation Dashboard Icon">
-      </a>
-      <a class="app-nav__link">
-        <img class="app-nav__icon" src="icons/icon-members.svg" alt="Navigation Members Icon">
-      </a>
-      <a class="app-nav__link">
-        <img class="app-nav__icon" src="icons/icon-visits.svg" alt="Navigation Visits Icon">
-      </a>
-      <a class="app-nav__link">
-        <img class="app-nav__icon" src="icons/icon-settings.svg" alt="Navigation Settings Icon">
-      </a>
+      <div>
+        <a class="app-nav__link app-nav__link--selected" href="#dashboard">
+          <img class="app-nav__icon" src="icons/icon-dashboard.svg" alt="Navigation Dashboard Icon">
+        </a>
+        <a class="app-nav__link" href="#members">
+          <img class="app-nav__icon" src="icons/icon-members.svg" alt="Navigation Members Icon">
+        </a>
+        <a class="app-nav__link" href="#visits">
+          <img class="app-nav__icon" src="icons/icon-visits.svg" alt="Navigation Visits Icon">
+        </a>
+        <a class="app-nav__link" href="#settings">
+          <img class="app-nav__icon" src="icons/icon-settings.svg" alt="Navigation Settings Icon">
+        </a>
+      </div>
 
     </nav>
 
@@ -54,7 +55,7 @@
 
         <div class="alert" id="alertMessage"></div>
 
-        <section class="traffic">
+        <section class="traffic" id="visits">
 
           <div class="traffic__header">
             <h3 class="sub-headline">Traffic</h3>
@@ -164,7 +165,7 @@
         </div>
       </section>
 
-      <section class="new-members">
+      <section class="new-members" id="members">
         <div class="container">
           <h3 class="sub-headline">New Members</h3>
 
@@ -265,7 +266,7 @@
         </div>
       </section>
 
-      <section class="settings">
+      <section class="settings" id="settings">
         <div class="container">
           <h3 class="sub-headline">Settings</h3>
 
@@ -310,9 +311,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
     <script src="js/plugins/ion-sound/ion.sound.min.js"></script>
+    <script src="js/variables.js"></script>
     <script src="js/data.js"></script>
     <script src="js/functions.js"></script>
     <script src="js/app.js"></script>
-    <script src="js/app-jquery.js"></script>
   </body>
 </html>

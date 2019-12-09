@@ -2,6 +2,12 @@
   background-color: $color-secondary;
   padding: 35px 0;
   text-align: center;
+  > div {
+    @include mq('tablet') {
+      position: fixed;
+      width: 90px;
+    }
+  }
   &__link {
     cursor: pointer;
     display: inline-block;

@@ -2,6 +2,7 @@
   Chart and page data for app
 */
 
+
 // Charts
 let trafficData = {
   labels: [
@@ -32,7 +33,7 @@ const trafficOptions = {
     onProgress: function(animation) {
       trafficProgress.value = animation.animationObject.currentStep / animation.animationObject.numSteps;
     },
-    onComplete: function(animation) {
+    onComplete: function() {
       $(trafficProgress).fadeOut(1500);
     }
   },
@@ -176,6 +177,25 @@ const devicesTrafficOptions = {
   }
 };
 
+// Generate charts for display
+let trafficChart = new Chart(trafficCanvas, {
+  type: 'line',
+  data: trafficData,
+  options: trafficOptions
+});
+
+let dailyTrafficChart = new Chart(dailyTrafficCanvas, {
+  type: 'bar',
+  data: dailyTrafficData,
+  options: dailyTrafficOptions
+});
+
+let devicesTrafficChart = new Chart(devicesTrafficCanvas, {
+  type: 'doughnut',
+  data: devicesTrafficData,
+  options: devicesTrafficOptions
+});
+
 // Page Data
 let notifications = [
   {
@@ -218,11 +238,13 @@ let users = [
 // Plugins
 ion.sound({
     sounds: [
-        {name: "bell_ring"},
-        {name: 'level_up'},
-        {name: 'door_bell'}
+        {
+          name: 'level_up',
+          volume: 0.2
+        }
     ],
-    volume: 0.2,
+    volume: 0,
+    // volume: 0.2,
     path: "js/plugins/ion-sound/sounds/",
     preload: true
 });

@@ -1,102 +1,56 @@
-const notificationIconDiv = document.querySelector('.app-header__icon-container');
-const notificationIcon = document.querySelector('.app-header__icon');
-const notificationLight = document.querySelector('.notification-light');
-const notificationsList = document.querySelector('.notifications');
-const nav = document.querySelector('.app-nav');
-const navLinks = nav.querySelectorAll('.app-nav__link');
-const main = document.querySelector('main');
-const searchBox = document.querySelector('.header__search');
-const alertMessage = document.getElementById('alertMessage');
-const trafficNav = document.querySelector('.traffic__nav');
-const trafficLinks = trafficNav.querySelectorAll('.traffic__link');
-const trafficCanvas = document.getElementById('trafficChart');
-const trafficProgress = document.getElementById('animationProgress');
-const dailyTrafficCanvas = document.getElementById('dailyTrafficChart');
-const devicesTrafficCanvas = document.getElementById('devicesChart');
-const messageForm = document.querySelector('.message__form');
-const userField = document.getElementById('userField');
-const messageField = document.getElementById('messageField');
-const sendButton = document.querySelector('.btn-positive');
-const settingsWrapper = document.querySelector('.settings .wrapper');
-const emailSettingsCheckBox = document.getElementById('emailSetting');
-const profileSettingsCheckBox = document.getElementById('profileSetting');
-const timeZoneSelect = document.getElementById('time-zone');
-const saveSettingsBtn = document.getElementById('save');
-const cancelSettingsBtn = document.getElementById('cancel');
+// Get User settings and display them
+addUserSettings();
 
 // Add default notifications to DOM
 addNotifications();
-notificationLight.style.visibility = 'hidden';
 
-// Play notification icon animation on page load
-window.addEventListener('load', function(){
-  this.setTimeout(function(){
-    notificationLight.style.visibility = 'visible';
-    notificationIcon.classList.add('shake');
-    animateLight();
-  },2000);
-});
+// Play notification icon animation and display green light on page load
+window.addEventListener('load', showNotificationAlert());
 
 // display default login alert box
 showAlert('Alert', 'Chart data is from Saturday due to a system update that ran overnight.');
-
-// Generate charts for display
-let trafficChart = new Chart(trafficCanvas, {
-  type: "line",
-  data: trafficData,
-  options: trafficOptions
-});
-
-let dailyTrafficChart = new Chart(dailyTrafficCanvas, {
-  type: "bar",
-  data: dailyTrafficData,
-  options: dailyTrafficOptions
-});
-
-let devicesTrafficChart = new Chart(devicesTrafficCanvas, {
-  type: 'doughnut',
-  data: devicesTrafficData,
-  options: devicesTrafficOptions
-});
+$('#alertMessage').delay(300).slideDown(700);
 
 // Event Listeners
+
 notificationsList.addEventListener('click', e => {
+  // Check if user clicked on a notification X icon
   if (e.target.className === 'close-icon purple') {
-    let notification = e.target.parentNode;
-    // let content += e.target.previousElementSibling.childNodes[1];
-    let content = e.target.previousElementSibling.firstChild.nextSibling.textContent;
-    // let content = e.target.previousElementSibling.firstChild.nextSibling;
-    notificationsList.removeChild(notification);
-    for (let i = 0; i < notifications.length; i += 1) {
-      let comparison = ' ' + notifications[i].notification;
-      if (comparison === content) {
-        notifications.splice(i, 1);
-      }
-    }
+    // Reference the List item containing the notification and remove it
+    let notificationLI = e.target.parentNode;
+    removeElement(notificationsList, notificationLI);
   }
+  // Check if there are no notifications
   if (notificationsList.childElementCount === 0) {
+    // If so hide the notification's list
     notificationsList.style.display = 'none';
   }
 });
 
 notificationIcon.addEventListener('click', () => {
-  notificationLight.style.visibility = 'hidden';
-  notificationIcon.classList.remove('shake');
+  // Hide the notification light
+  hideElement(notificationLight);
+  // Check to see if the notification's list is visible
   if (notificationsList.style.display === 'block') {
+    // If so hide it
     notificationsList.style.display = 'none';
+    // Otherwise display it
   } else {
     notificationsList.style.display = 'block';
+    // Check if there are no notifications
     if (notificationsList.childElementCount === 0) {
-      const li = document.createElement('li');
-      li.innerHTML = '<span>No new notifications.</span>';
-      li.className = 'notification';
-      notificationsList.appendChild(li);
+     addEmptyNotification();
+      // Otherwise, if there is more than 1 list item that doesn't include the new list item containing the no new notifications message
     } else {
       if (notificationsList.childElementCount > 1) {
+        // Select all list items
         let notifications = document.querySelectorAll('.notification');
+        // Loop over the length of the list items
         for (let i = 0; i < notifications.length; i += 1) {
+          // Check if the notification's content matches the new list item that tells the user there are no notifications
          if (notifications[i].innerHTML === '<span>No new notifications.</span>') {
-            notificationsList.removeChild(notifications[i]);
+           // Remove the list item because there are new notifications
+            removeElement(notificationsList, notifications[i]);
           }
         }
       }
@@ -105,169 +59,102 @@ notificationIcon.addEventListener('click', () => {
 });
 
 nav.addEventListener('click', e => {
+  // Check to see if an icon was clicked on
   if (e.target.tagName === 'IMG') {
+    // Reference the anchor element
     let iconLink = e.target.parentNode;
-    let selected = e.target;
+    // Add the active page class to the clicked nav icon
     toggleClass(iconLink, navLinks, 'app-nav__link--selected');
   }
 });
 
+alertMessage.addEventListener('click', e => {
+  // Check if the X icon was clicked on
+  if (e.target.className === 'alert__icon') {
+    // Slide up and hide the alert message
+    $(alertMessage).slideUp(700);
+  }
+});
+
 trafficNav.addEventListener('click', e => {
+  // Check if the clicked element is a list item
   if (e.target.tagName === 'LI') {
     let link = e.target;
+    // Add the active state class to the clicked list item
     toggleClass(link, trafficLinks, 'traffic__link--active');
+    // If the clicked link is Hourly
     if (link.textContent === 'Hourly') {
+      // Set the Hourly labels
       trafficData.labels = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+      // Set the Hourly data
       trafficData.datasets[0].data = [867, 200, 768, 100, 232, 231, 112, 122, 200];
-      trafficChart = new Chart(trafficCanvas, {
-        type: "line",
-        data: trafficData,
-        options: trafficOptions
-      });
-    }
+      // Update the chart
+      trafficChart.update();
+    } // If the clicked link is Daily
     if (link.textContent === 'Daily') {
+      // Set the Daily labels
       trafficData.labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+      // Set the Daily data
       trafficData.datasets[0].data = [300, 670, 550, 820, 700, 520, 580];
-      trafficChart = new Chart(trafficCanvas, {
-        type: "line",
-        data: trafficData,
-        options: trafficOptions
-      });
-    }
+      // Update the chart
+      trafficChart.update();
+    } // If the clicked link is Weekly
     if (link.textContent === 'Weekly') {
+      // Set the Weekly labels
       trafficData.labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', 
     '11-17', '18-24', '25-31'];
+      // Set the Weekly data
       trafficData.datasets[0].data = [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250];
-      trafficChart = new Chart(trafficCanvas, {
-        type: "line",
-        data: trafficData,
-        options: trafficOptions
-      });
-    }
+      // Update the chart
+      trafficChart.update();
+    } // If the clicked link is Monthly
     if (link.textContent === 'Monthly') {
+      // Set the Monthly labels
       trafficData.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 
     'Aug', 'Oct', 'Nov', 'Dec'];
+      // Set the Monthly data
       trafficData.datasets[0].data = [950, 2012, 542, 768, 1024, 1200, 480, 1020, 1025, 1230, 2400, 2120];
-      trafficChart = new Chart(trafficCanvas, {
-        type: "line",
-        data: trafficData,
-        options: trafficOptions
-      });
+      // Update the chart
+      trafficChart.update();
     }
   }
 });
 
 messageForm.addEventListener('click', e => {
+  // Remove default form submission behaviour
   e.preventDefault();
+  // Check if the send button was clicked
   if (e.target === sendButton) {
+    // Reference the value entered into the user field
     let user = userField.value.toLowerCase();
+    // Reference the value entered into the message field
     let message = messageField.value;
-    if (user === '' && message === '') {
-      showAlert('error', 'Message unsuccessfully sent, please fill in both form fields.');
-    } else if (user === '') {
-      showAlert('error', 'Message unsuccessfully sent, please enter a member name.');
-    } else if (message === '') {
-      showAlert('error', 'Message unsuccessfully sent, please enter a message.');
-    } else if (message.length < 6 ) {
-      showAlert('error', 'Message unsuccessfully sent, please enter a message that is longer than 5 characters.');
-      message = '';
-    } else {
-      let userNames = [];
-      for (let i = 0; i < users.length; i += 1) {
-        let userName = users[i].name.toLowerCase();
-        userNames.push(userName);
-      }
-      if (userNames.indexOf(user) < 0) {
-        showAlert('error', 'Message unsuccessfully sent, there is no such member that matches your user search.');
-      } else {
-          showAlert('success', 'Message sent successfully.');
-        if (user === 'Jamie Reardon'.toLowerCase()) {
-          let notificationsArrayLength = notifications.length;
-          notifications.push({from: 'Jamie Reardon', notification: 'sent you a message.'});
-          const li = document.createElement('li');
-          let userPhoto = users[0].photo;
-          let from = notifications[notificationsArrayLength].from;
-          let notification = notifications[notificationsArrayLength].notification;
-          li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
-          li.className = 'notification';
-          notificationsList.appendChild(li);
-          notificationLight.style.visibility = 'visible';
-          animateLight();
-          window.setTimeout(function(){
-            notificationIcon.classList.add('shake');
-            ion.sound.play('level_up');
-          },2000);
-        }
-      }
-      user = '';
-      message = '';
-    }
+    // Check form data
+    validateForm(user, message);
   }
 });
 
+// Add the autocomplete function for the user field in the message area
 autocomplete(userField, users);
 
-// To move and refactor
-
-let emailPref = localStorage.getItem('Email Notifications');
-
-if (emailPref === 'true') {
-  emailSettingsCheckBox.checked = true;
-}
-if (emailPref === 'false') {
-  emailSettingsCheckBox.checked = false;
-}
-
-let profilePref = localStorage.getItem('Profile Public');
-
-if (profilePref === 'true') {
-  profileSettingsCheckBox.checked = true;
-}
-if (profilePref === 'false') {
-  profileSettingsCheckBox.checked = false;
-}
-
-let timeZonePref = localStorage.getItem('Timezone');
-
-if (timeZonePref === 'Eastern') {
-  timeZoneSelect.selectedIndex = '1';
-}
-if (timeZonePref === 'Central') {
-  timeZoneSelect.selectedIndex = '2';
-}
-if (timeZonePref === 'Pacific') {
-  timeZoneSelect.selectedIndex = '3';
-}
-
-// timeZoneSelect.addEventListener('change', (e) => {
-//   let selectedTimeZone = e.target.options[e.target.selectedIndex];
-//   if (selectedTimeZone.textContent === 'Eastern') {
-//     timeZonePref = 'Eastern';
-//   } else if (selectedTimeZone.textContent === 'Central') {
-//     timeZonePref = localStorage.setItem('Timezone', 'Eastern');
-//   } else if (selectedTimeZone.textContent === 'Pacific') {
-//     timeZonePref = localStorage.setItem('Timezone', 'Eastern');
-//   }
-// });
-
 saveSettingsBtn.addEventListener('click', () => {
-  let selectedTimeZone = timeZoneSelect[timeZoneSelect.selectedIndex];
   if (emailSettingsCheckBox.checked) {
-    localStorage.setItem('Email Notifications', 'true');
+    localStorage.setItem('Email Notifications', 'on');
   } else {
-    localStorage.setItem('Email Notifications', 'false');
+    localStorage.setItem('Email Notifications', 'off');
   }
   if (profileSettingsCheckBox.checked) {
-    localStorage.setItem('Profile Public', 'true');
+    localStorage.setItem('Profile Public', 'on');
   } else {
-    localStorage.setItem('Profile Public', 'false');
+    localStorage.setItem('Profile Public', 'off');
   }
-  if (selectedTimeZone.textContent === 'Eastern') {
-    timeZonePref = localStorage.setItem('Timezone', 'Eastern');
-  } else if (selectedTimeZone.textContent === 'Central') {
-    timeZonePref = localStorage.setItem('Timezone', 'Central');
-  } else if (selectedTimeZone.textContent === 'Pacific') {
-    timeZonePref = localStorage.setItem('Timezone', 'Pacific');
+  let selectedTimezone = timezoneSelect[timezoneSelect.selectedIndex];
+  if (selectedTimezone.textContent === 'Eastern') {
+    timezonePreference = localStorage.setItem('Timezone', 'Eastern');
+  } else if (selectedTimezone.textContent === 'Central') {
+    timezonePreference = localStorage.setItem('Timezone', 'Central');
+  } else if (selectedTimezone.textContent === 'Pacific') {
+    timezonePreference = localStorage.setItem('Timezone', 'Pacific');
   }
   showAlert('success', 'Settings saved successfully.')
 });
@@ -281,31 +168,4 @@ cancelSettingsBtn.addEventListener("click", () => {
     profileSettingsCheckBox.checked = false;
   }
 });
-
-// settingsWrapper.addEventListener('click', (e) => {
-//   let newEmailSetting;
-//   let newProfileSetting;
-//   if (e.target.className === 'toggle-checkbox') {
-//     let checkbox = e.target;
-//     if (checkbox === emailSettingsCheckBox) {
-//       if (checkbox.checked) {
-//         newEmailSetting = true;
-//       } else {
-//         newEmailSetting = false;
-//       }
-//       // newEmailSetting = emailSettingsCheckBox.checked;
-//     } else if (checkbox === profileSettingsCheckBox) {
-//       newProfileSetting = profileSettingsCheckBox.checked;
-//       console.log(newProfileSetting);
-//     }
-//   }
-//   if (e.target === cancelSettingsBtn) {
-//     let oldEmailSetting = emailSettingsCheckBox.checked;
-//     if (newEmailSetting !== oldEmailSetting) {
-//       console.log('no it\'s not');
-//     } else {
-//       console.log('yes it is');
-//     }
-//   }
-// });
 

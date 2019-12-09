@@ -51,29 +51,6 @@ const showAlert = (type, message) => {
   }
 };
 
-const checkUser = search => {
-  let matched = [];
-  for (let i = 0; i < users.length; i += 1) {
-    let user = users[i].name.toLowerCase();
-    if (user.indexOf(search) > -1) {
-      matched.push(user);
-    }
-  }
-  let sorted = Array.from(new Set(matched));
-  sorted.forEach(user => {
-    const div = document.createElement("div");
-    div.textContent = user;
-    div.className = "message__match";
-    messageForm.appendChild(div);
-  });
-  const matchDivs = document.querySelectorAll('.message__match');
-  // matchDivs.forEach(match => {
-  //   if (!match.textContent.startsWith(search)) {
-  //     messageForm.removeChild(match);
-  //   }
-  // });
-};
-
 const autocomplete = (inp, arr) => {
   /*the autocomplete function takes two arguments,
   the text field element and an array of possible autocompleted values:*/
@@ -180,22 +157,55 @@ const toggleClass = (element, parent, name) => {
   element.classList.add(name);
 };
 
-// function animateLight() {
-//   if (notificationLight.style.display === 'block') {
-//     $(notificationLight).fadeOut(1000,function(){ 
-//     $(this).fadeIn(1000,function(){ 
-//       animateLight() });
-//     });
-//   }
-//   if (notificationLight.style.display === 'none') {
-//     $(notificationLight).hide();
-//   }
-// }
-function animateLight() {
+const removeElement = (parent, element) => {
+  parent.removeChild(element);
+}
+
+const hideElement = element => {
+  element.style.visibility = 'hidden';
+}
+
+const showElement = element => {
+  element.style.visibility = 'visible';
+}
+
+const animateLight = () => {
   $(notificationLight).fadeOut(1000,function(){ 
   $(this).fadeIn(1000,function(){ 
     animateLight() });
   });
+}
+
+const addUserSettings = () => {
+  /* Get the user's email and profile setting preferences
+    Compare the values and reflect the settings for the checkboxes states
+  */
+  let emailPreference = localStorage.getItem('Email Notifications');
+  if (emailPreference === 'on') {
+    emailSettingsCheckBox.checked = true;
+  }
+  if (emailPreference === 'off') {
+    emailSettingsCheckBox.checked = false;
+  }
+
+  let profilePreference = localStorage.getItem('Profile Public');
+  if (profilePreference === 'on') {
+    profileSettingsCheckBox.checked = true;
+  }
+  if (profilePreference === 'off') {
+    profileSettingsCheckBox.checked = false;
+  }
+  // Get the user's timezone setting preference, compare the value and reflect the setting for the select option
+  let timezonePreference = localStorage.getItem('Timezone');
+  if (timezonePreference === 'Eastern') {
+    timezoneSelect.selectedIndex = '1';
+  }
+  if (timezonePreference === 'Central') {
+    timezoneSelect.selectedIndex = '2';
+  }
+  if (timezonePreference === 'Pacific') {
+    timezoneSelect.selectedIndex = '3';
+  }
 }
 
 const addNotifications = () => {
@@ -205,12 +215,105 @@ const addNotifications = () => {
     for (let j = 0; j < users.length; j += 1) {
       if (users[j].name === from) {
         let userPhoto = users[j].photo;
-        const li = document.createElement("li");
-        li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
-        li.className = "notification";
+        const li = document.createElement('li');
+        li.innerHTML = `<img class='profile-photo' src='${userPhoto}'> <span><strong class='activity__desc--name'>${from}</strong> ${notification}</span> <span class='close-icon purple'></span>`;
+        li.className = 'notification';
         notificationsList.appendChild(li);
       }
     }
   }
-  notificationLight.style.display = 'block';
 };
+
+const addEmptyNotification = () => {
+  // Create a new notification list item
+  const li = document.createElement('li');
+  // Add a message to show the user there are no more notifications
+  li.innerHTML = '<span>No new notifications.</span>';
+  // Add the class to the list item
+  li.className = 'notification';
+  // Add the list item to the notification's list
+  notificationsList.appendChild(li);
+}
+
+const showNotificationAlert = option => {
+  window.setTimeout(function(){
+    notificationLight.style.visibility = 'visible';
+    notificationIcon.classList.add('shake');
+    animateLight();
+    if (option === 'sound') {
+      ion.sound.play('level_up');
+    }
+  },2000);
+  window.setTimeout(function(){
+    notificationIcon.classList.remove('shake');
+  },4000);
+}
+
+const userNewNotification = () => {
+  // Reference the length of the notifications array
+  let notificationsArrayLength = notifications.length;
+  // Add a new notification to the logged in user
+  notifications.push({from: 'Jamie Reardon', notification: 'sent you a message.'});
+  // Create a new notification's list item
+  const li = document.createElement('li');
+  // Get the photo and name of the user that is logged in who messaged
+  let userPhoto = users[0].photo;
+  let from = notifications[notificationsArrayLength].from;
+  // Get the notification message
+  let notification = notifications[notificationsArrayLength].notification;
+  // Add the HTML for the new notification list item
+  li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
+  li.className = 'notification';
+  // Add the new notification to the notification list
+  notificationsList.appendChild(li);
+  // Show the notification light to indicate to the user that they have a new message
+  showNotificationAlert('sound');
+}
+
+const validateForm = (userField, messageField) => {
+  // Check if both fields are blank
+  if (userField === '' && messageField === '') {
+    // If so display an error alert
+    showAlert('error', 'Message unsuccessfully sent, please fill in both form fields.');
+    // Check if the user field is blank
+  } else if (userField === '') {
+    // If so display an error alert
+    showAlert('error', 'Message unsuccessfully sent, please enter a member name.');
+    // Check if the message field is blank
+  } else if (messageField === '') {
+    // If so display an error alert
+    showAlert('error', 'Message unsuccessfully sent, please enter a message.');
+    // Check if the message field contains less than 6 characters
+  } else if (messageField.length < 6 ) {
+    // If so display an error alert
+    showAlert('error', 'Message unsuccessfully sent, please enter a message that is longer than 5 characters.');
+    // reset message field
+    messageField = '';
+    // Otherwise assume form data is correct for submission
+  } else {
+    // Create an empty array literal for the usernames of the members
+    let userNames = [];
+    // Loop over the users array's length and add each username to the new array
+    for (let i = 0; i < users.length; i += 1) {
+      let userName = users[i].name.toLowerCase();
+      userNames.push(userName);
+    } // Check to see if the submitted user field value matches any of the usernames in the array
+    if (userNames.indexOf(userField) < 0) {
+      // If it doesn't show an error alert
+      showAlert('error', 'Message unsuccessfully sent, there is no such member that matches your user search.');
+    } else {
+      // Otherwise submit form and show a success alert
+      submitForm(userField);
+    } // Reset form data
+    userField = '';
+    messageField = '';
+  }
+}
+
+const submitForm = userField => {
+  showAlert('success', 'Message sent successfully.');
+  // Check to see if the username was the logged in user
+  if (userField === 'Jamie Reardon'.toLowerCase()) {
+    userNewNotification();
+  }
+}

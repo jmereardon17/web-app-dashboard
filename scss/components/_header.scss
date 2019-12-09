@@ -68,6 +68,7 @@
       text-overflow: ellipsis;
       white-space: nowrap;
       width: 80%;
+      min-height: 15px;
       @include mq('phone') {
         width: 100%;
       }
