@@ -84,38 +84,17 @@ trafficNav.addEventListener('click', e => {
     toggleClass(link, trafficLinks, 'traffic__link--active');
     // If the clicked link is Hourly
     if (link.textContent === 'Hourly') {
-      // Set the Hourly labels
-      trafficData.labels = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
-      // Set the Hourly data
-      trafficData.datasets[0].data = [867, 200, 768, 100, 232, 231, 112, 122, 200];
-      // Update the chart
-      trafficChart.update();
+      // Call the updateChart function to update the chart data
+      updateTrafficChart('hourly', [867, 200, 768, 100, 232, 231, 112, 122, 200]);
     } // If the clicked link is Daily
     if (link.textContent === 'Daily') {
-      // Set the Daily labels
-      trafficData.labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
-      // Set the Daily data
-      trafficData.datasets[0].data = [300, 670, 550, 820, 700, 520, 580];
-      // Update the chart
-      trafficChart.update();
+      updateTrafficChart('daily', [300, 670, 550, 820, 700, 520, 580]);
     } // If the clicked link is Weekly
     if (link.textContent === 'Weekly') {
-      // Set the Weekly labels
-      trafficData.labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', 
-    '11-17', '18-24', '25-31'];
-      // Set the Weekly data
-      trafficData.datasets[0].data = [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250];
-      // Update the chart
-      trafficChart.update();
+      updateTrafficChart('weekly', [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250]);
     } // If the clicked link is Monthly
     if (link.textContent === 'Monthly') {
-      // Set the Monthly labels
-      trafficData.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Sep', 
-    'Aug', 'Oct', 'Nov', 'Dec'];
-      // Set the Monthly data
-      trafficData.datasets[0].data = [950, 2012, 542, 768, 1024, 1200, 480, 1020, 1025, 1230, 2400, 2120];
-      // Update the chart
-      trafficChart.update();
+      updateTrafficChart('monthly', [950, 2012, 542, 768, 1024, 1200, 480, 1020, 1025, 1230, 2400, 2120]);
     }
   }
 });
@@ -138,29 +117,12 @@ messageForm.addEventListener('click', e => {
 autocomplete(userField, users);
 
 saveSettingsBtn.addEventListener('click', () => {
-  if (emailSettingsCheckBox.checked) {
-    localStorage.setItem('Email Notifications', 'on');
-  } else {
-    localStorage.setItem('Email Notifications', 'off');
-  }
-  if (profileSettingsCheckBox.checked) {
-    localStorage.setItem('Profile Public', 'on');
-  } else {
-    localStorage.setItem('Profile Public', 'off');
-  }
-  let selectedTimezone = timezoneSelect[timezoneSelect.selectedIndex];
-  if (selectedTimezone.textContent === 'Eastern') {
-    timezonePreference = localStorage.setItem('Timezone', 'Eastern');
-  } else if (selectedTimezone.textContent === 'Central') {
-    timezonePreference = localStorage.setItem('Timezone', 'Central');
-  } else if (selectedTimezone.textContent === 'Pacific') {
-    timezonePreference = localStorage.setItem('Timezone', 'Pacific');
-  }
-  showAlert('success', 'Settings saved successfully.')
+  saveSettings('email');
+  saveSettings('profile');
+  saveSettings('timezone');
 });
 
 cancelSettingsBtn.addEventListener("click", () => {
-
   if (emailSettingsCheckBox.checked) {
     emailSettingsCheckBox.checked = false;
   }

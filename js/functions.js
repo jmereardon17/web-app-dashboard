@@ -270,6 +270,23 @@ const userNewNotification = () => {
   showNotificationAlert('sound');
 }
 
+const updateTrafficChart = (labels, datasets) => {
+  // Set the Hourly labels
+  if (labels === 'hourly') {
+    trafficData.labels = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00'];
+  } else if (labels === 'daily') {
+    trafficData.labels = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+  } else if (labels === 'weekly') {
+    trafficData.labels = ['16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', '11-17', '18-24', '25-31'];
+  } else if (labels === 'monthly') {
+    trafficData.labels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  }
+  // Set the Hourly data
+  trafficData.datasets[0].data = datasets;
+  // Update the chart
+  trafficChart.update();
+}
+
 const validateForm = (userField, messageField) => {
   // Check if both fields are blank
   if (userField === '' && messageField === '') {
@@ -316,4 +333,32 @@ const submitForm = userField => {
   if (userField === 'Jamie Reardon'.toLowerCase()) {
     userNewNotification();
   }
+}
+
+const saveSettings = settings => {
+  if (settings === 'email') {
+    if (emailSettingsCheckBox.checked) {
+      localStorage.setItem('Email Notifications', 'on');
+    } else {
+      localStorage.setItem('Email Notifications', 'off');
+    }
+  }
+  if (settings === 'profile') {
+    if (profileSettingsCheckBox.checked) {
+      localStorage.setItem('Profile Public', 'on');
+    } else {
+      localStorage.setItem('Profile Public', 'off');
+    }
+  }
+  if (settings === 'timezone') {
+    let selectedTimezone = timezoneSelect[timezoneSelect.selectedIndex];
+    if (selectedTimezone.textContent === 'Eastern') {
+      timezonePreference = localStorage.setItem('Timezone', 'Eastern');
+    } else if (selectedTimezone.textContent === 'Central') {
+      timezonePreference = localStorage.setItem('Timezone', 'Central');
+    } else if (selectedTimezone.textContent === 'Pacific') {
+      timezonePreference = localStorage.setItem('Timezone', 'Pacific');
+    }
+  }
+  showAlert('success', 'Settings saved successfully.')
 }
