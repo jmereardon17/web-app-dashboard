@@ -10,6 +10,6 @@ I also went for the Exceeds Expectations Grading where I had to:
 - Use local storage to save the settings. The settings are saved to local storage when the "Save" button is clicked, the settings are reset when the "Cancel" button is clicked, and when page is reloaded, the settings are remembered.
 
 Browsers tested for compatibility:
-Chrome
+- Chrome
 
 Grade: TBC
