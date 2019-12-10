@@ -12,4 +12,4 @@ I also went for the Exceeds Expectations Grading where I had to:
 Browsers tested for compatibility:
 - Chrome
 
-Grade: TBC
+Grade: Exceeds Expectations
