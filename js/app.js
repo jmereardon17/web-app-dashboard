@@ -85,16 +85,16 @@ trafficNav.addEventListener('click', e => {
     // If the clicked link is Hourly
     if (link.textContent === 'Hourly') {
       // Call the updateChart function to update the chart data
-      updateTrafficChart('hourly', [867, 200, 768, 100, 232, 231, 112, 122, 200]);
+      updateTrafficChart('hourly', hourlyData);
     } // If the clicked link is Daily
     if (link.textContent === 'Daily') {
-      updateTrafficChart('daily', [300, 670, 550, 820, 700, 520, 580]);
+      updateTrafficChart('daily', dailyData);
     } // If the clicked link is Weekly
     if (link.textContent === 'Weekly') {
-      updateTrafficChart('weekly', [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250]);
+      updateTrafficChart('weekly', weeklyData);
     } // If the clicked link is Monthly
     if (link.textContent === 'Monthly') {
-      updateTrafficChart('monthly', [950, 2012, 542, 768, 1024, 1200, 480, 1020, 1025, 1230, 2400, 2120]);
+      updateTrafficChart('monthly', monthlyData);
     }
   }
 });

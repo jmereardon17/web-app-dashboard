@@ -2,8 +2,13 @@
   Chart and page data for app
 */
 
+// Traffic Chart Data
+const hourlyData = [867, 200, 768, 100, 232, 231, 112, 122, 200];
+const dailyData = [300, 670, 550, 820, 700, 520, 580];
+const weeklyData = [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250];
+const monthlyData = [950, 2012, 542, 768, 1024, 1200, 480, 1020, 1025, 1230, 2400, 2120];
 
-// Charts
+// Charts Configuration
 let trafficData = {
   labels: [
     '16-22', '23-29', '30-5', '6-12', '13-19', '20-26', '27-3', '4-10', 
@@ -11,7 +16,7 @@ let trafficData = {
   ],
   datasets: [
     {
-      data: [800, 1250, 1000, 1500, 2000, 1500, 1700, 1250, 1700, 2250, 1700, 2250],
+      data: weeklyData,
       backgroundColor: 'rgba(116, 119, 191, .3)',
       hoverBackgroundColor: '#81C98F',
       borderColor: '#BCBFEB',
