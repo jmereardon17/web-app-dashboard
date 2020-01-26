@@ -1,7 +1,7 @@
 const addAlertHTML = (type, message) => {
   alertMessage.innerHTML = `<span class="alert__title">${type}</span>
    <p class="alert__message">${message}</p>
-   <span class="alert__icon"></span>`;
+   <img class="alert__icon" src="../icons/icon-close.svg" alt="Close Icon">`;
 };
 
 const resetFields = () => {
@@ -41,7 +41,6 @@ const showAlert = (type, message) => {
           },
           1000
         );
-        // messageForm.scrollIntoView( { behavour: 'smooth' } );
       }
     });
   }
