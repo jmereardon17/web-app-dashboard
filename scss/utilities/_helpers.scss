@@ -24,6 +24,8 @@
 
 // Form Placeholder
 %form-field {
+  -webkit-appearance: none;
+  -moz-appearance: none;
   width: 100%;
   font-size: 14px;
   outline: 0;
