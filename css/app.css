@@ -1251,6 +1251,11 @@ main {
   line-height: 0;
   margin-bottom: 17px;
 }
+@media not all and (min-resolution: 0.001dpcm) {
+  .message__field {
+    line-height: inherit;
+  }
+}
 .message__area {
   margin-bottom: 17px;
 }
