@@ -2,8 +2,6 @@
   cursor: pointer;
   width: 21px;
   transition: transform .5s;
-  // animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-  // animation-delay: 2s;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   perspective: 1000px;
@@ -36,31 +34,20 @@
 }
 
 .close-icon {
-  @include element(
-    $background: url('../../icons/icon-close.svg') no-repeat center / cover, 
-    $disp: block, 
-    $width: 12px, 
-    $height: 10px);
+  width: 10px;
   cursor: pointer;
+  margin-top: 1px;
   margin-left: auto;
 }
 
-.purple {
-  background-image: url('../../icons/icon-close-purple.svg');
-}
-
 .alert__icon {
-  @include element(
-    $background: url('../../icons/icon-close.svg') no-repeat center / cover, 
-    $disp: block, 
-    $width: 10px, 
-    $height: 10px);
+  width: 10px;
   position: absolute;
   top: 8px;
   right: 8px;
   cursor: pointer;
   @include mq('desktop') {
-    top: 16px;
+    top: 14px;
     right: 14px;
   }
 }

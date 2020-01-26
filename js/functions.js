@@ -215,7 +215,7 @@ const addNotifications = () => {
       if (users[j].name === from) {
         let userPhoto = users[j].photo;
         const li = document.createElement('li');
-        li.innerHTML = `<img class='profile-photo' src='${userPhoto}'> <span><strong class='activity__desc--name'>${from}</strong> ${notification}</span> <span class='close-icon purple'></span>`;
+        li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <img class="close-icon purple" src="icons/icon-close-purple.svg" alt="Close Icon">`;
         li.className = 'notification';
         notificationsList.appendChild(li);
       }
@@ -261,7 +261,7 @@ const userNewNotification = () => {
   // Get the notification message
   let notification = notifications[notificationsArrayLength].notification;
   // Add the HTML for the new notification list item
-  li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <span class="close-icon purple"></span>`;
+  li.innerHTML = `<img class="profile-photo" src="${userPhoto}"> <span><strong class="activity__desc--name">${from}</strong> ${notification}</span> <img class="close-icon purple" src="icons/icon-close-purple.svg" alt="Close Icon">`;
   li.className = 'notification';
   // Add the new notification to the notification list
   notificationsList.appendChild(li);
