@@ -4,7 +4,7 @@
   margin: auto;
   position: relative;
   line-height: 0;
-  @include element($background: url('../../icons/icon-search.svg') no-repeat 97% 50% / 18px 18px, $width: 80%) {
+  @include element($background: url('icons/icon-search.svg') no-repeat 97% 50% / 18px 18px, $width: 80%) {
     max-width: 380px;
   }
   @include mq('tablet-small') {

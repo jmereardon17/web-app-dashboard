@@ -1226,7 +1226,7 @@ main {
   margin: auto;
   position: relative;
   line-height: 0;
-  background: url("../../icons/icon-search.svg") no-repeat 97% 50%/18px 18px;
+  background: url("icons/icon-search.svg") no-repeat 97% 50%/18px 18px;
   width: 80%;
   max-width: 380px;
 }
