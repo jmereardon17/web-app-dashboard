@@ -1,7 +1,7 @@
 const addAlertHTML = (type, message) => {
   alertMessage.innerHTML = `<span class="alert__title">${type}</span>
    <p class="alert__message">${message}</p>
-   <img class="alert__icon" src="/icons/icon-close.svg" alt="Close Icon">`;
+   <img class="alert__icon" src="icons/icon-close.svg" alt="Close Icon">`;
 };
 
 const resetFields = () => {
